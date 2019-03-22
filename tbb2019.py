@@ -14,3 +14,9 @@ class BraveDreams():
 class TheWarOnMe():
 	tempo = 120
 	pads = {}
+	
+
+class NotMarriedAnyMore():
+	tempo = 89
+	pads = {}
+	
