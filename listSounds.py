@@ -20,9 +20,10 @@ for batch in batches:
 				n.append(c)
 		
 		name = "".join(chr(c) for c in n)
-		sounds.append((name, kn))
+		wav = doc.getElementsByTagName("Path")[0].childNodes[0].data
+		sounds.append((name, kn, wav))
 	
 print("sounds = {")
-print(", \n".join("\"%s\":%d" % (s[0], s[1]) for s in sounds))
+print("\n,".join("\"%s\":%d #%s" % (s[0], s[1], s[2]) for s in sounds))
 print("}")
 	

@@ -14,10 +14,9 @@ def setName(doc, onto, name):
 		kitParam(doc, onto, "Nm%d" % i, ord(name[i]))
 
 
-def specItemFrom(padSpecs, item, i):
-	k = str(i + 1)
-	if (k in padSpecs):
-		spec = padSpecs[k]
+def valueFrom(padSpecs, item, i):
+	if (i < len(padSpecs)):
+		spec = padSpecs[i]
 		if (item in spec):
 			return spec[item]
 	return -1
@@ -35,7 +34,7 @@ def createKit(zIndex, name, tempo, padSpecs):
 	
 	for i in range(15):
 		pad = kitNode(doc, kitPrm, "PadPrm")
-		kitParam(doc, pad, "Wv", specItemFrom(padSpecs, "sound", i))
+		kitParam(doc, pad, "Wv", valueFrom(padSpecs, "sound", i))
 		kitParam(doc, pad, "WvLevel", 100)
 		kitParam(doc, pad, "WvPan", 15)
 		kitParam(doc, pad, "PlayMode", 0)
@@ -43,7 +42,7 @@ def createKit(zIndex, name, tempo, padSpecs):
 		kitParam(doc, pad, "MuteGrp", 0)
 		kitParam(doc, pad, "TempoSync", 0)
 		kitParam(doc, pad, "PadMidiCh", 15)
-		kitParam(doc, pad, "NoteNum", specItemFrom(padSpecs, "note", i))
+		kitParam(doc, pad, "NoteNum", valueFrom(padSpecs, "note", i))
 		kitParam(doc, pad, "MidiCtrl", 0)
 		kitParam(doc, pad, "Loop", 0)
 		kitParam(doc, pad, "TrigType", 0)
