@@ -26,11 +26,12 @@ def setUpFx(doc, onto, n):
 	for i in range(20):
 		kitParam(doc, onto, "Fx%dPrm%d" % (n, i), 0)
 
-def createKit(zIndex, name, tempo, padSpecs):
+def createKit(zIndex, name, kitDef):
 	doc = xml.dom.minidom.parseString("<KitPrm/>")
 	kitPrm = doc.documentElement
-	kitParam(doc, kitPrm, "Level", 100)
-	kitParam(doc, kitPrm, "Tempo", tempo * 10)
+
+	kitParam(doc, kitPrm, "Level", kitDef.level)
+	kitParam(doc, kitPrm, "Tempo", kitDef.tempo * 10)
 	setName(doc, kitPrm, name)
 	
 	for i in range(16):
@@ -44,15 +45,15 @@ def createKit(zIndex, name, tempo, padSpecs):
 	
 	for i in range(15):
 		pad = kitNode(doc, kitPrm, "PadPrm")
-		kitParam(doc, pad, "Wv", valueFrom(padSpecs, "sound", i))
+		kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
 		kitParam(doc, pad, "WvLevel", 100)
 		kitParam(doc, pad, "WvPan", 15)
 		kitParam(doc, pad, "PlayMode", 0)
 		kitParam(doc, pad, "OutAsgn", 0)
 		kitParam(doc, pad, "MuteGrp", 0)
 		kitParam(doc, pad, "TempoSync", 0)
-		kitParam(doc, pad, "PadMidiCh", valueFrom(padSpecs, "channel", i))
-		kitParam(doc, pad, "NoteNum", valueFrom(padSpecs, "note", i))
+		kitParam(doc, pad, "PadMidiCh", valueFrom(kitDef.pads, "channel", i))
+		kitParam(doc, pad, "NoteNum", valueFrom(kitDef.pads, "note", i))
 		kitParam(doc, pad, "MidiCtrl", 0)
 		kitParam(doc, pad, "Loop", 0)
 		kitParam(doc, pad, "TrigType", 0)

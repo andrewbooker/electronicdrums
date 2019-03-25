@@ -8,5 +8,5 @@ kn = 50
 set = __import__("tbb2019")
 for n, cl in set.__dict__.items():
 	if isinstance(cl, type):
-		createKit(kn, n[:8], cl.tempo, cl.pads)
+		createKit(kn, n[:8], cl)
 		kn += 1

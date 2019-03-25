@@ -8,6 +8,7 @@ channel = "channel"
 
 # eventually, put these in set order
 class ItCouldBeHome():
+	level = 100
 	tempo = 90
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
 			{sound: wav["Cym_Splash2"]},
@@ -25,6 +26,7 @@ class ItCouldBeHome():
 
 
 class BraveDreams():
+	level = 100
 	tempo = 93
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
 			{sound: wav["Cym_Splash2"]},
@@ -42,6 +44,7 @@ class BraveDreams():
 
 
 class TheWarOnMe():
+	level = 100
 	tempo = 120
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
 			{sound: wav["Cym_Splash2"]},
@@ -59,6 +62,7 @@ class TheWarOnMe():
 	
 
 class NotMarriedAnyMore():
+	level = 100
 	tempo = 89
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
 			{sound: wav["Cym_Splash2"]},
@@ -76,6 +80,7 @@ class NotMarriedAnyMore():
 
 
 class Housewives():
+	level = 100
 	tempo = 100
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
 			{sound: wav["Cym_Splash2"]},
@@ -92,16 +97,17 @@ class Housewives():
 			{sound: wav["SE_Noise1"]}] # pad rim
 			
 class AllTheBlueChanges():
+	level = 90
 	tempo = 122
 	pads = [{note: 60, channel: 0}, #top left
 			{note: 62, channel: 0},
 			{note: 64, channel: 0},
-			{note: 52, channel: 0}, # mid left
-			{note: 57, channel: 0},
-			{note: 59, channel: 0},
+			{note: 52, channel: 0, sound: wav["HH_DbS_cl"]}, # mid left
+			{note: 57, channel: 0, sound: wav["Cym_Fx2"]},
+			{note: 59, channel: 0, sound: wav["SE_SweepSlap"]},
             {note: 45, channel: 0}, # bottom left
 			{note: 47, channel: 0},
-			{note: 50, channel: 0},
+			{note: 50, channel: 0, sound: wav["P_Tambourine"]},
 			{sound: wav["Kick_Proc3"]}, # foot R
 			{sound: wav["SnareXs_2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
