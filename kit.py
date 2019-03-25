@@ -13,13 +13,12 @@ def setName(doc, onto, name):
 	for i in range(8):
 		kitParam(doc, onto, "Nm%d" % i, ord(name[i]))
 
-
-def valueFrom(padSpecs, item, i):
+def valueFrom(padSpecs, item, i, alternative = -1):
 	if (i < len(padSpecs)):
 		spec = padSpecs[i]
 		if (item in spec):
 			return spec[item]
-	return -1
+	return alternative
 	
 def setUpFx(doc, onto, n):
 	kitParam(doc, onto, "Fx%dSw" % n, 1)
@@ -33,7 +32,6 @@ def createKit(zIndex, name, tempo, padSpecs):
 	kitParam(doc, kitPrm, "Level", 100)
 	kitParam(doc, kitPrm, "Tempo", tempo * 10)
 	setName(doc, kitPrm, name)
-	
 	
 	for i in range(16):
 		kitParam(doc, kitPrm, "SubNm%d" % i, 0)
@@ -53,7 +51,7 @@ def createKit(zIndex, name, tempo, padSpecs):
 		kitParam(doc, pad, "OutAsgn", 0)
 		kitParam(doc, pad, "MuteGrp", 0)
 		kitParam(doc, pad, "TempoSync", 0)
-		kitParam(doc, pad, "PadMidiCh", 15)
+		kitParam(doc, pad, "PadMidiCh", valueFrom(padSpecs, "channel", i))
 		kitParam(doc, pad, "NoteNum", valueFrom(padSpecs, "note", i))
 		kitParam(doc, pad, "MidiCtrl", 0)
 		kitParam(doc, pad, "Loop", 0)
