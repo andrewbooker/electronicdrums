@@ -20,7 +20,12 @@ def valueFrom(padSpecs, item, i):
 		if (item in spec):
 			return spec[item]
 	return -1
-		
+	
+def setUpFx(doc, onto, n):
+	kitParam(doc, onto, "Fx%dSw" % n, 1)
+	kitParam(doc, onto, "Fx%dType" % n, 1)
+	for i in range(20):
+		kitParam(doc, onto, "Fx%dPrm%d" % (n, i), 0)
 
 def createKit(zIndex, name, tempo, padSpecs):
 	doc = xml.dom.minidom.parseString("<KitPrm/>")
@@ -29,8 +34,15 @@ def createKit(zIndex, name, tempo, padSpecs):
 	kitParam(doc, kitPrm, "Tempo", tempo * 10)
 	setName(doc, kitPrm, name)
 	
+	
 	for i in range(16):
 		kitParam(doc, kitPrm, "SubNm%d" % i, 0)
+
+	kitParam(doc, kitPrm, "Fx2Asgn", 0)
+	kitParam(doc, kitPrm, "LinkPad0", -1)
+	kitParam(doc, kitPrm, "LinkPad1", -1)
+	setUpFx(doc, kitPrm, 1)
+	setUpFx(doc, kitPrm, 2)
 	
 	for i in range(15):
 		pad = kitNode(doc, kitPrm, "PadPrm")
