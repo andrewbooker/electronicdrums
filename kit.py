@@ -2,6 +2,7 @@
 
 from datetime import date
 import xml.dom.minidom
+from fx import Thru
 
 def kitNode(doc, onto, name):
 	return onto.appendChild(doc.createElement(name))
@@ -20,11 +21,11 @@ def valueFrom(padSpecs, item, i, alternative = -1):
 			return spec[item]
 	return alternative
 	
-def setUpFx(doc, onto, n):
-	kitParam(doc, onto, "Fx%dSw" % n, 1)
-	kitParam(doc, onto, "Fx%dType" % n, 1)
+def setUpFx(doc, onto, fx, n):
+	kitParam(doc, onto, "Fx%dSw" % n, 1 if fx.type > 0 else 0)
+	kitParam(doc, onto, "Fx%dType" % n, fx.type)
 	for i in range(20):
-		kitParam(doc, onto, "Fx%dPrm%d" % (n, i), 0)
+		kitParam(doc, onto, "Fx%dPrm%d" % (n, i), fx.asSpec()[i] if i < len(fx.asSpec()) else 0)
 
 def createKit(zIndex, name, kitDef):
 	doc = xml.dom.minidom.parseString("<KitPrm/>")
@@ -40,8 +41,8 @@ def createKit(zIndex, name, kitDef):
 	kitParam(doc, kitPrm, "Fx2Asgn", 0)
 	kitParam(doc, kitPrm, "LinkPad0", -1)
 	kitParam(doc, kitPrm, "LinkPad1", -1)
-	setUpFx(doc, kitPrm, 1)
-	setUpFx(doc, kitPrm, 2)
+	setUpFx(doc, kitPrm, kitDef.fx if hasattr(kitDef, "fx") else Thru(), 1)
+	setUpFx(doc, kitPrm, Thru(), 2)
 	
 	for i in range(15):
 		pad = kitNode(doc, kitPrm, "PadPrm")

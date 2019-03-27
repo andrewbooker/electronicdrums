@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from sounds import sounds as wav
+from fx import *
 
 sound = "sound"
 note = "note"
@@ -112,4 +113,22 @@ class AllTheBlueChanges():
 			{sound: wav["SnareXs_2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
+			
+class TimeTravel():
+	level = 100
+	tempo = 78
+	pads = [{sound: wav["S00236"]}, #top left
+			{sound: wav["S00237"]},
+			{sound: wav["S00238"]},
+			{sound: wav["Cym_Fx2"]}, # mid left
+			{sound: wav["SE_SweepSlap"]},
+			{sound: wav["SnareXs_7"]},
+            {sound: wav["Kick_909_Atk"]}, # bottom left
+			{sound: wav["Snare_Proc4"]},
+			{sound: wav["HH_808_cl"]},
+			{sound: wav["Kick_Proc3"]}, # foot R
+			{sound: wav["P_Tamb_DnB"]}, # foot L
+			{sound: wav["Clap_909"]}, # pad top
+			{sound: wav["Clap_110"]}] # pad rim
+	fx = RingMod().freq(97).sens(10).balance(0.5)
 	
