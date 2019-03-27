@@ -113,6 +113,7 @@ class AllTheBlueChanges():
 			{sound: wav["SnareXs_2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
+	fx = Chorus().rate(28).depth(70).preDelayMs(5) #not sure - this was for when notes were wavs
 			
 class TimeTravel():
 	level = 100

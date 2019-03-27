@@ -5,6 +5,24 @@ class Thru():
 	def asSpec(self):
 		return []
 
+class Chorus():
+	type = 4
+	
+	def rate(self, v):
+		self.rate = v
+		return self
+		
+	def depth(self, v):
+		self.depth = v
+		return self
+		
+	def preDelayMs(self, v):
+		self.preDelayMs = v
+		return self
+		
+	def asSpec(self):
+		return [1, self.rate, self.depth, self.preDelayMs * 2, 4, 9, 50, 100]
+	
 class RingMod():
 	type = 16
 
