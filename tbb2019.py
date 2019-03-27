@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from sounds import sounds as wav
-from fx import *
+from effects import *
 
 sound = "sound"
 note = "note"

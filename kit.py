@@ -2,7 +2,7 @@
 
 from datetime import date
 import xml.dom.minidom
-from fx import Thru
+from effects import Thru
 
 def kitNode(doc, onto, name):
 	return onto.appendChild(doc.createElement(name))
