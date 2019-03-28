@@ -38,19 +38,21 @@ def createKit(zIndex, name, kitDef):
 	for i in range(16):
 		kitParam(doc, kitPrm, "SubNm%d" % i, 0)
 
+	hasFx = hasattr(kitDef, "fx")
 	kitParam(doc, kitPrm, "Fx2Asgn", 0)
 	kitParam(doc, kitPrm, "LinkPad0", -1)
 	kitParam(doc, kitPrm, "LinkPad1", -1)
-	setUpFx(doc, kitPrm, kitDef.fx if hasattr(kitDef, "fx") else Thru(), 1)
+	setUpFx(doc, kitPrm, kitDef.fx if hasFx else Thru(), 1)
 	setUpFx(doc, kitPrm, Thru(), 2)
 	
 	for i in range(15):
+		isPad = i < 13
 		pad = kitNode(doc, kitPrm, "PadPrm")
 		kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
 		kitParam(doc, pad, "WvLevel", 100)
 		kitParam(doc, pad, "WvPan", 15)
 		kitParam(doc, pad, "PlayMode", 0)
-		kitParam(doc, pad, "OutAsgn", 0)
+		kitParam(doc, pad, "OutAsgn", 1 if (isPad and hasFx) else 0)
 		kitParam(doc, pad, "MuteGrp", 0)
 		kitParam(doc, pad, "TempoSync", 0)
 		kitParam(doc, pad, "PadMidiCh", valueFrom(kitDef.pads, "channel", i))
