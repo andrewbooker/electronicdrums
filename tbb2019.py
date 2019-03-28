@@ -128,10 +128,10 @@ class TimeTravel():
 			{sound: wav["Snare_Proc4"]},
 			{sound: wav["HH_808_cl"]},
 			{sound: wav["Kick_Proc3"]}, # foot R
-			{sound: wav["P_Tamb_DnB"]}, # foot L
+			{sound: wav["SE_Noise1"]}, # foot L
 			{sound: wav["Clap_909"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
-	fx = RingMod().freq(97).sens(10).balance(0.5)
+	fx = PitchShift().pitch(4).feedback(50)
 	
 class WarmupMan():
 	level = 100

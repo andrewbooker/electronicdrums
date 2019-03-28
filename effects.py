@@ -68,6 +68,21 @@ class RingMod():
 	def asSpec(self):
 		return [self.freq, self.sens, 0, 15, 15, int(100 * self.balance), 100]
 		
+class PitchShift():
+	type = 17
+	
+	def pitch(self, v):
+		self.pitch = v
+		return self
+		
+	def feedback(self, v):
+		self.feedback = v
+		return self
+		
+	def asSpec(self):
+		fine = 50
+		return [24 + self.pitch, fine, self.feedback, 100, 100]
+		
 class Vibrato():
 	type = 18
 	
