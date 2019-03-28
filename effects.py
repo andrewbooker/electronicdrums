@@ -40,3 +40,17 @@ class RingMod():
 		
 	def asSpec(self):
 		return [self.freq, self.sens, 0, 15, 15, int(100 * self.balance), 100]
+		
+class Vibrato():
+	type = 18
+	
+	def rate(self, v):
+		self.rate = v
+		return self
+		
+	def depth(self, v):
+		self.depth = v
+		return self
+		
+	def asSpec(self):
+		return [self.rate, self.depth]

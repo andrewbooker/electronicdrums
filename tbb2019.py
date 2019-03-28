@@ -133,3 +133,21 @@ class TimeTravel():
 			{sound: wav["Clap_110"]}] # pad rim
 	fx = RingMod().freq(97).sens(10).balance(0.5)
 	
+class WarmupMan():
+	level = 100
+	tempo = 122
+	pads = [{note: 65, channel: 0},
+			{note: 70, channel: 0},
+			{note: 72, channel: 0},
+			{note: 53, channel: 0},
+			{note: 55, channel: 0},
+			{note: 62, channel: 0},
+			{note: 24, channel: 0},
+			{note: 46, channel: 0},
+			{note: 51, channel: 0},
+			{note: 36, channel: 0},
+			{note: 48, channel: 0},
+			{note: 60, channel: 0},
+			{note: 70, channel: 0}]
+	fx = Vibrato().rate(77).depth(69)
+	
