@@ -111,14 +111,14 @@ class ThingsChange():
 	level = 100
 	tempo = 60
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
-			{sound: wav["Cym_Splash2"]},
+			{sound: wav["P_Triangl_op"]},
 			{sound: wav["Cym_Crotale"]},
-			{sound: wav["Clap_Hse1"]}, # mid left
-			{sound: wav["HH_Proc2_op"]},
-			{sound: wav["Cym_Fx2"]},
-            {sound: wav["Kick_808_L"]}, # bottom left
-			{sound: wav["P_Tambourine"]},
-			{sound: wav["P_GanzaTap"]},
+			{note: 66, channel: 0}, # mid left
+			{note: 68, channel: 0},
+			{note: 71, channel: 0},
+			{note: 59, channel: 0}, # bottom left
+			{note: 63, channel: 0},
+			{note: 64, channel: 0},
 			{sound: wav["Kick_Acou1"]}, # foot R
 			{sound: wav["SE_Crasher"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
@@ -143,17 +143,17 @@ class Housewives():
 			
 class WhereverThereIsLight():
 	level = 100
-	tempo = 60
-	pads = [{sound: wav["Cym_Splash1"]}, #top left
-			{sound: wav["Cym_Splash2"]},
-			{sound: wav["Cym_Crotale"]},
-			{sound: wav["Clap_Hse1"]}, # mid left
-			{sound: wav["HH_Proc2_op"]},
-			{sound: wav["Cym_Fx2"]},
-            {sound: wav["Kick_808_L"]}, # bottom left
-			{sound: wav["P_Tambourine"]},
-			{sound: wav["P_GanzaTap"]},
-			{sound: wav["Kick_Acou1"]}, # foot R
+	tempo = 63
+	pads = [{note: 61, channel: 0, sound: wav["Cym_Splash1"]},
+			{note: 63, channel: 0, sound: wav["P_Triangl_op"]},
+			{note: 64, channel: 0, sound: wav["Cym_Crotale"]},
+			{note: 66, channel: 0},
+			{note: 68, channel: 0},
+			{note: 69, channel: 0},
+			{note: 52, channel: 0},
+			{note: 56, channel: 0},
+			{note: 59, channel: 0},
+			{sound: wav["Kick_808_L"]}, # foot R
 			{sound: wav["SE_Crasher"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
@@ -192,47 +192,84 @@ class AllTheBlueChanges():
 			{sound: wav["SnareXs_2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
-	fx = Chorus().rate(28).depth(70).preDelayMs(5) #not sure - this was for when notes were wavs
+	#fx = Chorus().rate(28).depth(70).preDelayMs(5) #not sure - this was for when notes were wavs
 			
 class Mixtaped():
 	level = 100
-	tempo = 60
-	pads = [{sound: wav["Cym_Splash1"]}, #top left
-			{sound: wav["Cym_Splash2"]},
-			{sound: wav["Cym_Crotale"]},
-			{sound: wav["Clap_Hse1"]}, # mid left
-			{sound: wav["HH_Proc2_op"]},
-			{sound: wav["Cym_Fx2"]},
-            {sound: wav["Kick_808_L"]}, # bottom left
-			{sound: wav["P_Tambourine"]},
-			{sound: wav["P_GanzaTap"]},
+	tempo = 47
+	pads = [{note: 71, channel: 0, sound: wav["HH_909_op"]}, #top left
+			{note: 74, channel: 0, sound: wav["Cym_Fx2"]},
+			{note: 76, channel: 0, sound: wav["Cym_Crotale"]},
+			{note: 60, channel: 0, sound: wav["P_Tabla_Te"]}, # mid left
+			{note: 62, channel: 0, sound: wav["Snare_Proc4"]},
+			{note: 64, channel: 0, sound: wav["Ride_Acou"]},
+            {note: 40, channel: 0, sound: wav["Kick_808_L"]}, # bottom left
+			{note: 45, channel: 0, sound: wav["Snare_Hph"]},
+			{note: 59, channel: 0, sound: wav["HH_Proc2_cl"]},
 			{sound: wav["Kick_Acou1"]}, # foot R
-			{sound: wav["SE_Crasher"]}, # foot L
-			{sound: wav["Snare_Proc4"]}, # pad top
-			{sound: wav["SE_Noise1"]}] # pad rim
+			{sound: wav["SE_Noise4"]}, # foot L
+			{note: 66, channel: 0, sound: wav["SE_Crasher"]}, # pad top
+			{note: 88, channel: 0, sound: wav["SE_VerbPf"]}] # pad rim
+	fx = Reverb().time(30).preDelay(5).density(10)
 	
 class WarmupMan():
 	level = 100
 	tempo = 122
-	pads = [{note: 65, channel: 0},
-			{note: 70, channel: 0},
-			{note: 72, channel: 0},
-			{note: 53, channel: 0},
-			{note: 55, channel: 0},
-			{note: 62, channel: 0},
-			{note: 24, channel: 0},
-			{note: 46, channel: 0},
-			{note: 51, channel: 0},
-			{note: 36, channel: 0},
-			{note: 48, channel: 0},
-			{note: 60, channel: 0},
-			{note: 70, channel: 0}]
+	pads = [{note: 65, channel: 0, sound: wav["Tom_808_L"]},
+			{note: 70, channel: 0, sound: wav["Tom_808_M"]},
+			{note: 72, channel: 0, sound: wav["Tom_808_H"]},
+			{note: 53, channel: 0, sound: wav["Tom_Roto_L"]},
+			{note: 55, channel: 0, sound: wav["Tom_Roto_M"]},
+			{note: 62, channel: 0, sound: wav["Tom_Roto_H"]},
+			{note: 24, channel: 0, sound: wav["Tom_Acou_L"]},
+			{note: 46, channel: 0, sound: wav["Tom_Acou_M"]},
+			{note: 51, channel: 0, sound: wav["Tom_Acou_H"]},
+			{note: 36, channel: 0, sound: wav["Kick_Acou1"]},
+			{note: 48, channel: 0, sound: wav["Snare_Edrs"]},
+			{note: 60, channel: 0, sound: wav["Ride_Acou"]},
+			{note: 70, channel: 0, sound: wav["Ride_Proc1Bl"]}]
 	fx = Vibrato().rate(77).depth(69)
 	
 			
 class DaysTurnIntoYears():
 	level = 100
-	tempo = 60
+	tempo = 84
+	pads = [{note: 79, channel: 0, sound: wav["S00238"]}, #top left
+			{note: 81, channel: 0, sound: wav["S00240"]},
+			{note: 83, channel: 0, sound: wav["S00241"]},
+			{note: 69, channel: 0, sound: wav["daysRad1"]}, # mid left
+			{note: 71, channel: 0, sound: wav["daysRad2"]},
+			{note: 74, channel: 0, sound: wav["daysRad3"]},
+            {note: 52, channel: 0, sound: wav["Kick_DnB2"]}, # bottom left
+			{note: 64, channel: 0, sound: wav["Clap_Min"]},
+			{note: 76, channel: 0, sound: wav["P_Claves"]},
+			{sound: wav["Kick_Acou1"]}, # foot R
+			{sound: wav["SE_Crasher"]}, # foot L
+			{note: 57, channel: 0, sound: wav["P_Claves"]}, # pad top
+			{note: 59, channel: 0, sound: wav["P_Claves"]}] # pad rim
+	fx = Reverb().time(60).preDelay(50).density(10)
+
+
+class WatchingOverMe(StandardPatch):
+	level = 100
+	tempo = 102
+	pads = [{sound: wav["P_Triangl_cl"]}, #top left
+			{sound: wav["P_Triangl_op"]},
+			{sound: wav["Cym_Crotale"]},
+			{sound: wav["roto8"]}, # mid left
+			{sound: wav["timbale2"]},
+			{sound: wav["P_Timbale_L"]},
+            {sound: wav["Kick_808_L"]}, # bottom left
+			{sound: wav["P_CongaProcH"]},
+			{sound: wav["P_Tabla_Ge"]},
+			{sound: wav["Kick_Acou1"]}, # foot R
+			{sound: wav["SE_Crasher"]}, # foot L
+			{sound: wav["Clap_Min"]}, # pad top
+			{sound: wav["P_CongaProcS"]}] # pad rim
+			
+class NeverNeeding(): # electronic 808 plus shakers, reverb snare 2nd half
+	level = 100
+	tempo = 120
 	pads = [{sound: wav["Cym_Splash1"]}, #top left
 			{sound: wav["Cym_Splash2"]},
 			{sound: wav["Cym_Crotale"]},
@@ -247,8 +284,28 @@ class DaysTurnIntoYears():
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
 	
+# acoustic songs
+class Ghostlike(StandardPatch):
+	level = 100
+	tempo = 120
+	
+class ForestAlmostBurning(StandardPatch):
+	level = 100
+	tempo = 120
 
-class WatchingOverMe(StandardPatch):
+class IGoDeeper(StandardPatch):
+	level = 100
+	tempo = 120
+	
+class TheWarOnMe(StandardPatch):
+	level = 100
+	tempo = 120
+	
+class KillingToSurvive(StandardPatch):
+	level = 100
+	tempo = 120
+
+class ItsTheWorld(StandardPatch):
 	level = 100
 	tempo = 120
 	

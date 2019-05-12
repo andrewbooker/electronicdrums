@@ -66,7 +66,8 @@ class RingMod():
 		return self
 		
 	def asSpec(self):
-		return [self.freq, self.sens, 0, 15, 15, int(100 * self.balance), 100]
+		polarity = 0
+		return [self.freq, self.sens, polarity, 15, 15, int(100 * self.balance), 100]
 		
 class PitchShift():
 	type = 17
@@ -96,3 +97,25 @@ class Vibrato():
 		
 	def asSpec(self):
 		return [self.rate, self.depth]
+		
+		
+class Reverb():
+	type = 19
+	
+	def time(self, v):
+		self.time = v
+		return self
+		
+	def preDelay(self, v):
+		self.preDelay = v
+		return self
+		
+	def density(self, v):
+		self.density = v
+		return self
+	
+	def asSpec(self):
+		effectLevel = 100
+		directLevel = 100
+		globalReverbLevel = 50
+		return [2, self.time, self.preDelay, 1, 2, self.density, effectLevel, directLevel, globalReverbLevel]

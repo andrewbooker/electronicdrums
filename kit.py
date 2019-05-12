@@ -52,7 +52,7 @@ def createKit(zIndex, name, kitDef):
 		kitParam(doc, pad, "WvLevel", 100)
 		kitParam(doc, pad, "WvPan", 15)
 		kitParam(doc, pad, "PlayMode", 0)
-		kitParam(doc, pad, "OutAsgn", 1 if (isPad and hasFx) else 0)
+		kitParam(doc, pad, "OutAsgn", 1 if (isPad and hasFx and i != 9) else 0) # maybe don't want some sounds (eg right foot) going through fx 
 		kitParam(doc, pad, "MuteGrp", 0)
 		kitParam(doc, pad, "TempoSync", 0)
 		kitParam(doc, pad, "PadMidiCh", valueFrom(kitDef.pads, "channel", i))
