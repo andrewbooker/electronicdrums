@@ -88,8 +88,6 @@ class TheWarOnMe():
 			{sound: wav["Tom_808_M"]}] # pad rim
 	fx = Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88)
 
-#never needing
-
 class Borderline():
 	level = 100
 	tempo = 87 # check
@@ -266,6 +264,7 @@ class WatchingOverMe(StandardPatch):
 			{sound: wav["SE_Crasher"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["P_CongaProcS"]}] # pad rim
+	fx = SyncDelay().feedback(31).effLevel(60)
 			
 class NeverNeeding(): # electronic 808 plus shakers, reverb snare 2nd half
 	level = 100

@@ -5,6 +5,20 @@ class Thru():
 	def asSpec(self):
 		return []
 
+class SyncDelay():
+	type = 2
+	
+	def feedback(self, v):
+		self.feedback = v
+		return self
+		
+	def effLevel(self, v):
+		self.effLevel = v
+		return self
+		
+	def asSpec(self):
+		return [0, 7, 100, self.feedback, 1, 9, effLevel, 100]
+	
 class Chorus():
 	type = 4
 	
