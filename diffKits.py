@@ -8,13 +8,15 @@ locGen = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\KIT"
 
 #actuals = glob.glob("%s\\*" % locDump)
 actuals = os.listdir(locDump)
+f = 0
 for a in actuals:
 	actual = open("%s\\%s" % (locDump, a), "r")
 	gfn = "%s\\%s" % (locGen, a)
 	if (os.path.isfile(gfn)):
+		anything = False
 		generated = open("%s\\%s" % (locGen, a), "r")
 		
-		print(a)
+		
 		
 		als = actual.readlines()
 		gls = generated.readlines()
@@ -22,11 +24,17 @@ for a in actuals:
 		
 		for al in als:
 			if ((len(gls) > i) and (al != gls[i])):
+				if (not anything):
+					print(a)
+					anything = True
 				print("%d: actual %s != generated %s" % (i, al, gls[i]))
+				f += 1
 			i += 1
 		
 		generated.close()
 	actual.close()
+	
+print("%d diff%s found" % (f, "s" if (f != 1) else ""))
 		
 	
 
