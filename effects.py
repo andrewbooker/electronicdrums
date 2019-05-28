@@ -17,7 +17,7 @@ class SyncDelay():
 		return self
 		
 	def asSpec(self):
-		return [0, 7, 100, self.feedback, 1, 9, effLevel, 100]
+		return [0, 7, 100, self.feedback, 1, 9, self.effLevel, 100]
 	
 class Chorus():
 	type = 4
@@ -128,8 +128,11 @@ class Reverb():
 		self.density = v
 		return self
 	
+	def effLevel(self, v):
+		self.effLevel = v
+		return self
+	
 	def asSpec(self):
-		effectLevel = 100
 		directLevel = 100
 		globalReverbLevel = 50
-		return [2, self.time, self.preDelay, 1, 2, self.density, effectLevel, directLevel, globalReverbLevel]
+		return [2, self.time, self.preDelay, 1, 2, self.density, self.effLevel, directLevel, globalReverbLevel]

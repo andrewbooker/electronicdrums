@@ -208,7 +208,7 @@ class Mixtaped():
 			{sound: wav["SE_Noise4"]}, # foot L
 			{note: 66, channel: 0, sound: wav["SE_Crasher"]}, # pad top
 			{note: 88, channel: 0, sound: wav["SE_VerbPf"]}] # pad rim
-	fx = Reverb().time(30).preDelay(5).density(10)
+	fx = Reverb().time(30).preDelay(5).density(10).effLevel(100)
 	
 class WarmupMan():
 	level = 100
@@ -245,7 +245,7 @@ class DaysTurnIntoYears():
 			{sound: wav["SE_Crasher"]}, # foot L
 			{note: 57, channel: 0, sound: wav["P_Claves"]}, # pad top
 			{note: 59, channel: 0, sound: wav["P_Claves"]}] # pad rim
-	fx = Reverb().time(60).preDelay(50).density(10)
+	fx = Reverb().time(60).preDelay(50).density(10).effLevel(100)
 
 
 class WatchingOverMe(StandardPatch):
@@ -282,6 +282,7 @@ class NeverNeeding(): # electronic 808 plus shakers, reverb snare 2nd half
 			{sound: wav["SE_Crasher"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
+	fx = Reverb().time(73).preDelay(63).density(10).effLevel(80)
 	
 # acoustic songs
 class Ghostlike(StandardPatch):
@@ -306,5 +307,5 @@ class KillingToSurvive(StandardPatch):
 
 class ItsTheWorld(StandardPatch):
 	level = 100
-	tempo = 120
+	tempo = 73
 	
