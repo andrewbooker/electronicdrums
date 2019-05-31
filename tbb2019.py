@@ -45,10 +45,10 @@ class NotMarriedAnyMore():
 			{sound: wav["Clap_Hse1"]}, # mid left
 			{sound: wav["HH_Proc2_op"]},
 			{sound: wav["Cym_Fx2"]},
-            {sound: wav["Kick_808_L"]}, # bottom left
-			{sound: wav["P_Tambourine"]},
+            {sound: wav["Clap_909"]}, # bottom left
 			{sound: wav["P_GanzaTap"]},
-			{sound: wav["Kick_Acou1"]}, # foot R
+			{sound: wav["P_Triangl_cl"]},
+			{sound: wav["Kick_Acou2"]}, # foot R
 			{sound: wav["SE_Crasher"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
@@ -67,8 +67,8 @@ class StrangeGods():
 			{sound: wav["P_GanzaTap"]},
 			{sound: wav["Kick_Acou1"]}, # foot R
 			{sound: wav["SE_Crasher"]}, # foot L
-			{sound: wav["Snare_Proc4"]}, # pad top
-			{sound: wav["SE_Noise1"]}] # pad rim
+			{sound: wav["SnareXs_6"]}, # pad top
+			{sound: wav["Snare_Proc4"]}] # pad rim
 
 class TheWarOnMe():
 	level = 100

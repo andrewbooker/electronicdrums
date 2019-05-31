@@ -12,7 +12,7 @@ f = 0
 for a in actuals:
 	actual = open("%s\\%s" % (locDump, a), "r")
 	gfn = "%s\\%s" % (locGen, a)
-	if (os.path.isfile(gfn)):
+	if (os.path.isfile(gfn) and int(a[3:6]) > 49):
 		anything = False
 		generated = open("%s\\%s" % (locGen, a), "r")
 		
