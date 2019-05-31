@@ -45,14 +45,18 @@ def createKit(zIndex, name, kitDef):
 	setUpFx(doc, kitPrm, kitDef.fx if hasFx else Thru(), 1)
 	setUpFx(doc, kitPrm, Thru(), 2)
 	
+	
 	for i in range(15):
 		isPad = i < 13
+		# in general, right foot should always go to sub mix to avoid master fx
+		
+		outAssign = 1 if i != 9 and isPad and hasFx and not valueFrom(kitDef.pads, "bypassFx", i, False) else 0
 		pad = kitNode(doc, kitPrm, "PadPrm")
 		kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
 		kitParam(doc, pad, "WvLevel", 100)
 		kitParam(doc, pad, "WvPan", 15)
 		kitParam(doc, pad, "PlayMode", 0)
-		kitParam(doc, pad, "OutAsgn", 1 if (isPad and hasFx and i != 9) else 0) # maybe don't want some sounds (eg right foot) going through fx 
+		kitParam(doc, pad, "OutAsgn", outAssign) 
 		kitParam(doc, pad, "MuteGrp", 0)
 		kitParam(doc, pad, "TempoSync", 0)
 		kitParam(doc, pad, "PadMidiCh", valueFrom(kitDef.pads, "channel", i))
