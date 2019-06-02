@@ -183,15 +183,15 @@ class AllTheBlueChanges(): #58
 			{note: 52, channel: 0, sound: wav["HH_DbS_cl"]}, # mid left
 			{note: 57, channel: 0, sound: wav["Cym_Fx2"]},
 			{note: 59, channel: 0, sound: wav["SE_SweepSlap"]},
-            {note: 45, channel: 0}, # bottom left
-			{note: 47, channel: 0},
-			{note: 50, channel: 0, sound: wav["P_Tambourine"]},
+            {sound: wav["P_Tamb_Proc"]}, # bottom left
+			{sound: wav["P_Tambourine"]},
+			{sound: wav["P_Tambourine"]},
 			{sound: wav["Kick_Proc3"]}, # foot R
 			{sound: wav["SnareXs_2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
 			
-class Mixtaped():
+class Mixtaped(): 
 	level = 100
 	tempo = 47
 	pads = [{note: 71, channel: 0, sound: wav["HH_909_op"]}, #top left
