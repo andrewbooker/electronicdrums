@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-class ShortLooper(): # only available as a master effect
-	type = -1
-	def asSpec(self):
-		return [1, 80, 3, 1]
-
 class Thru():
 	type = 0
 	def asSpec(self):
@@ -69,11 +64,6 @@ class Phaser():
 		rateSync = 0
 		return [stageType, rateSync, self.rate, 0, self.depth, self.manual, self.resonance, self.separation, 100, 100]
 	
-class Filter():
-	type = 11
-	def asSpec(self):
-		return [2, 1, 50, 3]
-	
 class RingMod():
 	type = 16
 
@@ -85,13 +75,16 @@ class RingMod():
 		self.sens = v
 		return self
 		
+	def polarity(self, v):
+		self.polarity = v
+		return self
+		
 	def balance(self, v):
 		self.balance = v
 		return self
 		
 	def asSpec(self):
-		polarity = 0
-		return [self.freq, self.sens, polarity, 15, 15, int(100 * self.balance), 100]
+		return [self.freq, self.sens, self.polarity, 15, 15, int(100 * self.balance), 100]
 		
 class PitchShift():
 	type = 17
