@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import xml.dom.minidom
+from effects import *
 
 
 def node(doc, onto, name):
@@ -101,11 +102,35 @@ def createSys():
 	param(doc, sys, "VLinkKnob2CC", 0)
 	param(doc, sys, "VLinkCtrlOnly", 0)
 	
-	
 	return doc
 	
+def setUpFx(doc, onto, prefix, fx):
+	param(doc, onto, "%sType" % prefix, fx.type if prefix == "Fx" else 0)
+	for i in range(20):
+		param(doc, onto, "%sPrm%d" % (prefix, i), fx.asSpec()[i] if i < len(fx.asSpec()) else 0)
+	
+def createMasterEffects():
+	doc = xml.dom.minidom.parseString("<MEfctPrm/>")
+	eff = doc.documentElement
+	
+	param(doc, eff, "MEQLoGain", 0)
+	param(doc, eff, "MEQMidFreq", 17)
+	param(doc, eff, "MEQMidGain", 0)
+	param(doc, eff, "MEQHiGain", 0)
+	param(doc, eff, "FltrPreset", 0)
+	param(doc, eff, "DlyPreset", 1)
+	param(doc, eff, "SLoopPreset", 0)
+	
+	setUpFx(doc, eff, "Fltr", Filter())
+	setUpFx(doc, eff, "Dr", SyncDelay().feedback(31).effLevel(60))
+	setUpFx(doc, eff, "Sp", ShortLooper())
+	#setUpFx(doc, eff, "Fx", Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
+	setUpFx(doc, eff, "Fx", RingMod().freq(9).sens(9).balance(0.5))
+	
+	return doc
 	
 file = open("D:\\gear\\spd-sx\\test.xml", "w");
 createSetup().writexml(file, addindent="\t", newl="\n")
 createSys().writexml(file, addindent="\t", newl="\n")
+createMasterEffects().writexml(file, addindent="\t", newl="\n")
 file.close()

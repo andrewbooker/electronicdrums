@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+class ShortLooper(): # only available as a master effect
+	type = -1
+	def asSpec(self):
+		return [1, 80, 3, 1]
+
 class Thru():
 	type = 0
 	def asSpec(self):
@@ -63,6 +68,11 @@ class Phaser():
 		stageType = 1
 		rateSync = 0
 		return [stageType, rateSync, self.rate, 0, self.depth, self.manual, self.resonance, self.separation, 100, 100]
+	
+class Filter():
+	type = 11
+	def asSpec(self):
+		return [2, 1, 50, 3]
 	
 class RingMod():
 	type = 16
@@ -136,3 +146,5 @@ class Reverb():
 		directLevel = 100
 		globalReverbLevel = 50
 		return [2, self.time, self.preDelay, 1, 2, self.density, self.effLevel, directLevel, globalReverbLevel]
+		
+		
