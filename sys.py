@@ -9,11 +9,20 @@ def node(doc, onto, name):
 
 def param(doc, onto, name, value):
 	node(doc, onto, name).appendChild(doc.createTextNode(str(value)))
-
-
+	
+def addEmptyKitChain(doc, onto):
+	base = node(doc, onto, "KitChain")
+	
+	for i in range(10):
+		param(doc, base, "Nm%d" % i, "")
+		
+	for i in range(20):
+		param(doc, base, "Stp%d" % i, -1)
+	
 def createSetup():
 	doc = xml.dom.minidom.parseString("<SetupPrm/>")
 	setup = doc.documentElement
+	
 	param(doc, setup, "LCDContrast", 4)
 	param(doc, setup, "LCDBright", 7)
 	param(doc, setup, "PadIllumi", 1)
@@ -58,7 +67,7 @@ def createSetup():
 		param(doc, pad, "RimGain", 0)
 		param(doc, pad, "NoiseCxl", 1)
 
-	return doc
+	return setup
 	
 def createSys():
 	doc = xml.dom.minidom.parseString("<SysPrm/>")
@@ -102,7 +111,16 @@ def createSys():
 	param(doc, sys, "VLinkKnob2CC", 0)
 	param(doc, sys, "VLinkCtrlOnly", 0)
 	
-	return doc
+	return sys
+	
+def createKitChain():
+	doc = xml.dom.minidom.parseString("<KitChainPrm/>")
+	chain = doc.documentElement
+	
+	for i in range(8):
+		addEmptyKitChain(doc, chain)
+		
+	return chain
 	
 def setUpFx(doc, onto, prefix, fx):
 	param(doc, onto, "%sType" % prefix, fx.type if prefix == "Fx" else 0)
@@ -124,13 +142,14 @@ def createMasterEffects():
 	setUpFx(doc, eff, "Fltr", Filter())
 	setUpFx(doc, eff, "Dr", SyncDelay().feedback(31).effLevel(60))
 	setUpFx(doc, eff, "Sp", ShortLooper())
-	#setUpFx(doc, eff, "Fx", Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
-	setUpFx(doc, eff, "Fx", RingMod().freq(9).sens(9).balance(0.5))
+	setUpFx(doc, eff, "Fx", Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
+	#setUpFx(doc, eff, "Fx", RingMod().freq(9).sens(9).balance(0.5))
 	
-	return doc
+	return eff
 	
-file = open("D:\\gear\\spd-sx\\test.xml", "w");
+file = open("D:\\gear\\spd-sx\\sysparam_gen.spd", "w");
 createSetup().writexml(file, addindent="\t", newl="\n")
 createSys().writexml(file, addindent="\t", newl="\n")
+createKitChain().writexml(file, addindent="\t", newl="\n")
 createMasterEffects().writexml(file, addindent="\t", newl="\n")
 file.close()
