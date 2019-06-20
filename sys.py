@@ -61,10 +61,51 @@ def createSetup():
 	
 def createSys():
 	doc = xml.dom.minidom.parseString("<SysPrm/>")
+	sys = doc.documentElement
+	
+	param(doc, sys, "ClickSndGrp", 0)
+	param(doc, sys, "ClickSnd", 4)
+	param(doc, sys, "ClickWv", 0)
+	param(doc, sys, "ClickInterval", 0)
+	param(doc, sys, "ClickPan", 15)
+	param(doc, sys, "ClickAsgn", 2)
+	param(doc, sys, "ClickLevel", 100)
+	param(doc, sys, "AudInLevel", 60)
+	param(doc, sys, "AudInAsgn", 0)
+	param(doc, sys, "Fx2Asgn", 1)
+	param(doc, sys, "SystemGain", 0)
+	param(doc, sys, "SubOutLevel", 100)
+	param(doc, sys, "USBDAudInLevel", 80)
+	
+	param(doc, sys, "KitChainSw", 0)
+	param(doc, sys, "KitChainBank", 0)
+	param(doc, sys, "PadCtrlPad1", 0)
+	param(doc, sys, "PadCtrlPad2", 0)
+	param(doc, sys, "PadCtrlPad3", 0)
+	param(doc, sys, "PadCtrlPad4", 0)
+	param(doc, sys, "PadCtrlPad5", 0)
+	param(doc, sys, "PadCtrlPad6", 0)
+	param(doc, sys, "PadCtrlPad7", 0)
+	param(doc, sys, "PadCtrlPad8", 0)
+	param(doc, sys, "PadCtrlPad9", 0)
+	param(doc, sys, "PadCtrlExt1", 0)
+	param(doc, sys, "PadCtrlExt2", 0)
+	param(doc, sys, "PadCtrlExt3", 0)
+	param(doc, sys, "PadCtrlExt4", 0)
+	param(doc, sys, "PadCtrlFS1", 0)
+	param(doc, sys, "PadCtrlFS2", 0)
+	param(doc, sys, "VLinkMode", 0)
+	param(doc, sys, "VLinkBank", -1)
+	param(doc, sys, "VLinkCh", 0)
+	param(doc, sys, "VLinkKnob1CC", 0)
+	param(doc, sys, "VLinkKnob2CC", 0)
+	param(doc, sys, "VLinkCtrlOnly", 0)
+	
 	
 	return doc
 	
 	
 file = open("D:\\gear\\spd-sx\\test.xml", "w");
 createSetup().writexml(file, addindent="\t", newl="\n")
+createSys().writexml(file, addindent="\t", newl="\n")
 file.close()
