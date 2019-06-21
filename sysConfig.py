@@ -188,6 +188,8 @@ class SystemConfig():
 		self.masterShortLoop = MasterShortLooper()
 		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
 		
+	#implicit in korg: master is kit: sub, FX2 only routed to sub
+	#implicit in korg: sub is kit: master, FX1 available and FX2 routed to master
 	def fx1On(self):
 		return 1 if self.inAssign == 1 else 0
 		

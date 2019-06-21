@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from random import randint
+
 class Thru():
 	type = 0
 	def asSpec(self):
@@ -63,6 +65,16 @@ class Phaser():
 		stageType = 1
 		rateSync = 0
 		return [stageType, rateSync, self.rate, 0, self.depth, self.manual, self.resonance, self.separation, 100, 100]
+		
+	@staticmethod
+	def createRandom():
+		e = Phaser()
+		e.rate(randint(10, 100))
+		e.depth(randint(40, 100))
+		e.manual(randint(40, 100))
+		e.resonance(randint(40, 100))
+		e.separation(randint(10, 100))
+		return e
 	
 class RingMod():
 	type = 16
