@@ -37,8 +37,6 @@ class MasterShortLooper():
 		self.timingHalf = 0
 		return [self.rateSyncOn, self.autoOn, self.interval, self.timingHalf]
 		
-			
-
 
 def node(doc, onto, name):
 	return onto.appendChild(doc.createElement(name))
@@ -70,10 +68,10 @@ def createSetup(fxModOn):
 	param(doc, setup, "LocalCtrl", 1)
 	param(doc, setup, "SoftThru", 1)
 	param(doc, setup, "MIDIPCCtrl", 1)
-	param(doc, setup, "MIDICCCtrl", 1)
+	param(doc, setup, "MIDICCCtrl", 1 if fxModOn else 0)
 	param(doc, setup, "MEfctCCSel", 64)
-	param(doc, setup, "MEfctCCKnob1", 12 if fxModOn else 0)
-	param(doc, setup, "MEfctCCKnob2", 13 if fxModOn else 0)
+	param(doc, setup, "MEfctCCKnob1", 12)
+	param(doc, setup, "MEfctCCKnob2", 13)
 	param(doc, setup, "USBMIDIThru", 0)
 	param(doc, setup, "PadLock", 0)
 	param(doc, setup, "AutoPowerOff", 0)
@@ -88,7 +86,7 @@ def createSetup(fxModOn):
 		param(doc, pad, "Threshold", 2)
 		param(doc, pad, "Curve", 0)
 		
-	#kd7s : need to reset this for TBB gig
+	#kd7s : need to reset this for TBB gig to 
 	for i in range(2):
 		pad = node(doc, setup, "ExtPad")
 		param(doc, pad, "InputMode", 1)
@@ -121,7 +119,7 @@ def createSetup(fxModOn):
 
 	return setup
 	
-def createSys():
+def createSys(inAssign, fx2Assign):
 	doc = xml.dom.minidom.parseString("<SysPrm/>")
 	sys = doc.documentElement
 	
@@ -132,9 +130,9 @@ def createSys():
 	param(doc, sys, "ClickPan", 15)
 	param(doc, sys, "ClickAsgn", 2)
 	param(doc, sys, "ClickLevel", 100)
-	param(doc, sys, "AudInLevel", 60)
-	param(doc, sys, "AudInAsgn", 0)
-	param(doc, sys, "Fx2Asgn", 1)
+	param(doc, sys, "AudInLevel", 75)
+	param(doc, sys, "AudInAsgn", inAssign)
+	param(doc, sys, "Fx2Asgn", fx2Assign)
 	param(doc, sys, "SystemGain", 0)
 	param(doc, sys, "SubOutLevel", 100)
 	param(doc, sys, "USBDAudInLevel", 80)
@@ -174,22 +172,31 @@ def createKitChain():
 		
 	return chain
 	
-
-	
 def setUpFx(doc, onto, prefix, fx):
 	param(doc, onto, "%sType" % prefix, fx.type if hasattr(fx, "type") else 0)
 	for i in range(20):
 		param(doc, onto, "%sPrm%d" % (prefix, i), fx.asSpec()[i] if i < len(fx.asSpec()) else 0)
-	
-class SystemConfig():
 
+
+class SystemConfig():
 	def __init__(self):
 		self.fxModOn = 1
+		self.inAssign = 0 #0: master, 1; sub
+		
 		self.masterFilter = MasterFilter()
 		self.masterDelay = MasterSyncDelay().leftTapTime(50).effLevel(60)
 		self.masterShortLoop = MasterShortLooper()
-		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5) #Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
-
+		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
+		
+	def fx1On(self):
+		return 1 if self.inAssign == 1 else 0
+		
+	def fx2Assign(self):
+		return 0 if self.inAssign == 1 else 1
+		
+	def kitAssign(self): # for use in separate kit builder
+		return 0 if self.inAssign == 1 else 1
+	
 	def createMasterEffects(self):
 		doc = xml.dom.minidom.parseString("<MEfctPrm/>")
 		eff = doc.documentElement
@@ -209,17 +216,16 @@ class SystemConfig():
 		
 		return eff
 		
-	def createIn(self, file):
+	def createIn(self, fqfn):
+		file = open(fqfn, "w")
 		createSetup(self.fxModOn).writexml(file, addindent="\t", newl="\n")
-		createSys().writexml(file, addindent="\t", newl="\n")
+		createSys(self.inAssign, self.fx2Assign()).writexml(file, addindent="\t", newl="\n")
 		createKitChain().writexml(file, addindent="\t", newl="\n")
 		self.createMasterEffects().writexml(file, addindent="\t", newl="\n")
-		
-	def createTest(self):
-		file = open("D:\\gear\\spd-sx\\sysparam_gen.spd", "w");
-		#file = open("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd", "w");
-		self.createIn(file)
 		file.close()
 		
+	def createTest(self):
+		self.createIn("D:\\gear\\spd-sx\\sysparam_gen.spd")
 		
-SystemConfig().createTest()
+		
+		
