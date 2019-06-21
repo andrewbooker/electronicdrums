@@ -4,6 +4,42 @@ import xml.dom.minidom
 from effects import *
 
 
+class MasterFilter():
+	def asSpec(self):
+		self.slope = 2 #= -36dB
+		self.rateSyncOn = 0
+		self.modRate = 47
+		self.modDepth = 54
+		self.lfoWave = 1 #= sine
+		return [self.slope, self.rateSyncOn, self.modRate, 8, self.lfoWave, self.modDepth]
+
+class MasterSyncDelay():	
+	def leftTapTime(self, v):
+		self.leftTapTime = v
+		return self
+		
+	def effLevel(self, v):
+		self.effLevel = v
+		return self
+		
+	def asSpec(self):
+		self.panOn = 1
+		self.syncOn = 1
+		self.directLevel = 100
+		return [self.panOn, self.syncOn, 6, self.leftTapTime, 0, 9, self.directLevel]
+		
+class MasterShortLooper():
+	type = 1
+	def asSpec(self):
+		self.autoOn = 2
+		self.rateSyncOn = 1
+		self.interval = 4
+		self.timingHalf = 0
+		return [self.rateSyncOn, self.autoOn, self.interval, self.timingHalf]
+		
+			
+
+
 def node(doc, onto, name):
 	return onto.appendChild(doc.createElement(name))
 
@@ -138,68 +174,53 @@ def createKitChain():
 		
 	return chain
 	
-class MasterFilter():
-	def asSpec(self):
-		self.slope = 2 #= -36dB
-		self.rateSyncOn = 0
-		self.modRate = 47
-		self.modDepth = 54
-		self.lfoWave = 1 #= sine
-		return [self.slope, self.rateSyncOn, self.modRate, 8, self.lfoWave, self.modDepth]
 
-class MasterSyncDelay():	
-	def leftTapTime(self, v):
-		self.leftTapTime = v
-		return self
-		
-	def effLevel(self, v):
-		self.effLevel = v
-		return self
-		
-	def asSpec(self):
-		self.panOn = 1
-		self.syncOn = 1
-		self.directLevel = 100
-		return [self.panOn, self.syncOn, 6, self.leftTapTime, 0, 9, self.directLevel]
-		
-class MasterShortLooper():
-	type = 1
-	def asSpec(self):
-		self.autoOn = 2
-		self.rateSyncOn = 1
-		self.interval = 4
-		self.timingHalf = 0
-		return [self.rateSyncOn, self.autoOn, self.interval, self.timingHalf]
 	
 def setUpFx(doc, onto, prefix, fx):
 	param(doc, onto, "%sType" % prefix, fx.type if hasattr(fx, "type") else 0)
 	for i in range(20):
 		param(doc, onto, "%sPrm%d" % (prefix, i), fx.asSpec()[i] if i < len(fx.asSpec()) else 0)
 	
-def createMasterEffects():
-	doc = xml.dom.minidom.parseString("<MEfctPrm/>")
-	eff = doc.documentElement
-	
-	param(doc, eff, "MEQLoGain", 0)
-	param(doc, eff, "MEQMidFreq", 17)
-	param(doc, eff, "MEQMidGain", 0)
-	param(doc, eff, "MEQHiGain", 0)
-	param(doc, eff, "FltrPreset", 0)
-	param(doc, eff, "DlyPreset", 1)
-	param(doc, eff, "SLoopPreset", 0)
-	
-	setUpFx(doc, eff, "Fltr", MasterFilter())
-	setUpFx(doc, eff, "Dr", MasterSyncDelay().leftTapTime(50).effLevel(60))
-	setUpFx(doc, eff, "Sp", MasterShortLooper())
-	#setUpFx(doc, eff, "Fx", Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
-	setUpFx(doc, eff, "Fx", RingMod().freq(9).sens(9).polarity(1).balance(0.5))
-	
-	return eff
-	
-#file = open("D:\\gear\\spd-sx\\sysparam_gen.spd", "w"); #E:\\Roland\\SPD-SX\\SYSTEM
-file = open("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd", "w");
-createSetup().writexml(file, addindent="\t", newl="\n")
-createSys().writexml(file, addindent="\t", newl="\n")
-createKitChain().writexml(file, addindent="\t", newl="\n")
-createMasterEffects().writexml(file, addindent="\t", newl="\n")
-file.close()
+class SystemConfig():
+
+	def createMasterEffects(self):
+		doc = xml.dom.minidom.parseString("<MEfctPrm/>")
+		eff = doc.documentElement
+		
+		param(doc, eff, "MEQLoGain", 0)
+		param(doc, eff, "MEQMidFreq", 17)
+		param(doc, eff, "MEQMidGain", 0)
+		param(doc, eff, "MEQHiGain", 0)
+		param(doc, eff, "FltrPreset", 0)
+		param(doc, eff, "DlyPreset", 1)
+		param(doc, eff, "SLoopPreset", 0)
+		
+		self.masterFilter = MasterFilter()
+		self.masterDelay = MasterSyncDelay().leftTapTime(50).effLevel(60)
+		self.masterShortLoop = MasterShortLooper()
+		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
+		
+		setUpFx(doc, eff, "Fltr", self.masterFilter)
+		setUpFx(doc, eff, "Dr", self.masterDelay)
+		setUpFx(doc, eff, "Sp", self.masterShortLoop)
+		#setUpFx(doc, eff, "Fx", Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
+		setUpFx(doc, eff, "Fx", self.masterFx)
+		
+		return eff
+
+
+		
+	def createIn(self, file):
+		createSetup().writexml(file, addindent="\t", newl="\n")
+		createSys().writexml(file, addindent="\t", newl="\n")
+		createKitChain().writexml(file, addindent="\t", newl="\n")
+		self.createMasterEffects().writexml(file, addindent="\t", newl="\n")
+		
+	def createTest(self):
+		file = open("D:\\gear\\spd-sx\\sysparam_gen.spd", "w");
+		#file = open("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd", "w");
+		self.createIn(file)
+		file.close()
+		
+		
+SystemConfig().createTest()
