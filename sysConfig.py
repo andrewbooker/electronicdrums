@@ -55,7 +55,7 @@ def addEmptyKitChain(doc, onto):
 	for i in range(20):
 		param(doc, base, "Stp%d" % i, -1)
 	
-def createSetup():
+def createSetup(fxModOn):
 	doc = xml.dom.minidom.parseString("<SetupPrm/>")
 	setup = doc.documentElement
 	
@@ -72,8 +72,8 @@ def createSetup():
 	param(doc, setup, "MIDIPCCtrl", 1)
 	param(doc, setup, "MIDICCCtrl", 1)
 	param(doc, setup, "MEfctCCSel", 64)
-	param(doc, setup, "MEfctCCKnob1", 12)
-	param(doc, setup, "MEfctCCKnob2", 13)
+	param(doc, setup, "MEfctCCKnob1", 12 if fxModOn else 0)
+	param(doc, setup, "MEfctCCKnob2", 13 if fxModOn else 0)
 	param(doc, setup, "USBMIDIThru", 0)
 	param(doc, setup, "PadLock", 0)
 	param(doc, setup, "AutoPowerOff", 0)
@@ -88,7 +88,7 @@ def createSetup():
 		param(doc, pad, "Threshold", 2)
 		param(doc, pad, "Curve", 0)
 		
-	#kd7s
+	#kd7s : need to reset this for TBB gig
 	for i in range(2):
 		pad = node(doc, setup, "ExtPad")
 		param(doc, pad, "InputMode", 1)
@@ -183,6 +183,13 @@ def setUpFx(doc, onto, prefix, fx):
 	
 class SystemConfig():
 
+	def __init__(self):
+		self.fxModOn = 1
+		self.masterFilter = MasterFilter()
+		self.masterDelay = MasterSyncDelay().leftTapTime(50).effLevel(60)
+		self.masterShortLoop = MasterShortLooper()
+		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5) #Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
+
 	def createMasterEffects(self):
 		doc = xml.dom.minidom.parseString("<MEfctPrm/>")
 		eff = doc.documentElement
@@ -195,23 +202,15 @@ class SystemConfig():
 		param(doc, eff, "DlyPreset", 1)
 		param(doc, eff, "SLoopPreset", 0)
 		
-		self.masterFilter = MasterFilter()
-		self.masterDelay = MasterSyncDelay().leftTapTime(50).effLevel(60)
-		self.masterShortLoop = MasterShortLooper()
-		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
-		
 		setUpFx(doc, eff, "Fltr", self.masterFilter)
 		setUpFx(doc, eff, "Dr", self.masterDelay)
 		setUpFx(doc, eff, "Sp", self.masterShortLoop)
-		#setUpFx(doc, eff, "Fx", Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88))
 		setUpFx(doc, eff, "Fx", self.masterFx)
 		
 		return eff
-
-
 		
 	def createIn(self, file):
-		createSetup().writexml(file, addindent="\t", newl="\n")
+		createSetup(self.fxModOn).writexml(file, addindent="\t", newl="\n")
 		createSys().writexml(file, addindent="\t", newl="\n")
 		createKitChain().writexml(file, addindent="\t", newl="\n")
 		self.createMasterEffects().writexml(file, addindent="\t", newl="\n")
