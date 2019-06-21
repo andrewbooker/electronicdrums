@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
+from sounds import sounds as wav
 
-roots = {"E": 64, "G": 67, "A": 69, "C": 72, "D": 74}
+roots = {"E": 64, "F#": 66, "G": 67, "A": 69, "B": 71, "C": 72, "D": 74}
 modes = {"aeolian": [2, 1, 2, 2, 1, 2],
 		 "dorian": [2, 1, 2, 2, 2, 1],
 		 "ionian": [2, 2, 1, 2, 2, 2],
@@ -22,38 +23,40 @@ class Notes():
 				base += mode[(n - 1) % len(mode)]
 			
 			self.notes.append(base)
-		
-		
+
 	def note(self, i):
 		return self.notes[i]
-		
 
-	
-def pad(n):
-	return "P_GanzaTap"
 
-def generate(r, m):
+def generate(r, m, t):
 	notes = Notes(11, roots[r], modes[m])
 	
-	print("class %s_%s():" % (r, m))
-	print("\tlevel = 100")
-	print("\ttempo = 86")
-	print("\tpads = [{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(8), pad(8)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(7), pad(7)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(6), pad(6)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(5), pad(5)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(4), pad(4)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(3), pad(3)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(2), pad(2)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(1), pad(1)))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(0), pad(0)))
-	print("\t\t\t{sound: wav[\"%s\"]}," % "Kick_Acou1")
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.root + 24, "SnareXs_4"))
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}," % (notes.note(9), "SE_Crasher")) # pad top
-	print("\t\t\t{note: %d, channel: 0, sound: wav[\"%s\"]}]" % (notes.note(10), "SE_VerbPf"))  #pad rim
-	print("")
-
-
+	k = type("%s_%s" % (r, m), (), {})
+	k.level = 100
+	k.tempo = t
+	k.pads = []
+	
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(6)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(4)})
+	k.pads.append({"sound": wav["Cym_Proc"]})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(3)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(2)})
+	k.pads.append({"sound": wav["P_GanzaTap"]})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(1)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(0)})
+	k.pads.append({"sound": wav["Kick_Acou1"]})
+	k.pads.append({"sound": wav["SnareXs_4"]})
+	k.pads.append({"sound": wav["SE_Crasher"]})
+	k.pads.append({"sound": wav["SE_VerbPf"]})	
+	
+	print(k.__name__)
+	return k
+	
+i = 0
 for root in roots:
 	for mode in modes:
-		generate(root, mode)
+		generate(root, mode, 73)
+		i += 1
+		
+print("\n%d kits generated" % i)
