@@ -16,7 +16,7 @@ class Notes():
 		self.root = root
 		self.notes = []
 		for n in range(padCount):
-			if ((n % len(mode)) == 0):
+			if ((n % (len(mode) + 1)) == 0):
 				octaves += 1
 				base = root + (octaves * 12)
 			else:
@@ -29,34 +29,25 @@ class Notes():
 
 
 def generate(r, m, t):
-	notes = Notes(11, roots[r], modes[m])
+	notes = Notes(7, roots[r], modes[m])
 	
 	k = type("%s_%s" % (r, m), (), {})
 	k.level = 100
 	k.tempo = t
 	k.pads = []
 	
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(6)})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(4)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(6)})
 	k.pads.append({"sound": wav["Cym_Proc"]})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(3)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(2)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(3)})
 	k.pads.append({"sound": wav["P_GanzaTap"]})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(1)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(0)})
+	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(1)})
 	k.pads.append({"sound": wav["Kick_Acou1"]})
 	k.pads.append({"sound": wav["SnareXs_4"]})
 	k.pads.append({"sound": wav["SE_Crasher"]})
 	k.pads.append({"sound": wav["SE_VerbPf"]})	
-	
-	print(k.__name__)
+
 	return k
-	
-i = 0
-for root in roots:
-	for mode in modes:
-		generate(root, mode, 73)
-		i += 1
-		
-print("\n%d kits generated" % i)

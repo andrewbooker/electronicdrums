@@ -27,58 +27,64 @@ def setUpFx(doc, onto, fx, n):
 	for i in range(20):
 		kitParam(doc, onto, "Fx%dPrm%d" % (n, i), fx.asSpec()[i] if i < len(fx.asSpec()) else 0)
 
-def createKit(zIndex, name, kitDef):
-	doc = xml.dom.minidom.parseString("<KitPrm/>")
-	kitPrm = doc.documentElement
-
-	kitParam(doc, kitPrm, "Level", kitDef.level)
-	kitParam(doc, kitPrm, "Tempo", kitDef.tempo * 10)
-	setName(doc, kitPrm, name)
-	
-	for i in range(16):
-		kitParam(doc, kitPrm, "SubNm%d" % i, 0)
-
-	hasFx = hasattr(kitDef, "fx")
-	kitParam(doc, kitPrm, "Fx2Asgn", 0)
-	kitParam(doc, kitPrm, "LinkPad0", -1)
-	kitParam(doc, kitPrm, "LinkPad1", -1)
-	setUpFx(doc, kitPrm, kitDef.fx if hasFx else Thru(), 1)
-	setUpFx(doc, kitPrm, Thru(), 2)
-	
-	
-	for i in range(15):
-		isPad = i < 13
-		# in general, right foot should always go to sub mix to avoid master fx
 		
-		outAssign = 1 if i != 9 and isPad and hasFx and not valueFrom(kitDef.pads, "bypassFx", i, False) else 0
-		pad = kitNode(doc, kitPrm, "PadPrm")
-		kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
-		kitParam(doc, pad, "WvLevel", 100)
-		kitParam(doc, pad, "WvPan", 15)
-		kitParam(doc, pad, "PlayMode", 0)
-		kitParam(doc, pad, "OutAsgn", outAssign) 
-		kitParam(doc, pad, "MuteGrp", 0)
-		kitParam(doc, pad, "TempoSync", 0)
-		kitParam(doc, pad, "PadMidiCh", valueFrom(kitDef.pads, "channel", i))
-		kitParam(doc, pad, "NoteNum", valueFrom(kitDef.pads, "note", i))
-		kitParam(doc, pad, "MidiCtrl", 0)
-		kitParam(doc, pad, "Loop", 0)
-		kitParam(doc, pad, "TrigType", 0)
-		kitParam(doc, pad, "GateTime", -1)
-		kitParam(doc, pad, "Dynamics", 1)
-		kitParam(doc, pad, "VoiceAsgn", 1)
-		kitParam(doc, pad, "Reverse", 0)
-		kitParam(doc, pad, "SubWv", -1)
-		kitParam(doc, pad, "SubWvLevel", 100)
-		kitParam(doc, pad, "SubWvPan", 15)
+class Kit():
+	def buildFrom(self, kitDef, name):
+		doc = xml.dom.minidom.parseString("<KitPrm/>")
+		kitPrm = doc.documentElement
 
-	kitFn = "kit%03d.spd" % zIndex
-	kitPrm.writexml(open("D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\KIT\\%s" % kitFn, "w"), addindent="\t", newl="\n")
-	#kitPrm.writexml(open("E:\\Roland\\SPD-SX\\KIT\\%s" % kitFn, "w"), addindent="\t", newl="\n")
-	print("kit %s created in %s" % (name, kitFn))
+		kitParam(doc, kitPrm, "Level", kitDef.level)
+		kitParam(doc, kitPrm, "Tempo", kitDef.tempo * 10)
+		setName(doc, kitPrm, name)
+		
+		for i in range(16):
+			kitParam(doc, kitPrm, "SubNm%d" % i, 0)
 
+		hasFx = hasattr(kitDef, "fx")
+		kitParam(doc, kitPrm, "Fx2Asgn", 0)
+		kitParam(doc, kitPrm, "LinkPad0", -1)
+		kitParam(doc, kitPrm, "LinkPad1", -1)
+		setUpFx(doc, kitPrm, kitDef.fx if hasFx else Thru(), 1)
+		setUpFx(doc, kitPrm, Thru(), 2)
+		
+		for i in range(15):
+			isPad = i < 13
+			# in general, right foot should always go to sub mix to avoid master fx
+			
+			outAssign = 1 if i != 9 and isPad and hasFx and not valueFrom(kitDef.pads, "bypassFx", i, False) else 0
+			pad = kitNode(doc, kitPrm, "PadPrm")
+			kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
+			kitParam(doc, pad, "WvLevel", 100)
+			kitParam(doc, pad, "WvPan", 15)
+			kitParam(doc, pad, "PlayMode", 0)
+			kitParam(doc, pad, "OutAsgn", outAssign) 
+			kitParam(doc, pad, "MuteGrp", 0)
+			kitParam(doc, pad, "TempoSync", 0)
+			kitParam(doc, pad, "PadMidiCh", valueFrom(kitDef.pads, "channel", i))
+			kitParam(doc, pad, "NoteNum", valueFrom(kitDef.pads, "note", i))
+			kitParam(doc, pad, "MidiCtrl", 0)
+			kitParam(doc, pad, "Loop", 0)
+			kitParam(doc, pad, "TrigType", 0)
+			kitParam(doc, pad, "GateTime", -1)
+			kitParam(doc, pad, "Dynamics", 1)
+			kitParam(doc, pad, "VoiceAsgn", 1)
+			kitParam(doc, pad, "Reverse", 0)
+			kitParam(doc, pad, "SubWv", -1)
+			kitParam(doc, pad, "SubWvLevel", 100)
+			kitParam(doc, pad, "SubWvPan", 15)
+			
+		return kitPrm
+		
+	def build(self, kitDef, name, dir, zIndex):
+		kitFn = "kit%03d.spd" % zIndex
+		file = open("%s\\%s" % (dir, kitFn), "w")
+		self.buildFrom(kitDef, name).writexml(file, addindent="\t", newl="\n")
+		file.close()
+		print("kit %s created in %s" % (name, kitFn))
+	
+	def buildNamed(self, kitDef, dir, zIndex):
+		self.build(kitDef, kitDef.__name__, dir, zIndex)
 
-
-
-
-
+	
+def createKit(zIndex, name, kitDef):
+	Kit().build(kitDef, name, "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\KIT", zIndex)

@@ -2,25 +2,25 @@
 
 import sys
 from random import randint
-
+from kit import Kit
+from genNotesPatches import generate
 from sysConfig import SystemConfig
 from effects import *
 
 key = sys.argv[1].upper()
-tempo = sys.argv[2]
-allowFxMod = 1 if len(sys.argv) < 4 else sys.argv[3]
+tempo = int(sys.argv[2])
+allowFxMod = 1 if len(sys.argv) < 4 else int(sys.argv[3])
 
 master = 0
 sub = 1
 
 class FxKorg():
 	korgAssign = master
-	allowedFx: [] # allow TapeEcho, Slicer, Wah
+	allowedFx: [] # allow TapeEcho, Slicer, Wah, nothing that's already available in the Korg
 		  
 class FxKit():
 	korgAssign = sub
 	allowedFx = [Phaser] #etc... allow Filter+Dist, Phaser, Wah, Vibrato, Slicer, PitchShift, RingMod if BD is assigned to 
-	
 
 mode = FxKit()
 fx = mode.allowedFx[randint(0, len(mode.allowedFx) - 1)]
@@ -34,5 +34,8 @@ c.inAssign = mode.korgAssign
 c.fxModOn = allowFxMod
 c.masterFx = fx.createRandom()
 
-c.createTest()
-#c.createIn("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd")
+c.createIn("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd")
+
+kitDef = generate(key, "aeolian", tempo)
+Kit().buildNamed(kitDef, "E:\\Roland\\SPD-SX\\KIT", 70)
+
