@@ -47,6 +47,8 @@ class Kit():
 		setUpFx(doc, kitPrm, kitDef.fx1 if hasattr(kitDef, "fx1") else Thru(), 1)
 		setUpFx(doc, kitPrm, kitDef.fx2 if hasattr(kitDef, "fx2") else Thru(), 2)
 		
+		pan = kitDef.pan if hasattr(kitDef, "pan") else 15
+		
 		for i in range(15):
 			isPad = i < 13
 			# in general, right foot should always go to sub mix to avoid master fx
@@ -57,7 +59,7 @@ class Kit():
 			pad = kitNode(doc, kitPrm, "PadPrm")
 			kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
 			kitParam(doc, pad, "WvLevel", 100)
-			kitParam(doc, pad, "WvPan", 15)
+			kitParam(doc, pad, "WvPan", pan)
 			kitParam(doc, pad, "PlayMode", 0)
 			kitParam(doc, pad, "OutAsgn", outAssign) 
 			kitParam(doc, pad, "MuteGrp", 0)

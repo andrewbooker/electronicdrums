@@ -37,5 +37,6 @@ c.masterFx = fx.createRandom()
 c.createIn("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd")
 
 kitDef = generate(key, "aeolian", tempo)
+kitDef.pan = 0
 Kit().buildNamed(kitDef, "E:\\Roland\\SPD-SX\\KIT", 70)
 
