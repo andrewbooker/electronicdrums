@@ -8,8 +8,8 @@ class MasterFilter():
 	def asSpec(self):
 		self.slope = 2 #= -36dB
 		self.rateSyncOn = 0
-		self.modRate = 47
-		self.modDepth = 54
+		self.modRate = 11
+		self.modDepth = 87
 		self.lfoWave = 1 #= sine
 		return [self.slope, self.rateSyncOn, self.modRate, 8, self.lfoWave, self.modDepth]
 

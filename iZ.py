@@ -16,13 +16,14 @@ sub = 1
 
 class FxKorg():
 	korgAssign = master
-	allowedFx: [] # allow TapeEcho, Slicer, Wah, nothing that's already available in the Korg
+	allowedFx = [Phaser] # allow TapeEcho, Slicer, Wah, nothing that's already available in the Korg
 		  
 class FxKit():
 	korgAssign = sub
 	allowedFx = [Phaser] #etc... allow Filter+Dist, Phaser, Wah, Vibrato, Slicer, PitchShift, RingMod if BD is assigned to 
 
-mode = FxKit()
+mode = FxKorg()
+#mode = FxKit()
 masterFx = mode.allowedFx[randint(0, len(mode.allowedFx) - 1)]
  
 
@@ -53,7 +54,7 @@ padOutFx1 = 1
 padOutFx2 = 2
 padOutSub = 3
 
-korgPercOut = padOutMaster
+korgPercOut = padOutMaster if (c.inAssign == sub) else padOutSub
 topKitOut = padOutFx1 if (c.fx1On() == 1) else padOutFx2
 midKitOut = padOutFx2
 bdOut = padOutSub
