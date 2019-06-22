@@ -39,7 +39,7 @@ def generate(r, m, t):
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(4)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(6)})
-	k.pads.append({"sound": wav["Cym_Proc"]})
+	k.pads.append({"sound": wav["Cym_808"]})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(2)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(3)})
 	k.pads.append({"sound": wav["P_GanzaTap"]})
