@@ -26,7 +26,7 @@ class MasterSyncDelay():
 		self.panOn = 1
 		self.syncOn = 1
 		self.directLevel = 100
-		return [self.panOn, self.syncOn, 6, self.leftTapTime, 0, 9, self.directLevel]
+		return [self.panOn, self.syncOn, 12, self.leftTapTime, 0, 9, self.directLevel]
 		
 class MasterShortLooper():
 	type = 1
@@ -184,7 +184,7 @@ class SystemConfig():
 		self.inAssign = 0 #0: master, 1; sub
 		
 		self.masterFilter = MasterFilter()
-		self.masterDelay = MasterSyncDelay().leftTapTime(50).effLevel(60)
+		self.masterDelay = MasterSyncDelay().leftTapTime(100).effLevel(60)
 		self.masterShortLoop = MasterShortLooper()
 		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
 		

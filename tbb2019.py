@@ -7,7 +7,13 @@ from standardPatch import StandardPatch
 note = "note"
 channel = "channel"
 sound = "sound"
-bypassFx = "bypassFx"
+outAssign = "outAssign"
+
+padOutMaster = 0
+padOutFx1 = 1
+padOutFx2 = 2
+padOutSub = 3
+padOutPhones = 4
 
 
 
@@ -83,7 +89,7 @@ class TheWarOnMe():
             {sound: wav["Kick_808_L"]}, # bottom left
 			{sound: wav["Clap_909"]},
 			{sound: wav["P_GanzaTap"]},
-			{sound: wav["Kick_Acou1"]}, # foot R
+			{sound: wav["Kick_Acou1"], outAssign: padOutMaster}, # foot R
 			{sound: wav["Tom_808_H"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["Tom_808_M"]}] # pad rim
@@ -203,7 +209,7 @@ class Mixtaped():
             {note: 40, channel: 0, sound: wav["Kick_808_L"]}, # bottom left
 			{note: 45, channel: 0, sound: wav["Snare_Hph"]},
 			{note: 59, channel: 0, sound: wav["HH_Proc2_cl"]},
-			{sound: wav["Kick_Acou1"]}, # foot R
+			{sound: wav["Kick_Acou1"], outAssign: padOutSub}, # foot R
 			{sound: wav["SE_Noise4"]}, # foot L
 			{note: 66, channel: 0, sound: wav["SE_Crasher"]}, # pad top
 			{note: 88, channel: 0, sound: wav["SE_VerbPf"]}] # pad rim
@@ -221,7 +227,7 @@ class WarmupMan():
 			{note: 24, channel: 0, sound: wav["Tom_Acou_L"]},
 			{note: 46, channel: 0, sound: wav["Tom_Acou_M"]},
 			{note: 51, channel: 0, sound: wav["Tom_Acou_H"]},
-			{note: 36, channel: 0, sound: wav["Kick_Acou1"]},
+			{note: 36, channel: 0, sound: wav["Kick_Acou1"], outAssign: padOutMaster},
 			{note: 48, channel: 0, sound: wav["SnareXs_4"]},
 			{note: 60, channel: 0, sound: wav["Ride_Acou"]},
 			{note: 70, channel: 0, sound: wav["Ride_Proc1Bl"]}]
@@ -257,7 +263,7 @@ class WatchingOverMe(StandardPatch): #062
             {sound: wav["Kick_808_L"]}, # bottom left
 			{sound: wav["P_CongaProcH"]},
 			{sound: wav["P_Tabla_Ge"]},
-			{sound: wav["Kick_Acou1"], bypassFx: True}, # foot R
+			{sound: wav["Kick_Acou1"], outAssign: padOutMaster}, # foot R
 			{sound: wav["Clap_Hse2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["P_CongaProcS"]}] # pad rim
@@ -266,17 +272,17 @@ class WatchingOverMe(StandardPatch): #062
 class NeverNeeding():
 	level = 100
 	tempo = 120
-	pads = [{sound: wav["Cym_Splash1"], bypassFx: True}, #top left
-			{sound: wav["Cym_Splash2"], bypassFx: True},
-			{sound: wav["Cym_Crotale"], bypassFx: True},
+	pads = [{sound: wav["Cym_Splash1"], outAssign: padOutMaster}, #top left
+			{sound: wav["Cym_Splash2"], outAssign: padOutMaster},
+			{sound: wav["Cym_Crotale"], outAssign: padOutMaster},
 			{sound: wav["Clap_Hse1"]}, # mid left
-			{sound: wav["HH_Proc2_op"], bypassFx: True},
-			{sound: wav["Cym_Fx2"], bypassFx: True},
-            {sound: wav["Kick_808_L"], bypassFx: True}, # bottom left
-			{sound: wav["P_Tambourine"], bypassFx: True},
-			{sound: wav["P_GanzaTap"], bypassFx: True},
-			{sound: wav["Kick_Acou1"], bypassFx: True}, # foot R
-			{sound: wav["SE_Crasher"], bypassFx: True}, # foot L
+			{sound: wav["HH_Proc2_op"], outAssign: padOutMaster},
+			{sound: wav["Cym_Fx2"], outAssign: padOutMaster},
+            {sound: wav["Kick_808_L"], outAssign: padOutMaster}, # bottom left
+			{sound: wav["P_Tambourine"], outAssign: padOutMaster},
+			{sound: wav["P_GanzaTap"], outAssign: padOutMaster},
+			{sound: wav["Kick_Acou1"], outAssign: padOutMaster}, # foot R
+			{sound: wav["SE_Crasher"], outAssign: padOutMaster}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
 	fx1 = Reverb().time(73).preDelay(63).density(10).effLevel(80)

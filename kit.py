@@ -47,13 +47,13 @@ class Kit():
 		setUpFx(doc, kitPrm, kitDef.fx1 if hasattr(kitDef, "fx1") else Thru(), 1)
 		setUpFx(doc, kitPrm, kitDef.fx2 if hasattr(kitDef, "fx2") else Thru(), 2)
 		
-		hasFx = hasattr(kitDef, "fx1")
-		
 		for i in range(15):
 			isPad = i < 13
 			# in general, right foot should always go to sub mix to avoid master fx
 			
-			outAssign = 1 if i != 9 and isPad and hasFx and not valueFrom(kitDef.pads, "bypassFx", i, False) else 0
+			outAssign = 1 if (isPad and hasattr(kitDef, "fx1")) else 0
+			outAssign = valueFrom(kitDef.pads, "outAssign", i, outAssign) 
+
 			pad = kitNode(doc, kitPrm, "PadPrm")
 			kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
 			kitParam(doc, pad, "WvLevel", 100)
