@@ -87,7 +87,7 @@ class TheWarOnMe():
 			{sound: wav["Tom_808_H"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["Tom_808_M"]}] # pad rim
-	fx = Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88)
+	fx1 = Phaser().rate(47).depth(60).manual(50).resonance(73).separation(88)
 
 class Borderline():
 	level = 100
@@ -207,7 +207,7 @@ class Mixtaped():
 			{sound: wav["SE_Noise4"]}, # foot L
 			{note: 66, channel: 0, sound: wav["SE_Crasher"]}, # pad top
 			{note: 88, channel: 0, sound: wav["SE_VerbPf"]}] # pad rim
-	fx = Reverb().time(30).preDelay(5).density(10).effLevel(100)
+	fx1 = Reverb().time(30).preDelay(5).density(10).effLevel(100)
 	
 class WarmupMan():
 	level = 100
@@ -225,7 +225,7 @@ class WarmupMan():
 			{note: 48, channel: 0, sound: wav["SnareXs_4"]},
 			{note: 60, channel: 0, sound: wav["Ride_Acou"]},
 			{note: 70, channel: 0, sound: wav["Ride_Proc1Bl"]}]
-	fx = Vibrato().rate(77).depth(69)
+	fx1 = Vibrato().rate(77).depth(69)
 
 class DaysTurnIntoYears():
 	level = 100
@@ -243,7 +243,7 @@ class DaysTurnIntoYears():
 			{sound: wav["SE_Crasher"]}, # foot L
 			{note: 57, channel: 0, sound: wav["P_Claves"]}, # pad top
 			{note: 59, channel: 0, sound: wav["P_Claves"]}] # pad rim
-	fx = Reverb().time(60).preDelay(50).density(10).effLevel(100)
+	fx1 = Reverb().time(60).preDelay(50).density(10).effLevel(100)
 
 class WatchingOverMe(StandardPatch): #062
 	level = 100
@@ -261,7 +261,7 @@ class WatchingOverMe(StandardPatch): #062
 			{sound: wav["Clap_Hse2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["P_CongaProcS"]}] # pad rim
-	fx = SyncDelay().feedback(31).effLevel(60)
+	fx1 = SyncDelay().feedback(31).effLevel(60)
 			
 class NeverNeeding():
 	level = 100
@@ -279,7 +279,7 @@ class NeverNeeding():
 			{sound: wav["SE_Crasher"], bypassFx: True}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
-	fx = Reverb().time(73).preDelay(63).density(10).effLevel(80)
+	fx1 = Reverb().time(73).preDelay(63).density(10).effLevel(80)
 	
 # acoustic songs
 class Ghostlike(StandardPatch):
