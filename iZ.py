@@ -3,7 +3,7 @@
 import sys
 from random import randint
 from kit import Kit
-from genNotesPatches import generate
+from iZgenKits import generate
 from sysConfig import SystemConfig
 from effects import *
 

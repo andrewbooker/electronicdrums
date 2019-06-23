@@ -26,7 +26,7 @@ class MasterSyncDelay():
 		self.panOn = 1
 		self.syncOn = 1
 		self.directLevel = 100
-		return [self.panOn, self.syncOn, 12, self.leftTapTime, 0, 4, self.directLevel]
+		return [self.panOn, self.syncOn, 12, self.leftTapTime, 0, 4, self.directLevel]  #note this will max out at 1300ms, should be tempo specific
 		
 class MasterShortLooper():
 	type = 1
