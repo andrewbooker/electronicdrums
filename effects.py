@@ -21,6 +21,24 @@ class SyncDelay():
 	def asSpec(self):
 		return [0, 7, 100, self.feedback, 1, 9, self.effLevel, 100]
 	
+class TapeEcho():
+	type = 3
+	
+	@staticmethod
+	def createRandom():
+		e = TapeEcho()
+		e.mode = 2 #long
+		e.repeatRate = 30 #0-127, modulated
+		e.intensity = 50 #0-127, modulated
+		e.distortion = 4 #0-5
+		e.wowFlutterRate = 47 #0-127
+		e.wowFlutterDepth = 81 #0-127
+		return e
+	
+	def asSpec(self):
+		return [self.mode, self.repeatRate, self.intensity, 12, 10, 64, 64, 64, self.distortion, self.wowFlutterRate, self.wowFlutterDepth, 65, 100, 100]
+		
+	
 class Chorus():
 	type = 4
 	
