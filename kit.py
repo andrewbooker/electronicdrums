@@ -40,8 +40,7 @@ class Kit():
 		for i in range(16):
 			kitParam(doc, kitPrm, "SubNm%d" % i, 0)
 
-		
-		kitParam(doc, kitPrm, "Fx2Asgn", 0) # does what?
+		kitParam(doc, kitPrm, "Fx2Asgn", 1 if hasattr(kitDef, "fx2") else 0) # does what?
 		kitParam(doc, kitPrm, "LinkPad0", -1)
 		kitParam(doc, kitPrm, "LinkPad1", -1)
 		setUpFx(doc, kitPrm, kitDef.fx1 if hasattr(kitDef, "fx1") else Thru(), 1)

@@ -19,7 +19,7 @@ class SyncDelay():
 		return self
 		
 	def asSpec(self):
-		return [0, 7, 100, self.feedback, 1, 9, self.effLevel, 100]
+		return [0, 7, 100, self.feedback, 1, 9, self.effLevel, 100] #note the delay will max out at 1300ms
 	
 class TapeEcho():
 	type = 3
@@ -161,6 +161,15 @@ class RingMod():
 	def asSpec(self):
 		return [self.freq, self.sens, self.polarity, 15, 15, int(100 * self.balance), 100]
 		
+	@staticmethod
+	def createRandom():
+		e = RingMod()
+		e.freq(randint(1, 127))
+		e.sens(randint(30, 127))
+		e.polarity(randint(0, 1))
+		e.balance(0.5)
+		return e
+		
 class PitchShift():
 	type = 17
 	
@@ -176,6 +185,13 @@ class PitchShift():
 		fine = 50
 		return [24 + self.pitch, fine, self.feedback, 100, 100]
 		
+	@staticmethod
+	def createRandom():
+		e = PitchShift()
+		e.pitch(randint(-24, 24))
+		e.feedback(randint(1, 99))
+		return e
+		
 class Vibrato():
 	type = 18
 	
@@ -190,6 +206,12 @@ class Vibrato():
 	def asSpec(self):
 		return [self.rate, self.depth]
 		
+	@staticmethod
+	def createRandom():
+		e = Vibrato()
+		e.rate(randint(5, 100))
+		e.depth(randint(20, 100))
+		return e
 		
 class Reverb():
 	type = 19
@@ -215,4 +237,24 @@ class Reverb():
 		globalReverbLevel = 50
 		return [2, self.time, self.preDelay, 1, 2, self.density, self.effLevel, directLevel, globalReverbLevel]
 		
+	@staticmethod
+	def createRandom():
+		e = Reverb()
+		e.time(randint(10, 90))
+		e.preDelay(randint(10, 99))
+		e.density(randint(1, 10))
+		e.effLevel(50)
+		return e
 		
+class Slicer():
+	type = 20
+	
+	@staticmethod
+	def createRandom():
+		e = Slicer()
+		e.pattern = randint(0, 15)
+		e.attack = randint(1, 127)
+		return e
+		
+	def asSpec(self):
+		return [self.pattern, 1, 8, self.attack]

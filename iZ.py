@@ -16,11 +16,11 @@ sub = 1
 
 class FxKorg():
 	korgAssign = master
-	allowedFx = [FilterPlusDrive] # allow TapeEcho, Slicer, Wah, nothing that's already available in the Korg
+	allowedFx = [Slicer, TapeEcho, TouchWah]
 		  
 class FxKit():
 	korgAssign = sub
-	allowedFx = [Phaser] #etc... allow Filter+Dist, Phaser, Wah, Vibrato, Slicer, PitchShift, RingMod if BD is assigned to 
+	allowedFx = [Phaser, FilterPlusDrive, Distortion, TouchWah, PitchShift, Vibrato, RingMod, Reverb, Slicer]
 
 mode = FxKorg()
 #mode = FxKit()
@@ -28,7 +28,8 @@ masterFx = mode.allowedFx[randint(0, len(mode.allowedFx) - 1)]
  
 
 
-print("writing files for %s %s bpm using %s%s" % (key, tempo, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
+print("%s %s bpm" % (key, tempo))
+print("master FX %s%s" % (masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
 
 c = SystemConfig()
 
@@ -42,11 +43,12 @@ kitDef = generate(key, "aeolian", tempo)
 kitDef.pan = 0
 
 
-
 kitDef.fx2 = FxKit.allowedFx[randint(0, len(FxKit.allowedFx) - 1)].createRandom() # should avoid using the one picked for the master, once more effects are added
 if (c.fx1On() == 1):
 	kitDef.fx1 = FxKit.allowedFx[randint(0, len(FxKit.allowedFx) - 1)].createRandom() # should avoid using the one picked for the master or fx2, once more effects are added
+	print("FX1 %s" % type(kitDef.fx1).__name__)
 
+print("FX2 %s" % type(kitDef.fx2).__name__)
 	
 # assign all sounds using c.kitAssign() and c.fx1On()
 padOutMaster = 0
@@ -57,7 +59,7 @@ padOutSub = 3
 korgPercOut = padOutMaster if (c.inAssign == sub) else padOutSub
 topKitOut = padOutFx1 if (c.fx1On() == 1) else padOutFx2
 midKitOut = padOutFx2
-bdOut = padOutSub
+bdOut = padOutSub # allow padOutFx2 if not RingMod
 
 kitDef.pads[0]["outAssign"] = korgPercOut
 kitDef.pads[1]["outAssign"] = korgPercOut
