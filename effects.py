@@ -94,6 +94,20 @@ class Phaser():
 		e.separation(randint(10, 100))
 		return e
 	
+class FilterPlusDrive():
+	type = 12
+	
+	@staticmethod
+	def createRandom():
+		e = FilterPlusDrive()
+		e.cutoff = 64 #0-127 modulated
+		e.resonance = 21 #0-127
+		e.drive = 39 #0-127 modulated
+		return e
+		
+	def asSpec(self):
+		return [self.cutoff, self.resonance, self.drive, 80]
+
 class RingMod():
 	type = 16
 

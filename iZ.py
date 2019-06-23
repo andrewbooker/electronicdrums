@@ -16,7 +16,7 @@ sub = 1
 
 class FxKorg():
 	korgAssign = master
-	allowedFx = [TapeEcho] # allow TapeEcho, Slicer, Wah, nothing that's already available in the Korg
+	allowedFx = [FilterPlusDrive] # allow TapeEcho, Slicer, Wah, nothing that's already available in the Korg
 		  
 class FxKit():
 	korgAssign = sub

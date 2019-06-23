@@ -26,7 +26,7 @@ class MasterSyncDelay():
 		self.panOn = 1
 		self.syncOn = 1
 		self.directLevel = 100
-		return [self.panOn, self.syncOn, 12, self.leftTapTime, 0, 9, self.directLevel]
+		return [self.panOn, self.syncOn, 12, self.leftTapTime, 0, 4, self.directLevel]
 		
 class MasterShortLooper():
 	type = 1
