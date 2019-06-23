@@ -108,6 +108,21 @@ class FilterPlusDrive():
 	def asSpec(self):
 		return [self.cutoff, self.resonance, self.drive, 80]
 
+class TouchWah():
+	type = 14
+	
+	@staticmethod
+	def createRandom():
+		e = TouchWah()
+		e.polarity = 0 #0-1
+		e.sensitivity = 47 #0-100 modulated
+		e.cutoff = 23 #0-100 modulated
+		e.q = 69 #0-100
+		return e
+	
+	def asSpec(self):
+		return [0, self.polarity, self.sensitivity, self.cutoff, self.q, 100, 100]
+	
 class RingMod():
 	type = 16
 
