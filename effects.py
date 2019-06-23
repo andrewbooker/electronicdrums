@@ -30,9 +30,9 @@ class TapeEcho():
 		e.mode = 2 #long
 		e.repeatRate = 30 #0-127, modulated
 		e.intensity = 50 #0-127, modulated
-		e.distortion = 4 #0-5
-		e.wowFlutterRate = 47 #0-127
-		e.wowFlutterDepth = 81 #0-127
+		e.distortion = randint(1, 5)
+		e.wowFlutterRate = randint(10, 110)
+		e.wowFlutterDepth = randint(50, 127)
 		return e
 	
 	def asSpec(self):
@@ -100,9 +100,9 @@ class FilterPlusDrive():
 	@staticmethod
 	def createRandom():
 		e = FilterPlusDrive()
-		e.cutoff = 64 #0-127 modulated
-		e.resonance = 21 #0-127
-		e.drive = 39 #0-127 modulated
+		e.cutoff = randint(20, 127) # modulated
+		e.resonance = randint(40, 127)
+		e.drive = randint(10, 120) # modulated
 		return e
 		
 	def asSpec(self):
@@ -114,10 +114,10 @@ class TouchWah():
 	@staticmethod
 	def createRandom():
 		e = TouchWah()
-		e.polarity = 0 #0-1
-		e.sensitivity = 47 #0-100 modulated
-		e.cutoff = 23 #0-100 modulated
-		e.q = 69 #0-100
+		e.polarity = randint(0, 1)
+		e.sensitivity = randint(20, 100) # modulated
+		e.cutoff = randint(10, 100) # modulated
+		e.q = randint(50, 100)
 		return e
 	
 	def asSpec(self):
@@ -129,11 +129,11 @@ class Distortion():
 	@staticmethod
 	def createRandom():
 		e = Distortion()
-		e.distType = 17 #0-24
-		e.drive = 46 #0-120
+		e.distType = randint(0, 24)
+		e.drive = randint(10, 120)
 		e.bottom = 50 #0-100
 		e.tone = 40 #0-100
-		e.level = 30 # 0-100 keep low
+		e.level = 30 # 0-100 keep low, maybe fn of disttype and drive
 		return e
 	
 	def asSpec(self):
