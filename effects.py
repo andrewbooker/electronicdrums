@@ -123,6 +123,22 @@ class TouchWah():
 	def asSpec(self):
 		return [0, self.polarity, self.sensitivity, self.cutoff, self.q, 100, 100]
 	
+class Distortion():
+	type = 15
+	
+	@staticmethod
+	def createRandom():
+		e = Distortion()
+		e.distType = 17 #0-24
+		e.drive = 46 #0-120
+		e.bottom = 50 #0-100
+		e.tone = 40 #0-100
+		e.level = 30 # 0-100 keep low
+		return e
+	
+	def asSpec(self):
+		return [self.distType, self.drive, self.bottom, self.tone, self.level, 50]
+	
 class RingMod():
 	type = 16
 
