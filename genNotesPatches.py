@@ -47,7 +47,7 @@ def generate(r, m, t):
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(1)})
 	k.pads.append({"sound": wav["Kick_Acou1"]})
 	k.pads.append({"sound": wav["SnareXs_4"]})
-	k.pads.append({"sound": wav["SE_Crasher"]})
+	k.pads.append({"sound": wav["SnareXs_7"]})
 	k.pads.append({"sound": wav["SE_VerbPf"]})	
 
 	return k
