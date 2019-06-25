@@ -46,21 +46,40 @@ class RecordAudio():
                 print("stopping audio %s" % self.dev)
 
 
-now = time.time()    
-fqp = "%s/recording/%s" % (sys.argv[1], datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d/%Y-%m-%d_%H%M%S"))
-if not os.path.exists(fqp):
-    os.makedirs(fqp)
-    
-shouldStop = threading.Event()
+if (False):
+	now = time.time()    
+	fqp = "%s/recording/%s" % (sys.argv[1], datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d/%Y-%m-%d_%H%M%S"))
+	if not os.path.exists(fqp):
+		os.makedirs(fqp)
+		
+	shouldStop = threading.Event()
 
-audio0 = RecordAudio(fqp, 3) #3 : mic on linux box headphones
-ta0 = threading.Thread(target=audio0.start, args=(shouldStop,), daemon=True)
+	audio0 = RecordAudio(fqp, 1) #3 : mic on linux box headphones
+	ta0 = threading.Thread(target=audio0.start, args=(shouldStop,), daemon=True)
 
-print("starting recording to %s" % fqp)
-ta0.start()
+	print("starting recording to %s" % fqp)
+	ta0.start()
 
-keyboard.wait("q")
-print ("stopping...")
-shouldStop.set()
-ta0.join()
-print("done")
+	keyboard.wait("q")
+	print ("stopping...")
+	shouldStop.set()
+	ta0.join()
+	print("done")
+	
+	
+
+	
+class ReadAudio():
+	def read(self, fqfn, dirOut):
+		with sf.SoundFile(fqfn, "r+") as f:
+			with sf.SoundFile("%s\\sample.wav" % dirOut, mode="x", samplerate=44100, channels=1, subtype="PCM_24") as out:
+				print("%d frames" % f.frames)
+				while f.tell() < f.frames:
+					data = f.read(1)
+					if (data[0] > 0.01):
+						out.write(data[0])
+				
+				out.close()
+			f.close()
+			
+ReadAudio().read(sys.argv[1], sys.argv[2])
