@@ -26,6 +26,8 @@ modes = {"aeolian": [2, 1, 2, 2, 1, 2],
 		 "mixolydian": [2, 2, 1, 2, 2, 1],
 		 "lydian": [2, 2, 2, 1, 2, 2],
 		 "eastern": [1, 3, 1, 2, 1, 3]}
+		 
+modeNames = modes.keys()
 
 
 class Notes():
