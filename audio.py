@@ -15,6 +15,7 @@ import sys
 import os
 import threading
 import keyboard
+import math
 
 
 
@@ -47,39 +48,72 @@ class RecordAudio():
 
 
 if (False):
-	now = time.time()    
-	fqp = "%s/recording/%s" % (sys.argv[1], datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d/%Y-%m-%d_%H%M%S"))
-	if not os.path.exists(fqp):
-		os.makedirs(fqp)
-		
-	shouldStop = threading.Event()
+    now = time.time()    
+    fqp = "%s/recording/%s" % (sys.argv[1], datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d/%Y-%m-%d_%H%M%S"))
+    if not os.path.exists(fqp):
+        os.makedirs(fqp)
+        
+    shouldStop = threading.Event()
 
-	audio0 = RecordAudio(fqp, 1) #3 : mic on linux box headphones
-	ta0 = threading.Thread(target=audio0.start, args=(shouldStop,), daemon=True)
+    audio0 = RecordAudio(fqp, 1) #3 : mic on linux box headphones
+    ta0 = threading.Thread(target=audio0.start, args=(shouldStop,), daemon=True)
 
-	print("starting recording to %s" % fqp)
-	ta0.start()
+    print("starting recording to %s" % fqp)
+    ta0.start()
 
-	keyboard.wait("q")
-	print ("stopping...")
-	shouldStop.set()
-	ta0.join()
-	print("done")
-	
-	
+    keyboard.wait("q")
+    print ("stopping...")
+    shouldStop.set()
+    ta0.join()
+    print("done")
+    
+    
 
-	
+class RMSn():
+    size = 10
+
+    def __init__(self):
+        self.values = []
+        self.avg = 0.0
+
+    def add(self, v):
+        self.avg += (abs(v) * 1.0 / RMSn.size)
+        self.values.append(v)
+        if (len(self.values) > 5):
+            p = self.values.pop(0)
+            self.avg -= (abs(p) * 1.0 / RMSn.size)
+
+    def first(self):
+        return self.values[0]
+
+    
 class ReadAudio():
-	def read(self, fqfn, dirOut):
-		with sf.SoundFile(fqfn, "r+") as f:
-			with sf.SoundFile("%s\\sample.wav" % dirOut, mode="x", samplerate=44100, channels=1, subtype="PCM_24") as out:
-				print("%d frames" % f.frames)
-				while f.tell() < f.frames:
-					data = f.read(1)
-					if (data[0] > 0.01):
-						out.write(data[0])
-				
-				out.close()
-			f.close()
-			
-ReadAudio().read(sys.argv[1], sys.argv[2])
+
+    def __init__(self):
+        self.movingAvg = RMSn()
+        self.state = 0
+
+    def read(self, fqfn, dirOut):
+        with sf.SoundFile(fqfn, "r+") as f:
+            with sf.SoundFile("%s/sample_e.wav" % dirOut, mode="x", samplerate=44100, channels=1, subtype="PCM_16") as out:
+                print("%d frames" % f.frames)
+                i = 0
+                while (f.tell() < f.frames and self.state < 2):
+                    data = f.read(1)
+                    self.movingAvg.add(data[0])
+                    if (self.movingAvg.avg > (0.1 if self.state == 0 else 0.005)):
+                        if self.state == 0:
+                            print("beginning sample at %d" % i)
+                        self.state = 1
+                        v = self.movingAvg.first()
+                        out.write(v)
+                    else:
+                        if self.state == 1:
+                            print("ending sample at %d" % i)
+                        self.state = 2 if self.state == 1 else 0
+                    i += 1
+                out.close()
+            f.close()
+            
+if (True):
+    ReadAudio().read(sys.argv[1], sys.argv[2])
