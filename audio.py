@@ -70,18 +70,17 @@ if (False):
     
 
 class RMSn():
-    size = 10
-
-    def __init__(self):
+    def __init__(self, size):
         self.values = []
+        self.size = size
         self.avg = 0.0
 
     def add(self, v):
-        self.avg += (abs(v) * 1.0 / RMSn.size)
+        self.avg += (abs(v) * 1.0 / self.size)
         self.values.append(v)
-        if (len(self.values) > 5):
+        if (len(self.values) > self.size):
             p = self.values.pop(0)
-            self.avg -= (abs(p) * 1.0 / RMSn.size)
+            self.avg -= (abs(p) * 1.0 / self.size)
 
     def first(self):
         return self.values[0]
@@ -90,27 +89,35 @@ class RMSn():
 class ReadAudio():
 
     def __init__(self):
-        self.movingAvg = RMSn()
+        self.movingAvg5 = RMSn(5)
+        self.movingAvg30 = RMSn(30)
         self.state = 0
 
     def read(self, fqfn, dirOut):
         with sf.SoundFile(fqfn, "r+") as f:
-            with sf.SoundFile("%s/sample_e.wav" % dirOut, mode="x", samplerate=44100, channels=1, subtype="PCM_16") as out:
+            fout = "%s/shortSample.wav" % dirOut
+            
+            if os.path.exists(fout):
+                os.remove(fout)
+            
+            with sf.SoundFile(fout, mode="x", samplerate=44100, channels=1, subtype="PCM_16") as out:
                 print("%d frames" % f.frames)
                 i = 0
                 while (f.tell() < f.frames and self.state < 2):
-                    data = f.read(1)
-                    self.movingAvg.add(data[0])
-                    if (self.movingAvg.avg > (0.1 if self.state == 0 else 0.005)):
-                        if self.state == 0:
-                            print("beginning sample at %d" % i)
+                    v = f.read(1)[0]
+                    self.movingAvg5.add(v)
+                    self.movingAvg30.add(v)
+                    if (self.state == 1 and self.movingAvg30.avg < 0.003):
+                        print("ending sample at %d" % i)
+                        self.state = 2
+
+                    if (self.state == 0 and abs(v - self.movingAvg5.avg) > 0.2):
+                        print("beginning sample at %d" % i)
                         self.state = 1
-                        v = self.movingAvg.first()
-                        out.write(v)
-                    else:
-                        if self.state == 1:
-                            print("ending sample at %d" % i)
-                        self.state = 2 if self.state == 1 else 0
+
+                    if (self.state == 1): 
+                        out.write(self.movingAvg5.first())
+
                     i += 1
                 out.close()
             f.close()
