@@ -71,8 +71,11 @@ if (False):
 
 class RMSn():
     def __init__(self, size):
-        self.values = []
         self.size = size
+        self.clear()
+        
+    def clear(self):
+        self.values = []
         self.avg = 0.0
 
     def add(self, v):
@@ -88,39 +91,50 @@ class RMSn():
     
 class ReadAudio():
 
-    def __init__(self):
+    def __init__(self, dirOut):
         self.movingAvg5 = RMSn(5)
         self.movingAvg30 = RMSn(30)
         self.state = 0
+        self.out = None
+        self.fn = 0
+        self.dirOut = dirOut
+        
+    def readOneSample(self, i, v):
+        self.movingAvg5.add(v)
+        self.movingAvg30.add(v)
+        
+        if (self.state == 2):
+            self.movingAvg5.clear()
+            self.movingAvg30.clear()
+            self.state = 0
+        
+        if (self.state == 1 and self.movingAvg30.avg < 0.003):
+            print("ending sample at %d at %d" % (self.fn, i))
+            self.state = 2
+            self.out.close()
+            self.out = None
+            self.fn += 1
 
-    def read(self, fqfn, dirOut):
+        if (self.state == 0 and abs(v - self.movingAvg5.avg) > 0.25):
+            print("beginning sample %d at %d" % (self.fn, i))
+            self.out = sf.SoundFile("%s/shortSample%03d.wav" % (self.dirOut, self.fn), mode="x", samplerate=44100, channels=1, subtype="PCM_16")
+            self.state = 1
+            
+        if (self.state == 1): 
+            self.out.write(self.movingAvg5.first())
+        
+
+    def read(self, fqfn):
         with sf.SoundFile(fqfn, "r+") as f:
-            fout = "%s/shortSample.wav" % dirOut
+            print("%d frames" % f.frames)
+            i = 0
+            while (f.tell() < f.frames):
+                v = f.read(1)[0]
+                self.readOneSample(i, v)
+
+                i += 1
             
-            if os.path.exists(fout):
-                os.remove(fout)
-            
-            with sf.SoundFile(fout, mode="x", samplerate=44100, channels=1, subtype="PCM_16") as out:
-                print("%d frames" % f.frames)
-                i = 0
-                while (f.tell() < f.frames and self.state < 2):
-                    v = f.read(1)[0]
-                    self.movingAvg5.add(v)
-                    self.movingAvg30.add(v)
-                    if (self.state == 1 and self.movingAvg30.avg < 0.003):
-                        print("ending sample at %d" % i)
-                        self.state = 2
-
-                    if (self.state == 0 and abs(v - self.movingAvg5.avg) > 0.2):
-                        print("beginning sample at %d" % i)
-                        self.state = 1
-
-                    if (self.state == 1): 
-                        out.write(self.movingAvg5.first())
-
-                    i += 1
-                out.close()
             f.close()
             
 if (True):
-    ReadAudio().read(sys.argv[1], sys.argv[2])
+    ReadAudio(sys.argv[2]).read(sys.argv[1])
