@@ -2,7 +2,7 @@
 
 from sounds import sounds as wav
 from random import randint
-from iZgenSounds import generateRightFoot
+from iZgenSounds import *
 
 roots = {"E": 64, 
 		 "F": 65,
@@ -143,7 +143,8 @@ class GeneratedKitSounds():
 	pc = ("Fuse_Fill2", "01/fusee_05.wav")
 	
 	def __init__(self):
-		generateRightFoot(GeneratedKitSounds.pc[1])
+		generateRightFoot(GeneratedKitSounds.rf[1])
+		generateCym(GeneratedKitSounds.cy[1])
 	
 	def rightFoot(self):
 		return GeneratedKitSounds.rf[0]

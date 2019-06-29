@@ -10,9 +10,17 @@ class Avg():
 	def isDone(self, hasF1, hasF2):
 		return not hasF1 and not hasF2
 		
-class XFade():
+class LinearXFade():
 	def on(self, d1, d2, i, size):
 		f = 1.0 * i / size
+		return (d1 * (1 - f)) + (d2 * f)
+	
+	def isDone(self, hasF1, hasF2):
+		return not hasF1 and not hasF2
+		
+class ShortXFade():
+	def on(self, d1, d2, i, size):
+		f = 1.0 / ((20.0 * i / size) + 1.0)
 		return (d1 * (1 - f)) + (d2 * f)
 	
 	def isDone(self, hasF1, hasF2):
@@ -33,12 +41,10 @@ class Multiply():
 		return not hasF1 or not hasF2
 		
 
-
-def generateRightFoot(fnOnto):
-	print("generating right foot sound")
+def combine(fnOnto, s1, s2, op):
 	loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\DATA"
-	f1 = sf.SoundFile("%s\\%s" % (loc, "00\\Kick__17.wav"), "r")
-	f2 = sf.SoundFile("%s\\%s" % (loc, "01\\Tom_A_01.wav"), "r")
+	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
+	f2 = sf.SoundFile("%s\\%s" % (loc, s2), "r")
 	
 	locOut = "E:\\Roland\\SPD-SX\\WAVE\\DATA"
 	fqfnOut = "%s\\%s" % (locOut, fnOnto)
@@ -50,8 +56,7 @@ def generateRightFoot(fnOnto):
 	
 	i = 0
 	done = False
-	
-	op = EnvelopeFollow()
+
 	size = max(f1.frames, f2.frames)
 	while (not done):
 		hasF1 = f1.tell() < f1.frames
@@ -70,5 +75,15 @@ def generateRightFoot(fnOnto):
 	f1.close()
 	f2.close()
 	out.close()
+
+
+def generateRightFoot(fnOnto):
+	print("generating right foot sound")
+	combine(fnOnto, "00\\Kick__17.wav", "01\\Tom_A_01.wav", EnvelopeFollow())
+	
+def generateCym(fnOnto):
+	print("generating cymbal sound")
+	combine(fnOnto, "00\\Cym_8.wav", "00\\Ride__02.wav", ShortXFade())
+	
 	
 	
