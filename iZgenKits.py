@@ -26,7 +26,7 @@ modes = {"aeolian": [2, 1, 2, 2, 1, 2],
 		 "ionian": [2, 2, 1, 2, 2, 2],
 		 "mixolydian": [2, 2, 1, 2, 2, 1],
 		 "lydian": [2, 2, 2, 1, 2, 2],
-		 "eastern": [1, 3, 1, 2, 1, 3]}
+		 "eastern": [1, 3, 1, 2, 1, 2]}
 		 
 modeNames = modes.keys()
 
@@ -53,7 +53,7 @@ class Notes():
 def any(a):
 	return a[randint(0, len(a) - 1)]
 
-class KitSoundsFromSpdSx():
+class NativeKitSounds():
 		
 	def rightFoot(self):
 		return any(["Kick_110",
@@ -131,7 +131,34 @@ class KitSoundsFromSpdSx():
 					"Clap_Verb1", #:6 #00/Clap__06.wav
 					"P_GanzaTap",
 					"SE_VerbPf"])
-   
+					
+					
+class GeneratedKitSounds():
+	rf = ("Fuse_Kick", "01/fusee_06.wav")
+	lf = ("Fuse_Bass1", "01/fusee.wav")
+	pt = ("Fuse_BBeat", "01/fusee_02.wav")
+	pr = ("Fuse_Fill1", "01/fusee_04.wav")
+	cy = ("Fuse_Crash", "01/fusee_03.wav")
+	pc = ("Fuse_Fill2", "01/fusee_05.wav")
+	
+	def rightFoot(self):
+		return GeneratedKitSounds.rf[0]
+		
+	def leftFoot(self):
+		return GeneratedKitSounds.lf[0]
+		
+	def padTop(self):
+		return GeneratedKitSounds.pt[0]
+		
+	def padRim(self):
+		return GeneratedKitSounds.pr[0]
+		
+	def cym(self):
+		return GeneratedKitSounds.cy[0]
+		
+	def perc(self):
+		return GeneratedKitSounds.pc[0]
+
 
 def generate(r, m, t):
 	notes = Notes(7, roots[r], modes[m])
@@ -141,7 +168,7 @@ def generate(r, m, t):
 	k.tempo = t
 	k.pads = []
 	
-	ks = KitSoundsFromSpdSx()
+	ks = GeneratedKitSounds() #NativeKitSounds
 	
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(4)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
