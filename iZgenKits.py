@@ -2,6 +2,7 @@
 
 from sounds import sounds as wav
 from random import randint
+from iZgenSounds import generateRightFoot
 
 roots = {"E": 64, 
 		 "F": 65,
@@ -141,6 +142,9 @@ class GeneratedKitSounds():
 	cy = ("Fuse_Crash", "01/fusee_03.wav")
 	pc = ("Fuse_Fill2", "01/fusee_05.wav")
 	
+	def __init__(self):
+		generateRightFoot(GeneratedKitSounds.pc[1])
+	
 	def rightFoot(self):
 		return GeneratedKitSounds.rf[0]
 		
@@ -159,6 +163,8 @@ class GeneratedKitSounds():
 	def perc(self):
 		return GeneratedKitSounds.pc[0]
 
+		
+ks = GeneratedKitSounds() #NativeKitSounds
 
 def generate(r, m, t):
 	notes = Notes(7, roots[r], modes[m])
@@ -167,8 +173,6 @@ def generate(r, m, t):
 	k.level = 100
 	k.tempo = t
 	k.pads = []
-	
-	ks = GeneratedKitSounds() #NativeKitSounds
 	
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(4)})
 	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
