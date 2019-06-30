@@ -3,6 +3,7 @@
 import soundfile as sf
 import os
 import math
+from random import uniform
 
 
 class Resize():
@@ -49,8 +50,12 @@ class LinearXFade():
 		return not hasF1 and not hasF2
 		
 class XChop():
+	def __init__(self):
+		self.freq = uniform(400.0, 4000.0)
+		
 	def on(self, d1, d2, i, size):
-		return d1 if ((i / 50) % 2) == 0 else d2
+		f = 1.0 + (0.5 * math.cos(i / self.freq))
+		return (d1 * (1 - f)) + (d2 * f)
 	
 	def isDone(self, hasF1, hasF2):
 		return not hasF1 and not hasF2
@@ -78,6 +83,19 @@ class Multiply():
 		return not hasF1 or not hasF2
 		
 
+class Gradient():
+	@staticmethod
+	def any():
+		return Gradient(uniform(0.3, 2.7), uniform(0.3, 2.7))
+
+	def __init__(self, y1, y2):
+		self.y1 = y1
+		self.y2 = y2
+		
+	def at(self, i):
+		return self.y1 + (i * (self.y2 - self.y1) / Resize.maxLength)
+		
+
 def combine(fnOnto, s1, s2, op):
 	loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\DATA"
 	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
@@ -98,8 +116,10 @@ def combine(fnOnto, s1, s2, op):
 		
 	print("%d in %s" % (len(resize1.buffer), s1))
 	print("%d in %s" % (len(resize2.buffer), s2))
-	r1 = resize1.read(lambda i: 1.6)
-	r2 = resize2.read(lambda i: 0.3)
+	g1 = Gradient.any()
+	g2 = Gradient.any()
+	r1 = resize1.read(g1.at)
+	r2 = resize2.read(g2.at)
 	lr1 = len(r1)
 	lr2 = len(r2)
 	print("now %d in %s" % (lr1, s1))
@@ -124,7 +144,7 @@ def combine(fnOnto, s1, s2, op):
 
 def generateRightFoot(fnOnto):
 	print("generating right foot sound")
-	combine(fnOnto, "00\\Kick__17.wav", "01\\Tom_A_01.wav", EnvelopeFollow())
+	combine(fnOnto, "00\\Kick__17.wav", "01\\Tom_A_01.wav", XChop())
 	
 def generateCym(fnOnto):
 	print("generating cymbal sound")
