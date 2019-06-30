@@ -2,6 +2,7 @@
 
 import sys
 from kit import Kit
+from iZgenSounds import any
 from iZgenKits import generate, modeNames, any
 from sysConfig import SystemConfig
 from effects import *

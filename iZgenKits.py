@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from sounds import sounds as wav
-from random import randint
 from iZgenSounds import *
 
 roots = {"E": 64, 
@@ -49,13 +48,7 @@ class Notes():
 
 	def note(self, i):
 		return self.notes[i]
-		
 
-def any(a, exceptions = []):
-	f = a[randint(0, len(a) - 1)]
-	if f in exceptions:
-		return any(a, exceptions)
-	return f
 
 class NativeKitSounds():
 		
@@ -147,7 +140,11 @@ class GeneratedKitSounds():
 	
 	def __init__(self):
 		generateRightFoot(GeneratedKitSounds.rf[1])
+		generateLeftFoot(GeneratedKitSounds.lf[1])
+		generatePadTop(GeneratedKitSounds.pt[1])
+		generatePadRim(GeneratedKitSounds.pr[1])
 		generateCym(GeneratedKitSounds.cy[1])
+		generatePerc(GeneratedKitSounds.pc[1])
 	
 	def rightFoot(self):
 		return GeneratedKitSounds.rf[0]
