@@ -13,13 +13,17 @@ class Resize():
 		self.buffer.append(d)
 		
 	def read(self, f):
+		inSize = len(self.buffer)
 		out = []
-		for i in range(len(self.buffer)):
+		for i in range(inSize):
 			p = i / f(i)
 			u = math.floor(p)
 			l = math.ceil(p)
-			dp = p - l
-			out.append(((1 - dp) * self.buffer[l]) + (dp * self.buffer[u]))
+			if (u < inSize and l < inSize):
+				dp = p - l
+				out.append(((1 - dp) * self.buffer[l]) + (dp * self.buffer[u]))
+			else:
+				break
 		
 		return out
 		
@@ -81,8 +85,8 @@ def combine(fnOnto, s1, s2, op):
 		
 	print("%d in %s" % (len(resize1.buffer), s1))
 	print("%d in %s" % (len(resize2.buffer), s2))
-	r1 = resize1.read(lambda i: 1.7)
-	r2 = resize2.read(lambda i: 1.2)
+	r1 = resize1.read(lambda i: 0.8)
+	r2 = resize2.read(lambda i: 1.6)
 	lr1 = len(r1)
 	lr2 = len(r2)
 	print("now %d in %s" % (lr1, s1))
