@@ -51,8 +51,11 @@ class Notes():
 		return self.notes[i]
 		
 
-def any(a):
-	return a[randint(0, len(a) - 1)]
+def any(a, exceptions = []):
+	f = a[randint(0, len(a) - 1)]
+	if f in exceptions:
+		return any(a, exceptions)
+	return f
 
 class NativeKitSounds():
 		

@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
 import sys
-from random import randint
 from kit import Kit
-from iZgenKits import generate, modeNames
+from iZgenKits import generate, modeNames, any
 from sysConfig import SystemConfig
 from effects import *
 
@@ -26,7 +25,7 @@ mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
 allowFxMod = 1 if len(sys.argv) < 5 else int(sys.argv[4])
 
 
-masterFx = mode.allowedFx[randint(0, len(mode.allowedFx) - 1)] #prefer tape echo if allowFxMod off
+masterFx = any(mode.allowedFx) #prefer tape echo if allowFxMod off
 
 print("tempo %d bpm" % tempo)
 print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
@@ -40,9 +39,9 @@ c.masterFx = masterFx.createRandom()
 c.createIn("E:\\Roland\\SPD-SX\\SYSTEM\\sysparam.spd")
 
 kitFx1 = Thru
-kitFx2 = FxKit.allowedFx[randint(0, len(FxKit.allowedFx) - 1)] # should avoid using the one picked for the master, once more effects are added
+kitFx2 = any(FxKit.allowedFx, [masterFx])
 if (c.fx1On() == 1):
-	kitFx1 = FxKit.allowedFx[randint(0, len(FxKit.allowedFx) - 1)] # should avoid using the one picked for the master or fx2, once more effects are added
+	kitFx1 = any(FxKit.allowedFx, [masterFx, kitFx2])
 	print("FX1 %s" % kitFx1.__name__)
 
 print("FX2 %s" % kitFx2.__name__)
