@@ -6,6 +6,8 @@ import math
 
 
 class Resize():
+	maxLength = 66150 #1.5 seconds
+	
 	def __init__(self):
 		self.buffer = []
 		
@@ -18,12 +20,13 @@ class Resize():
 		i = 0
 		done = False
 		while not done:
+			vol = 1 - (i / (1.0 * Resize.maxLength))
 			p = i / f(i)
 			u = math.floor(p)
 			l = math.ceil(p)
-			if (u < inSize and l < inSize):
+			if (u < inSize and l < inSize and i < Resize.maxLength):
 				dp = p - l
-				out.append(((1 - dp) * self.buffer[l]) + (dp * self.buffer[u]))
+				out.append(vol * (((1 - dp) * self.buffer[l]) + (dp * self.buffer[u])))
 			else:
 				done = True
 			i += 1
