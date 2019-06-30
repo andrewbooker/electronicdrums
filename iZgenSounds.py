@@ -15,7 +15,9 @@ class Resize():
 	def read(self, f):
 		inSize = len(self.buffer)
 		out = []
-		for i in range(inSize):
+		i = 0
+		done = False
+		while not done:
 			p = i / f(i)
 			u = math.floor(p)
 			l = math.ceil(p)
@@ -23,8 +25,9 @@ class Resize():
 				dp = p - l
 				out.append(((1 - dp) * self.buffer[l]) + (dp * self.buffer[u]))
 			else:
-				break
-		
+				done = True
+			i += 1
+
 		return out
 		
 class Avg():
@@ -85,8 +88,8 @@ def combine(fnOnto, s1, s2, op):
 		
 	print("%d in %s" % (len(resize1.buffer), s1))
 	print("%d in %s" % (len(resize2.buffer), s2))
-	r1 = resize1.read(lambda i: 0.8)
-	r2 = resize2.read(lambda i: 1.6)
+	r1 = resize1.read(lambda i: 1.6)
+	r2 = resize2.read(lambda i: 0.3)
 	lr1 = len(r1)
 	lr2 = len(r2)
 	print("now %d in %s" % (lr1, s1))
