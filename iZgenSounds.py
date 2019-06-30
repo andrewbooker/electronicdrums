@@ -5,20 +5,23 @@ import os
 import math
 
 
-class Stretch():
+class Resize():
 	def __init__(self):
 		self.buffer = []
 		
-	def on(self, d, i, f):
+	def add(self, d):
 		self.buffer.append(d)
-		if (len(self.buffer) == 1):
-			return d
 		
-		p = i / f
-		u = math.floor(p)
-		l = math.ceil(p)
-		dp = p - l
-		return ((1 - dp) * self.buffer[l]) + (dp * self.buffer[u])
+	def read(self, f):
+		out = []
+		for i in range(len(self.buffer)):
+			p = i / f(i)
+			u = math.floor(p)
+			l = math.ceil(p)
+			dp = p - l
+			out.append(((1 - dp) * self.buffer[l]) + (dp * self.buffer[u]))
+		
+		return out
 		
 class Avg():
 	def on(self, d1, d2, i, size):
@@ -66,32 +69,39 @@ def combine(fnOnto, s1, s2, op):
 	locOut = "E:\\Roland\\SPD-SX\\WAVE\\DATA"
 	fqfnOut = "%s\\%s" % (locOut, fnOnto)
 	
+	size = max(f1.frames, f2.frames)
+	resize1 = Resize()
+	resize2 = Resize()
+	
+	resize1.buffer = f1.read()
+	resize2.buffer = f2.read()
+	
+	f1.close()
+	f2.close()
+		
+	print("%d in %s" % (len(resize1.buffer), s1))
+	print("%d in %s" % (len(resize2.buffer), s2))
+	r1 = resize1.read(lambda i: 1.7)
+	r2 = resize2.read(lambda i: 1.2)
+	lr1 = len(r1)
+	lr2 = len(r2)
+	print("now %d in %s" % (lr1, s1))
+	print("now %d in %s" % (lr2, s2))
+	
 	if os.path.exists(fqfnOut):
 		os.remove(fqfnOut)
-	
 	out = sf.SoundFile(fqfnOut, mode="x", samplerate=44100, channels=1, subtype="PCM_16")
 	
 	i = 0
 	done = False
-
-	size = max(f1.frames, f2.frames)
-	stretch = Stretch()
 	while (not done):
-		hasF1 = f1.tell() < f1.frames
-		hasF2 = f2.tell() < f2.frames
-		
-		data = [0, 0]
-		if hasF1:
-			data[0] = stretch.on(f1.read(1)[0], i, 1.6)
-		if hasF2:
-			data[1] = f2.read(1)[0]
-			
+		hasF1 = i < lr1
+		hasF2 = i < lr2
+		data = [r1[i] if hasF1 else 0, r2[i] if hasF2 else 0]	
 		out.write(op.on(data[0], data[1], i, size))
 		done = op.isDone(hasF1, hasF2)
 		i += 1
 	
-	f1.close()
-	f2.close()
 	out.close()
 
 
