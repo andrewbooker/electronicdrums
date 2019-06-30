@@ -48,6 +48,13 @@ class LinearXFade():
 	def isDone(self, hasF1, hasF2):
 		return not hasF1 and not hasF2
 		
+class XChop():
+	def on(self, d1, d2, i, size):
+		return d1 if ((i / 50) % 2) == 0 else d2
+	
+	def isDone(self, hasF1, hasF2):
+		return not hasF1 and not hasF2
+		
 class ShortXFade():
 	def on(self, d1, d2, i, size):
 		f = 1.0 / ((20.0 * i / size) + 1.0)
@@ -121,7 +128,7 @@ def generateRightFoot(fnOnto):
 	
 def generateCym(fnOnto):
 	print("generating cymbal sound")
-	combine(fnOnto, "00\\Cym_8.wav", "00\\Ride__02.wav", ShortXFade())
+	combine(fnOnto, "00\\Cym_8.wav", "00\\Ride__02.wav", XChop())
 	
 	
 	
