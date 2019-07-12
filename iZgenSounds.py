@@ -319,80 +319,57 @@ perc = [
 	"00/SE_Cr.wav",
 	"01/SE_Sw.wav"
 ]
-		 
+	
+note = [
+	"00/Ride_.wav",
+	"00/Ride__01.wav",
+	"00/Ride__02.wav",
+	"00/Ride__03.wav",
+	"00/Ride__04.wav",
+	"00/P_Tri_01.wav",
+	"00/HH.wav",
+	"00/HH_02.wav",
+	"00/HH_Ac.wav",
+	"00/HH_Db.wav",
+	"00/HH_Dn.wav",
+	"00/HH_Hp.wav",
+	"00/HH_Hs.wav",
+	"00/HH_Hs_02.wav",
+	"00/HH_Pr.wav",
+	"00/HH_Pr_02.wav",
+	"00/HH_Pr_04.wav",
+	"00/P_Gan.wav",
+	"00/P_Cla.wav",
+	"00/P_Tri.wav",
+	"00/SE_Cr.wav",
+	"01/SE_Sw.wav"
+]
 
-def generateRightFoot(fnOnto):
-	print("generating right foot sound")
-	s1 = any(kick)
-	combine(fnOnto, s1, any(kick, [s1]), XChop())
-	
-def generateLeftFoot(fnOnto):
-	print("generating left foot sound")
-	combine(fnOnto, any(tom),  any(perc), XChop())
-	
-def generatePadTop(fnOnto):
-	print("generating pad top sound")
-	s1 = any(snare)
-	combine(fnOnto, s1, any(snare, [s1]), XChop())
-	
-def generatePadRim(fnOnto):
-	print("generating pad rim sound")
-	s1 = any(tom)
-	combine(fnOnto, s1, any(tom, [s1]), XChop())
-	
-def generateCym(fnOnto):
-	print("generating cymbal sound")
-	s1 = any(cym)
-	combine(fnOnto, s1, any(cym, [s1]), XChop())
-	
-def generatePerc(fnOnto):
-	print("generating perc sound")
-	s1 = any(perc)
-	combine(fnOnto, s1, any(perc, [s1]), XChop())
+def generateSound(subDir, i, fn, setA, setB, combiner):
+	s1 = any(setA)
+	cmb = any(combiner)
+	combine(fn, s1, any(setB, [s1]), cmb())
+	prm("%s/%.2d.spd" % (subDir, i), "bd_%.10d" % i, fn) 
 	
 	
-	
-class GeneratedKitSounds():
-	rf = ("Fuse_Kick", "01/fusee_06.wav")
-	lf = ("Fuse_Bass1", "01/fusee.wav")
-	pt = ("Fuse_BBeat", "01/fusee_02.wav")
-	pr = ("Fuse_Fill1", "01/fusee_04.wav")
-	cy = ("Fuse_Crash", "01/fusee_03.wav")
-	pc = ("Fuse_Fill2", "01/fusee_05.wav")
-	
-	def __init__(self):
-		generateRightFoot(GeneratedKitSounds.rf[1])
-		generateLeftFoot(GeneratedKitSounds.lf[1])
-		generatePadTop(GeneratedKitSounds.pt[1])
-		generatePadRim(GeneratedKitSounds.pr[1])
-		generateCym(GeneratedKitSounds.cy[1])
-		generatePerc(GeneratedKitSounds.pc[1])
-	
-	def rightFoot(self):
-		return GeneratedKitSounds.rf[0]
-		
-	def leftFoot(self):
-		return GeneratedKitSounds.lf[0]
-		
-	def padTop(self):
-		return GeneratedKitSounds.pt[0]
-		
-	def padRim(self):
-		return GeneratedKitSounds.pr[0]
-		
-	def cym(self):
-		return GeneratedKitSounds.cy[0]
-		
-	def perc(self):
-		return GeneratedKitSounds.pc[0]
-		
-		
-class PreparedKitSounds():
-	def __init__(self):
-		combine("99/01234567.wav", "00/Kick__04.wav", "00/Kick__05.wav", EnvelopeFollow())
-		prm("99/01.spd", "kick00000000", "99/01234567.wav") 
+def generateSoundRange(subDir, type, setA, setB, combiners):
+	print("generating %s sounds" % type)
+	for i in range(10):
+		fn = "%s/%s%.6d.wav" % (subDir, type, i)
+		generateSound(subDir, i, fn, setA, setB, combiners)
 
-ksTest = PreparedKitSounds()
+all = [EnvelopeFollow, XChop, Avg, ShortXFade, Multiply]
+
+generateSoundRange("99", "bd", kick, kick + tom, [EnvelopeFollow, XChop, Avg, ShortXFade])
+generateSoundRange("98", "lf", tom + perc, snare + perc, all)
+generateSoundRange("97", "pt", snare, snare, all)
+generateSoundRange("96", "pr", tom, tom, all)
+generateSoundRange("95", "pe", perc, perc, all)
+generateSoundRange("94", "cy", cym, cym, [XChop, Avg, ShortXFade])
+generateSoundRange("93", "no", note, note, all)
+		
+		
+
 	
 	
 	

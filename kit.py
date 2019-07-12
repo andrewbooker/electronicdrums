@@ -56,7 +56,7 @@ class Kit():
 
 			pad = kitNode(doc, kitPrm, "PadPrm")
 			kitParam(doc, pad, "Wv", valueFrom(kitDef.pads, "sound", i))
-			kitParam(doc, pad, "WvLevel", 100)
+			kitParam(doc, pad, "WvLevel", valueFrom(kitDef.pads, "vol", i, 100))
 			kitParam(doc, pad, "WvPan", pan)
 			kitParam(doc, pad, "PlayMode", 0)
 			kitParam(doc, pad, "OutAsgn", outAssign) 
