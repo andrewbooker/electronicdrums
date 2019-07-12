@@ -167,6 +167,7 @@ class GeneratedKitSounds():
 class PreparedKitSounds():
 	def __init__(self):
 		combine("99/01234567.wav", "00/Kick__04.wav", "00/Kick__05.wav", EnvelopeFollow())
+		prm("99/01.spd", "kick00000000", "99/01234567.wav") 
 
 ksTest = PreparedKitSounds()
 ks = NativeKitSounds() #NativeKitSounds
@@ -189,7 +190,7 @@ def generate(r, m, t):
 	k.pads.append({"sound": wav[ks.perc()]})
 	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(0)})
 	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(1)})
-	k.pads.append({"sound": wav[ks.rightFoot()]})
+	k.pads.append({"sound": 9901})
 	k.pads.append({"sound": wav[ks.leftFoot()]})
 	k.pads.append({"sound": wav[ks.padTop()]})
 	k.pads.append({"sound": wav[ks.padRim()]})

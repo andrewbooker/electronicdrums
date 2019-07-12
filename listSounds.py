@@ -4,7 +4,7 @@ import os
 import xml.dom.minidom
 
 loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\PRM"
-batches = ["00", "01", "02", "03"]
+batches = ["00", "01", "02", "03", "99"]
 
 sounds = []
 

@@ -4,6 +4,7 @@ import soundfile as sf
 import os
 import math
 from random import uniform, randint
+import xml.dom.minidom
 
 
 def any(a, exceptions = []):
@@ -103,19 +104,22 @@ class Gradient():
 		return self.y1 + (i * (self.y2 - self.y1) / Resize.maxLength)
 		
 
+
+def prepFqFnOut(fnOnto, type):
+	subDir, fnOut = fnOnto.split("/")
+	locOut = "E:\\Roland\\SPD-SX\\WAVE"
+	dir = "%s\\%s\\%s" % (locOut, type, subDir)
+	if not os.path.exists(dir):
+		os.makedirs(dir)
+	return "%s\\%s" % (dir, fnOut)
+
 def combine(fnOnto, s1, s2, op):
 	loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\DATA"
 	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
 	f2 = sf.SoundFile("%s\\%s" % (loc, s2), "r")
 	
 	print("combining %s with %s using %s" % (s1, s2, type(op).__name__))
-	
-	subDir, fnOut = fnOnto.split("/")
-	locOut = "E:\\Roland\\SPD-SX\\WAVE"
-	dir = "%s\\DATA\\%s" % (locOut, subDir)
-	if not os.path.exists(dir):
-		os.makedirs(dir)
-	fqfnOut = "%s\\%s" % (dir, fnOut)
+	fqfnOut = prepFqFnOut(fnOnto, "DATA")
 	
 	size = max(f1.frames, f2.frames)
 	resize1 = Resize()
@@ -149,6 +153,35 @@ def combine(fnOnto, s1, s2, op):
 		i += 1
 	
 	out.close()
+	
+	
+
+
+def param(doc, onto, name, value):
+	onto.appendChild(doc.createElement(name)).appendChild(doc.createTextNode(str(value)))
+	
+
+def prm(fnOnto, name, wavPath):
+	doc = xml.dom.minidom.parseString("<WvPrm/>")
+	wvPrm = doc.documentElement
+	
+	for i in range(12):
+		param(doc, wvPrm, "Nm%d" % i, ord(name[i]))
+
+	param(doc, wvPrm, "Tag", 0)
+	param(doc, wvPrm, "Tempo", 1200)
+	param(doc, wvPrm, "Beat", 0)
+	param(doc, wvPrm, "Measure", 0)
+	param(doc, wvPrm, "Start", 0)
+	param(doc, wvPrm, "End", 0)
+	param(doc, wvPrm, "Path", wavPath)
+	
+	fqfnOut = prepFqFnOut(fnOnto, "PRM")
+	file = open(fqfnOut, "w")
+	wvPrm.writexml(file, addindent="\t", newl="\n")
+	file.close()
+	
+	
 
 kick = [
 	"00/Kick_.wav",
