@@ -108,6 +108,8 @@ def combine(fnOnto, s1, s2, op):
 	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
 	f2 = sf.SoundFile("%s\\%s" % (loc, s2), "r")
 	
+	print("combining %s with %s using %s" % (s1, s2, type(op).__name__))
+	
 	locOut = "E:\\Roland\\SPD-SX\\WAVE\\DATA"
 	fqfnOut = "%s\\%s" % (locOut, fnOnto)
 	
@@ -120,17 +122,14 @@ def combine(fnOnto, s1, s2, op):
 	
 	f1.close()
 	f2.close()
-		
-	print("%d in %s" % (len(resize1.buffer), s1))
-	print("%d in %s" % (len(resize2.buffer), s2))
+	
 	g1 = Gradient.any()
 	g2 = Gradient.any()
 	r1 = resize1.read(g1.at)
 	r2 = resize2.read(g2.at)
 	lr1 = len(r1)
 	lr2 = len(r2)
-	print("now %d in %s" % (lr1, s1))
-	print("now %d in %s" % (lr2, s2))
+	
 	
 	if os.path.exists(fqfnOut):
 		os.remove(fqfnOut)
@@ -213,7 +212,7 @@ cym = [
 	"00/Cym_F_01.wav",
 	"00/Cym_S_01.wav",
 	"00/P_Gon.wav",
-	"00/P_Tri_01.wav"
+	"00/P_Tri_01.wav",
 	"00/HH_01.wav",
 	"00/HH_03.wav",
 	"00/HH_Ac_01.wav",

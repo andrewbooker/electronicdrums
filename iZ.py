@@ -10,6 +10,12 @@ from effects import *
 master = 0
 sub = 1
 
+if (len(sys.argv) < 3):
+	print("iZ <key> <tempo> <apply-master-fx-to> [<allow-fx-mod>]")
+	print("eg iZ F# 83 kit")
+	print("or iZ Bb 150 korg 1")
+	exit()
+
 class FxKorg():
 	korgAssign = master
 	allowedFx = [Slicer, TapeEcho, TouchWah]

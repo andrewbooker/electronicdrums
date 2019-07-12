@@ -174,16 +174,17 @@ def generate(r, m, t):
 	k.level = 100
 	k.tempo = t
 	k.pads = []
+	notePerc = wav["P_GanzaTap"]
 	
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(4)})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(5)})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(6)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(4)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(5)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(6)})
 	k.pads.append({"sound": wav[ks.cym()]})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(2)})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(3)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(2)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(3)})
 	k.pads.append({"sound": wav[ks.perc()]})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(0)})
-	k.pads.append({"sound": wav["P_Triangl_op"], "channel": 0, "note": notes.note(1)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(0)})
+	k.pads.append({"sound": notePerc, "channel": 0, "note": notes.note(1)})
 	k.pads.append({"sound": wav[ks.rightFoot()]})
 	k.pads.append({"sound": wav[ks.leftFoot()]})
 	k.pads.append({"sound": wav[ks.padTop()]})
