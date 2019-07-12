@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import sys
+from utils import any
 from kit import Kit
-from iZgenSounds import any
-from iZgenKits import generate, modeNames, any
+from iZgenKits import generate, modeNames
 from sysConfig import SystemConfig
 from effects import *
 
@@ -12,8 +12,8 @@ sub = 1
 
 if (len(sys.argv) < 3):
 	print("iZ <key> <tempo> <apply-master-fx-to> [<allow-fx-mod>]")
-	print("eg iZ F# 83 kit")
-	print("or iZ Bb 150 korg 1")
+	print("eg iZ.py F# 83 kit")
+	print("or iZ.py Bb 150 korg 1")
 	exit()
 
 class FxKorg():

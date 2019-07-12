@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from sounds import sounds as wav
-from iZgenSounds import *
+from utils import any
 
 roots = {"E": 64, 
 		 "F": 65,
@@ -130,47 +130,8 @@ class NativeKitSounds():
 					"SE_VerbPf"])
 					
 					
-class GeneratedKitSounds():
-	rf = ("Fuse_Kick", "01/fusee_06.wav")
-	lf = ("Fuse_Bass1", "01/fusee.wav")
-	pt = ("Fuse_BBeat", "01/fusee_02.wav")
-	pr = ("Fuse_Fill1", "01/fusee_04.wav")
-	cy = ("Fuse_Crash", "01/fusee_03.wav")
-	pc = ("Fuse_Fill2", "01/fusee_05.wav")
-	
-	def __init__(self):
-		generateRightFoot(GeneratedKitSounds.rf[1])
-		generateLeftFoot(GeneratedKitSounds.lf[1])
-		generatePadTop(GeneratedKitSounds.pt[1])
-		generatePadRim(GeneratedKitSounds.pr[1])
-		generateCym(GeneratedKitSounds.cy[1])
-		generatePerc(GeneratedKitSounds.pc[1])
-	
-	def rightFoot(self):
-		return GeneratedKitSounds.rf[0]
-		
-	def leftFoot(self):
-		return GeneratedKitSounds.lf[0]
-		
-	def padTop(self):
-		return GeneratedKitSounds.pt[0]
-		
-	def padRim(self):
-		return GeneratedKitSounds.pr[0]
-		
-	def cym(self):
-		return GeneratedKitSounds.cy[0]
-		
-	def perc(self):
-		return GeneratedKitSounds.pc[0]
-		
-class PreparedKitSounds():
-	def __init__(self):
-		combine("99/01234567.wav", "00/Kick__04.wav", "00/Kick__05.wav", EnvelopeFollow())
-		prm("99/01.spd", "kick00000000", "99/01234567.wav") 
 
-ksTest = PreparedKitSounds()
-ks = NativeKitSounds() #NativeKitSounds
+ks = NativeKitSounds()
 
 def generate(r, m, t):
 	notes = Notes(7, roots[r], modes[m])
