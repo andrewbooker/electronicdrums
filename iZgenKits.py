@@ -163,9 +163,13 @@ class GeneratedKitSounds():
 		
 	def perc(self):
 		return GeneratedKitSounds.pc[0]
-
 		
-ks = GeneratedKitSounds() #NativeKitSounds
+class PreparedKitSounds():
+	def __init__(self):
+		combine("99/01234567.wav", "00/Kick__04.wav", "00/Kick__05.wav", EnvelopeFollow())
+
+ksTest = PreparedKitSounds()
+ks = NativeKitSounds() #NativeKitSounds
 
 def generate(r, m, t):
 	notes = Notes(7, roots[r], modes[m])

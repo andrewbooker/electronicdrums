@@ -110,8 +110,12 @@ def combine(fnOnto, s1, s2, op):
 	
 	print("combining %s with %s using %s" % (s1, s2, type(op).__name__))
 	
-	locOut = "E:\\Roland\\SPD-SX\\WAVE\\DATA"
-	fqfnOut = "%s\\%s" % (locOut, fnOnto)
+	subDir, fnOut = fnOnto.split("/")
+	locOut = "E:\\Roland\\SPD-SX\\WAVE"
+	dir = "%s\\DATA\\%s" % (locOut, subDir)
+	if not os.path.exists(dir):
+		os.makedirs(dir)
+	fqfnOut = "%s\\%s" % (dir, fnOut)
 	
 	size = max(f1.frames, f2.frames)
 	resize1 = Resize()
@@ -129,7 +133,6 @@ def combine(fnOnto, s1, s2, op):
 	r2 = resize2.read(g2.at)
 	lr1 = len(r1)
 	lr2 = len(r2)
-	
 	
 	if os.path.exists(fqfnOut):
 		os.remove(fqfnOut)
