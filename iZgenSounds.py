@@ -5,7 +5,7 @@ import os
 import math
 from random import uniform
 import xml.dom.minidom
-from utils import any
+from utils import any, MovingAvg, AbsMovingAvg
 
 
 class Resize():
@@ -25,8 +25,8 @@ class Resize():
 		while not done:
 			vol = 1 - (i / (1.0 * Resize.maxLength))
 			p = i / f(i)
-			u = math.floor(p)
-			l = math.ceil(p)
+			l = math.floor(p)
+			u = math.ceil(p)
 			if (u < inSize and l < inSize and i < Resize.maxLength):
 				dp = p - l
 				out.append(vol * (((1 - dp) * self.buffer[l]) + (dp * self.buffer[u])))
@@ -71,15 +71,23 @@ class ShortXFade():
 		return not hasF1 and not hasF2
 
 class EnvelopeFollow():
+	def __init__(self):
+		self.movingAvg = AbsMovingAvg(8)
+		
 	def on(self, d1, d2, i, size):
-		return abs(d1) * d2
+		self.movingAvg.add(d1)
+		return self.movingAvg.value() * d2
 	
 	def isDone(self, hasF1, hasF2):
 		return not hasF1 or not hasF2
 		
 class Multiply():
+	def __init__(self):
+		self.movingAvg = MovingAvg(8)
+		
 	def on(self, d1, d2, i, size):
-		return d1 * d2
+		self.movingAvg.add(d1 * d2)
+		return self.movingAvg.value()
 	
 	def isDone(self, hasF1, hasF2):
 		return not hasF1 or not hasF2
@@ -87,8 +95,12 @@ class Multiply():
 
 class Gradient():
 	@staticmethod
+	def anyWithin(lower, upper):
+		return Gradient(uniform(lower, upper), uniform(lower, upper))
+		
+	@staticmethod
 	def any():
-		return Gradient(uniform(0.3, 2.7), uniform(0.3, 2.7))
+		return Gradient.anyWithin(0.3, 2.7)
 
 	def __init__(self, y1, y2):
 		self.y1 = y1
@@ -107,12 +119,12 @@ def prepFqFnOut(fnOnto, type):
 		os.makedirs(dir)
 	return "%s\\%s" % (dir, fnOut)
 
-def combine(fnOnto, s1, s2, op):
+def combine(fnOnto, s1, s2, grad1, grad2, op):
 	loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\DATA"
 	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
 	f2 = sf.SoundFile("%s\\%s" % (loc, s2), "r")
 	
-	print("combining %s with %s using %s" % (s1, s2, type(op).__name__))
+	print("%s using %s with %s and %s" % (fnOnto, type(op).__name__, s1, s2))
 	fqfnOut = prepFqFnOut(fnOnto, "DATA")
 	
 	size = max(f1.frames, f2.frames)
@@ -125,10 +137,8 @@ def combine(fnOnto, s1, s2, op):
 	f1.close()
 	f2.close()
 	
-	g1 = Gradient.any()
-	g2 = Gradient.any()
-	r1 = resize1.read(g1.at)
-	r2 = resize2.read(g2.at)
+	r1 = resize1.read(grad1.at)
+	r2 = resize2.read(grad2.at)
 	lr1 = len(r1)
 	lr2 = len(r2)
 	
@@ -225,10 +235,7 @@ snare = [
 	"01/Snare_21.wav",
 	"01/Snare_22.wav",
 	"01/Snare_23.wav",
-	"01/Snare_24.wav",
-	"02/snare.wav",
-	"02/snare_01.wav",
-	"02/snare_02.wav"
+	"01/Snare_24.wav"
 ]
 
 cym = [
@@ -268,19 +275,9 @@ tom = [
 	"01/Tom_E_02.wav",
 	"01/Tom_R.wav",
 	"01/Tom_R_01.wav",
-	"01/Tom_R_02.wav",
-	"02/roto8.wav",
-	"02/roto8_01.wav",
+	"01/Tom_R_02.wav"
 	"00/P_Tim.wav",
-	"00/P_Tim_01.wav",
-	"02/timba.wav",
-	"02/timba_01.wav",
-	"02/timba_02.wav",
-	"02/tom13.wav",
-	"02/tom13_01.wav",
-	"02/tom13_02.wav",
-	"02/tom16.wav",
-	"02/tom16_01.wav"
+	"00/P_Tim_01.wav"
 ]
 
 perc = [
@@ -345,10 +342,12 @@ note = [
 	"01/SE_Sw.wav"
 ]
 
-def generateSound(subDir, i, fn, setA, setB, combiner):
+def generateSound(subDir, type, i, fn, setA, setB, combiner):
 	s1 = any(setA)
 	cmb = any(combiner)
-	combine(fn, s1, any(setB, [s1]), cmb())
+	g1 = Gradient.anyWithin(0.9, 1.4) if type == "bd" else Gradient.any()
+	g2 = Gradient.any()
+	combine(fn, s1, any(setB, [s1]), g1, g2, cmb())
 	prm("%s/%.2d.spd" % (subDir, i), "bd_%.10d" % i, fn) 
 	
 	
@@ -356,13 +355,14 @@ def generateSoundRange(subDir, type, setA, setB, combiners):
 	print("generating %s sounds" % type)
 	for i in range(10):
 		fn = "%s/%s%.6d.wav" % (subDir, type, i)
-		generateSound(subDir, i, fn, setA, setB, combiners)
+		generateSound(subDir, type, i, fn, setA, setB, combiners)
 
+most = [EnvelopeFollow, XChop, Avg, ShortXFade]
 all = [EnvelopeFollow, XChop, Avg, ShortXFade, Multiply]
 
-generateSoundRange("99", "bd", kick, kick + tom, [EnvelopeFollow, XChop, Avg, ShortXFade])
+generateSoundRange("99", "bd", kick, kick + tom, most)
 generateSoundRange("98", "lf", tom + perc, snare + perc, all)
-generateSoundRange("97", "pt", snare, snare, all)
+generateSoundRange("97", "pt", snare, snare, most)
 generateSoundRange("96", "pr", tom, tom, all)
 generateSoundRange("95", "pe", perc, perc, all)
 generateSoundRange("94", "cy", cym, cym, [XChop, Avg, ShortXFade])

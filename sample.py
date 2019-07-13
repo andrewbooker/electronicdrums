@@ -15,7 +15,7 @@ import sys
 import os
 import threading
 import keyboard
-import math
+from utils import AbsMovingAvg
 
 
 
@@ -67,33 +67,13 @@ if (False):
     ta0.join()
     print("done")
     
-    
-
-class RMSn():
-    def __init__(self, size):
-        self.size = size
-        self.clear()
-        
-    def clear(self):
-        self.values = []
-        self.avg = 0.0
-
-    def add(self, v):
-        self.avg += (abs(v) * 1.0 / self.size)
-        self.values.append(v)
-        if (len(self.values) > self.size):
-            p = self.values.pop(0)
-            self.avg -= (abs(p) * 1.0 / self.size)
-
-    def first(self):
-        return self.values[0]
 
     
 class ReadAudio():
 
     def __init__(self, dirOut):
-        self.movingAvg5 = RMSn(5)
-        self.movingAvg30 = RMSn(30)
+        self.movingAvg5 = AbsMovingAvg(5)
+        self.movingAvg30 = AbsMovingAvg(30)
         self.state = 0
         self.out = None
         self.fn = 0

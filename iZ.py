@@ -68,8 +68,8 @@ for modeName in modeNames:
 	padOutFx2 = 2
 	padOutSub = 3
 
-	korgPercOut = padOutMaster if (c.inAssign == sub) else padOutSub
 	topKitOut = padOutFx1 if (c.fx1On() == 1) else padOutFx2
+	korgPercOut = padOutMaster if (c.inAssign == sub) else topKitOut
 	midKitOut = padOutFx2
 	bdOut = padOutSub # allow padOutFx2 if not RingMod
 
