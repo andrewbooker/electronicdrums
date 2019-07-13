@@ -275,7 +275,7 @@ tom = [
 	"01/Tom_E_02.wav",
 	"01/Tom_R.wav",
 	"01/Tom_R_01.wav",
-	"01/Tom_R_02.wav"
+	"01/Tom_R_02.wav",
 	"00/P_Tim.wav",
 	"00/P_Tim_01.wav"
 ]
@@ -353,7 +353,7 @@ def generateSound(subDir, type, i, fn, setA, setB, combiner):
 	
 def generateSoundRange(subDir, type, setA, setB, combiners):
 	print("generating %s sounds" % type)
-	for i in range(10):
+	for i in range(100):
 		fn = "%s/%s%.6d.wav" % (subDir, type, i)
 		generateSound(subDir, type, i, fn, setA, setB, combiners)
 

@@ -137,7 +137,7 @@ class NativeKitSounds():
 					
 class GeneratedSounds():
 	def _findIn(self, n):
-		return (n * 100) + randint(0, 9)
+		return (n * 100) + randint(0, 99)
 
 	def rightFoot(self):
 		return self._findIn(99)
@@ -171,7 +171,7 @@ def generate(r, m, t):
 	k.level = 100
 	k.tempo = t
 	k.pads = []
-	noteVol = 30
+	noteVol = 50
 	
 	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
 	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})

@@ -31,8 +31,7 @@ tempo = int(sys.argv[2])
 mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
 allowFxMod = 1 if len(sys.argv) < 5 else int(sys.argv[4])
 
-
-masterFx = any(mode.allowedFx) #prefer tape echo if allowFxMod off
+masterFx = any(mode.allowedFx)
 
 print("tempo %d bpm" % tempo)
 print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
