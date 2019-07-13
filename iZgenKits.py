@@ -23,7 +23,10 @@ roots = {"E": 64,
 		 "D#": 75,
 		 "Eb": 75}
 
-modes = {"aeolian": [2, 1, 2, 2, 1, 2],
+modes = {"minorpentatonic": [3, 2, 2, 3],
+		 "majorpentatonic": [4, 1, 2, 4],
+		 "wholetone": [2, 2, 2, 2, 2],
+		 "aeolian": [2, 1, 2, 2, 1, 2],
 		 "dorian": [2, 1, 2, 2, 2, 1],
 		 "ionian": [2, 2, 1, 2, 2, 2],
 		 "mixolydian": [2, 2, 1, 2, 2, 1],
@@ -173,18 +176,18 @@ def generate(r, m, t):
 	k.pads = []
 	noteVol = 50
 	
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)})
-	k.pads.append({"sound": ks.cym()})
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)})
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)})
-	k.pads.append({"sound": ks.perc()})
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)})
-	k.pads.append({"sound": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)})
-	k.pads.append({"sound": ks.rightFoot()})
-	k.pads.append({"sound": ks.leftFoot()})
-	k.pads.append({"sound": ks.padTop()})
-	k.pads.append({"sound": ks.padRim()})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)})
+	k.pads.append({"sound": ks.cym(), "soundb": ks.cym()})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)})
+	k.pads.append({"sound": ks.perc(), "soundb": ks.perc()})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)})
+	k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)})
+	k.pads.append({"sound": ks.rightFoot(), "soundb": ks.rightFoot()})
+	k.pads.append({"sound": ks.leftFoot(), "soundb": ks.leftFoot()})
+	k.pads.append({"sound": ks.padTop(), "soundb": ks.padTop()})
+	k.pads.append({"sound": ks.padRim(), "soundb": ks.padRim()})
 
 	return k
