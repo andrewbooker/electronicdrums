@@ -23,7 +23,10 @@ roots = {"E": 64,
 		 "D#": 75,
 		 "Eb": 75}
 
-modes = {"minorpentatonic": [3, 2, 2, 3],
+modes = {"fifths": [7],
+		 "fourfive": [5, 2],
+		 "diminished": [3, 3, 3],
+		 "minorpentatonic": [3, 2, 2, 3],
 		 "majorpentatonic": [4, 1, 2, 4],
 		 "wholetone": [2, 2, 2, 2, 2],
 		 "aeolian": [2, 1, 2, 2, 1, 2],
@@ -47,7 +50,7 @@ class Notes():
 				octaves += 1
 				base = root + (octaves * 12)
 			else:
-				base += mode[(n - 1) % len(mode)]
+				base += mode[(n - (1 + octaves)) % len(mode)]
 			
 			self.notes.append(base)
 
