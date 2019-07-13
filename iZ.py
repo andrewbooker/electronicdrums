@@ -6,14 +6,16 @@ from kit import Kit
 from iZgenKits import generate, modeNames
 from sysConfig import SystemConfig
 from effects import *
+from random import randint
 
 master = 0
 sub = 1
 
-if (len(sys.argv) < 3):
-	print("iZ <key> <tempo> <apply-master-fx-to> [<allow-fx-mod>]")
+if (len(sys.argv) < 2):
+	print("iZ <key> [<tempo>] [<apply-master-fx-to>] [<allow-fx-mod>]")
 	print("eg iZ.py F# 83 kit")
 	print("or iZ.py Bb 150 korg 1")
+	print("or iZ.py A")
 	exit()
 
 class FxKorg():
@@ -27,7 +29,7 @@ class FxKit():
 effModes = {"kit": FxKit, "korg": FxKorg}
 
 key = sys.argv[1].upper()
-tempo = int(sys.argv[2])
+tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
 mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
 allowFxMod = 1 if len(sys.argv) < 5 else int(sys.argv[4])
 
