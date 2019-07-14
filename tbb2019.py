@@ -17,31 +17,6 @@ padOutPhones = 4
 
 
 
-
-#Ghostlike -- acoustic only
-#Forest Almost Burning -- acoustic
-#--Not Married Any More -- claps for brush/stick
-#Strange Gods --  all the claps, cabasa
-#I Go Deeper  -- acoustic
-#--The War On Me (might be dropped) - electronic
-#Killing To Survive  -- acoustic
-#Never Needing -- electronic 808 plus shakers, reverb snare 2nd half
-#It’s The World -- acoustic
-#Borderline -- tuned figure electronics (3 notes), shakers, dampened drums
-
-#Things Change - electronic: piano
-#Housewives - electronics - bongo shit
-#Wherever There Is Light - electronic
-#Time Travel In Texas
-#All The Blue Changes
-#Mixtaped
-#The Warm-Up Man Forever
-#Only Rain - electronic
-#Days Turn Into Years - electronic
-#WatchingOverMe - electronic
-
-
-# eventually, put these in set order
 # 1st is 51
 class TimeTravel():
 	level = 100
@@ -100,24 +75,6 @@ class AllTheBlueChanges(): #58
 			{sound: wav["SnareXs_2"]}, # foot L
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
-
-class Borderline():
-	level = 100
-	tempo = 87 # check
-	korg = 21
-	pads = [{sound: wav["Cym_Splash1"]}, #top left
-			{sound: wav["Cym_Splash2"]},
-			{sound: wav["Cym_Crotale"]},
-			{sound: wav["Clap_Hse2"]}, # mid left
-			{sound: wav["P_GanzaTap"], note: 62, channel: 0},
-			{sound: wav["P_Tamb_DnB"], note: 64, channel: 0},
-            {sound: wav["Clap_Min"]}, # bottom left
-			{sound: wav["P_GanzaTap"]},
-			{sound: wav["P_Tamb_DnB"]},
-			{sound: wav["Kick_Acou1"], note: 57, channel: 0}, # foot R
-			{sound: wav["Clap_808"]}, # foot L
-			{sound: wav["P_Tambourine"]}, # pad top
-			{sound: wav["Snare_Proc4"]}] # pad rim
 			
 class WarmupMan():
 	level = 100
@@ -197,24 +154,6 @@ class Mixtaped():
 			{note: 88, channel: 0, sound: wav["SE_VerbPf"]}] # pad rim
 	fx1 = Reverb().time(30).preDelay(5).density(10).effLevel(100)
 
-			
-class NeverNeeding():
-	level = 100
-	tempo = 120
-	pads = [{sound: wav["Cym_Splash1"], outAssign: padOutMaster}, #top left
-			{sound: wav["Cym_Splash2"], outAssign: padOutMaster},
-			{sound: wav["Cym_Crotale"], outAssign: padOutMaster},
-			{sound: wav["Clap_Hse1"]}, # mid left
-			{sound: wav["HH_Proc2_op"], outAssign: padOutMaster},
-			{sound: wav["Cym_Fx2"], outAssign: padOutMaster},
-            {sound: wav["Kick_808_L"], outAssign: padOutMaster}, # bottom left
-			{sound: wav["P_Tambourine"], outAssign: padOutMaster},
-			{sound: wav["P_GanzaTap"], outAssign: padOutMaster},
-			{sound: wav["Kick_Acou1"], outAssign: padOutMaster}, # foot R
-			{sound: wav["SE_Crasher"], outAssign: padOutMaster}, # foot L
-			{sound: wav["Snare_Proc4"]}, # pad top
-			{sound: wav["SE_Noise1"]}] # pad rim
-	fx1 = Reverb().time(73).preDelay(63).density(10).effLevel(80)
 	
 class ThingsChange():
 	level = 100
@@ -234,11 +173,29 @@ class ThingsChange():
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["Snare_Proc4"]}] # pad rim
 			
+## end of Lorelei ##
 class ForestAlmostBurning(StandardPatch):
 	level = 100
 	tempo = 120
 
-
+			
+class NeverNeeding():
+	level = 100
+	tempo = 120
+	pads = [{sound: wav["Cym_Splash1"], outAssign: padOutMaster}, #top left
+			{sound: wav["Cym_Splash2"], outAssign: padOutMaster},
+			{sound: wav["Cym_Crotale"], outAssign: padOutMaster},
+			{sound: wav["Clap_Hse1"]}, # mid left
+			{sound: wav["HH_Proc2_op"], outAssign: padOutMaster},
+			{sound: wav["Cym_Fx2"], outAssign: padOutMaster},
+            {sound: wav["Kick_808_L"], outAssign: padOutMaster}, # bottom left
+			{sound: wav["P_Tambourine"], outAssign: padOutMaster},
+			{sound: wav["P_GanzaTap"], outAssign: padOutMaster},
+			{sound: wav["Kick_Acou1"], outAssign: padOutMaster}, # foot R
+			{sound: wav["SE_Crasher"], outAssign: padOutMaster}, # foot L
+			{sound: wav["Snare_Proc4"]}, # pad top
+			{sound: wav["SE_Noise1"]}] # pad rim
+	fx1 = Reverb().time(73).preDelay(63).density(10).effLevel(80)
 
 class DaysTurnIntoYears():
 	level = 100
@@ -275,4 +232,22 @@ class WatchingOverMe(StandardPatch): #062
 			{sound: wav["Clap_Min"]}, # pad top
 			{sound: wav["P_CongaProcS"]}] # pad rim
 	fx1 = SyncDelay().feedback(31).effLevel(60)
+	
+class Borderline():
+	level = 100
+	tempo = 87 # check
+	korg = 21
+	pads = [{sound: wav["Cym_Splash1"]}, #top left
+			{sound: wav["Cym_Splash2"]},
+			{sound: wav["Cym_Crotale"]},
+			{sound: wav["Clap_Hse2"]}, # mid left
+			{sound: wav["P_GanzaTap"], note: 62, channel: 0},
+			{sound: wav["P_Tamb_DnB"], note: 64, channel: 0},
+            {sound: wav["Clap_Min"]}, # bottom left
+			{sound: wav["P_GanzaTap"]},
+			{sound: wav["P_Tamb_DnB"]},
+			{sound: wav["Kick_Acou1"], note: 57, channel: 0}, # foot R
+			{sound: wav["Clap_808"]}, # foot L
+			{sound: wav["P_Tambourine"]}, # pad top
+			{sound: wav["Snare_Proc4"]}] # pad rim
 	
