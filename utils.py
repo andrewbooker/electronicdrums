@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 from random import randint
+import math
+
 
 def any(a, ommitting = []):
 	f = a[randint(0, len(a) - 1)]
@@ -42,5 +44,15 @@ class AbsMovingAvg(MovingAvg):
 		if (len(self.values) > self.size):
 			p = self.values.pop(0)
 			self.avg -= (abs(p) * 1.0 / self.size)
+			
+			
+class DelayTimes():
+	def __init__(self, tempo):
+		msPer16th = 15000.0 / tempo
+		max16thsPossible = math.floor(1300 / msPer16th)
+		
+		self.time = math.ceil(max16thsPossible * msPer16th)
+		self.leftTap = math.ceil(100.0 * randint(2, max16thsPossible - 1) / max16thsPossible)
+		
 	
 	

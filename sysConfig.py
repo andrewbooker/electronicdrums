@@ -18,14 +18,14 @@ class MasterSyncDelay():
 	
 	def __init__(self):
 		self.dt = 0
-		self.leftTapTime = 100
+		self.leftTap = 100
 		
 	def delayTime(self, t):
 		self.dt = t
 		return self
 		
 	def leftTapTime(self, v):
-		self.leftTapTime = v
+		self.leftTap = v
 		return self
 
 	def asSpec(self):
@@ -33,7 +33,7 @@ class MasterSyncDelay():
 		minim = 10
 		self.panOn = 2
 		self.syncOn = 1 if self.dt == 0 else 0
-		return [self.syncOn, self.dt, minim, self.leftTapTime, 0, 4, directLevel]
+		return [self.syncOn, self.dt, minim, self.leftTap, 0, 4, directLevel]
 		
 class MasterShortLooper():
 	type = 1
@@ -191,7 +191,7 @@ class SystemConfig():
 		self.inAssign = 0 #0: master, 1; sub
 		
 		self.masterFilter = MasterFilter()
-		self.masterDelay = MasterSyncDelay() if delay is None else MasterSyncDelay().delayTime(delay.time).leftTapTime(delay.leftTap)
+		self.masterDelay = MasterSyncDelay() if (delay is None) else MasterSyncDelay().delayTime(delay.time).leftTapTime(delay.leftTap)
 		self.masterShortLoop = MasterShortLooper()
 		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
 

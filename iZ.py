@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-from utils import any
+from utils import any, DelayTimes
 from kit import Kit
 from iZgenKits import generate, modeNames
 from sysConfig import SystemConfig
@@ -35,10 +35,12 @@ allowFxMod = 1 if len(sys.argv) < 5 else int(sys.argv[4])
 
 masterFx = any(mode.allowedFx)
 
+dt = DelayTimes(tempo)
 print("tempo %d bpm" % tempo)
+print("%s ms %s%%" % (dt.time, dt.leftTap))
 print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
 
-c = SystemConfig()
+c = SystemConfig(dt)
 
 c.inAssign = mode.korgAssign
 c.fxModOn = allowFxMod
