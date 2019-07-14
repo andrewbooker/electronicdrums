@@ -27,14 +27,14 @@ modes = {"fifths": [7],
 		 "fourfive": [5, 2],
 		 "minorpentatonic": [3, 2, 2, 3],
 		 "majorpentatonic": [4, 1, 2, 4],
-		 "diminished": [3, 3, 3],
-		 "wholetone": [2, 2, 2, 2, 2],
 		 "aeolian": [2, 1, 2, 2, 1, 2],
 		 "dorian": [2, 1, 2, 2, 2, 1],
 		 "ionian": [2, 2, 1, 2, 2, 2],
 		 "mixolydian": [2, 2, 1, 2, 2, 1],
 		 "lydian": [2, 2, 2, 1, 2, 2],
-		 "eastern": [1, 3, 1, 2, 1, 2]}
+		 "eastern": [1, 3, 1, 2, 1, 2],
+		 "diminished": [3, 3, 3],
+		 "wholetone": [2, 2, 2, 2, 2]}
 		 
 modeNames = modes.keys()
 

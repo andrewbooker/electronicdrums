@@ -13,21 +13,27 @@ class MasterFilter():
 		self.lfoWave = 1 #= sine
 		return [self.slope, self.rateSyncOn, self.modRate, 8, self.lfoWave, self.modDepth]
 
-class MasterSyncDelay():	
+class MasterSyncDelay():
+	type = 1
+	
+	def __init__(self):
+		self.dt = 0
+		self.leftTapTime = 100
+		
+	def delayTime(self, t):
+		self.dt = t
+		return self
+		
 	def leftTapTime(self, v):
 		self.leftTapTime = v
 		return self
-		
-	def effLevel(self, v):
-		self.effLevel = v
-		return self
-		
+
 	def asSpec(self):
-		self.panOn = 1
-		self.syncOn = 1
-		self.directLevel = 100
+		directLevel = 100
 		minim = 10
-		return [self.panOn, self.syncOn, minim, self.leftTapTime, 0, 4, self.directLevel]  #note this will max out at 1300ms, not usable with minim below 93 bpm
+		self.panOn = 2
+		self.syncOn = 1 if self.dt == 0 else 0
+		return [self.syncOn, self.dt, minim, self.leftTapTime, 0, 4, directLevel]
 		
 class MasterShortLooper():
 	type = 1
@@ -180,12 +186,12 @@ def setUpFx(doc, onto, prefix, fx):
 
 
 class SystemConfig():
-	def __init__(self):
+	def __init__(self, delay = None):
 		self.fxModOn = 1
 		self.inAssign = 0 #0: master, 1; sub
 		
 		self.masterFilter = MasterFilter()
-		self.masterDelay = MasterSyncDelay().leftTapTime(100).effLevel(60)
+		self.masterDelay = MasterSyncDelay() if delay is None else MasterSyncDelay().delayTime(delay.time).leftTapTime(delay.leftTap)
 		self.masterShortLoop = MasterShortLooper()
 		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
 

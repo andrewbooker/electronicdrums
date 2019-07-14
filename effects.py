@@ -27,7 +27,7 @@ class TapeEcho():
 	@staticmethod
 	def createRandom():
 		e = TapeEcho()
-		e.mode = 2 #long
+		e.mode = 5 #med+long
 		e.repeatRate = 30 #0-127, modulated
 		e.intensity = 50 #0-127, modulated
 		e.distortion = randint(1, 5)
@@ -36,7 +36,7 @@ class TapeEcho():
 		return e
 	
 	def asSpec(self):
-		return [self.mode, self.repeatRate, self.intensity, 12, 10, 64, 64, 64, self.distortion, self.wowFlutterRate, self.wowFlutterDepth, 65, 100, 100]
+		return [self.mode, self.repeatRate, self.intensity, 12, 10, 64, 1, 127, self.distortion, self.wowFlutterRate, self.wowFlutterDepth, 65, 100, 100]
 		
 	
 class Chorus():
