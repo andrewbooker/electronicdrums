@@ -82,11 +82,8 @@ class Kit():
 		file = open("%s\\%s" % (dir, kitFn), "w")
 		self.buildFrom(kitDef, name).writexml(file, addindent="\t", newl="\n")
 		file.close()
-		print("kit %s created in %s" % (name, kitFn))
+		print("kit %.3d %s created in %s" % (zIndex + 1, name, kitFn))
 	
 	def buildNamed(self, kitDef, dir, zIndex):
 		self.build(kitDef, kitDef.__name__, dir, zIndex)
 
-	
-def createKit(zIndex, name, kitDef):
-	Kit().build(kitDef, name, "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\KIT", zIndex)

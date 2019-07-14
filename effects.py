@@ -141,6 +141,12 @@ class Distortion():
 	
 class RingMod():
 	type = 16
+	
+	def __init__(self):
+		self.balance = 0.5
+		self.polarity(1)
+		self.freq(randint(1, 127))
+		self.sens(randint(30, 127))
 
 	def freq(self, v):
 		self.freq = v
@@ -151,15 +157,11 @@ class RingMod():
 		return self
 		
 	def polarity(self, v):
-		self.polarity = v
+		self.pol = v
 		return self
-		
-	def balance(self, v):
-		self.balance = v
-		return self
-		
+	
 	def asSpec(self):
-		return [self.freq, self.sens, self.polarity, 15, 15, int(100 * self.balance), 100]
+		return [self.freq, self.sens, self.pol, 15, 15, int(100 * self.balance), 100]
 		
 	@staticmethod
 	def createRandom():
@@ -167,7 +169,6 @@ class RingMod():
 		e.freq(randint(1, 127))
 		e.sens(randint(30, 127))
 		e.polarity(randint(0, 1))
-		e.balance(0.5)
 		return e
 		
 class PitchShift():

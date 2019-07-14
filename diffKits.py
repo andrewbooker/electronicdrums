@@ -8,7 +8,7 @@ locGen = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\KIT"
 
 #actuals = glob.glob("%s\\*" % locDump)
 actuals = os.listdir(locDump)
-ignore = ["kit057.spd", "kit061.spd", "kit062.spd", "kit068.spd"]
+ignore = []#["kit057.spd", "kit061.spd", "kit062.spd", "kit068.spd"]
 f = 0
 for a in actuals:
 	actual = open("%s\\%s" % (locDump, a), "r")

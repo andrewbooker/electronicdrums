@@ -60,7 +60,7 @@ def addEmptyKitChain(doc, onto):
 	for i in range(20):
 		param(doc, base, "Stp%d" % i, -1)
 	
-def createSetup(fxModOn):
+def createSetup(fxModOn, footTriggerTypes):
 	doc = xml.dom.minidom.parseString("<SetupPrm/>")
 	setup = doc.documentElement
 	
@@ -96,33 +96,35 @@ def createSetup(fxModOn):
 	#kd7s : need to reset this for TBB gig to 
 	for i in range(2):
 		pad = node(doc, setup, "ExtPad")
+		padType = footTriggerTypes[i]
 		param(doc, pad, "InputMode", 1)
-		param(doc, pad, "PadType", 0)
-		param(doc, pad, "Sens", 7)
-		param(doc, pad, "Threshold", 8)
-		param(doc, pad, "Curve", 0)
-		param(doc, pad, "ScanTime", 16)
-		param(doc, pad, "RetrigCxl", 6)
-		param(doc, pad, "MaskTime", 10)
+		param(doc, pad, "PadType", padType)
+		param(doc, pad, "Sens", 7 if padType == 0 else 12)
+		param(doc, pad, "Threshold", 8 if padType == 0 else 17)
+		param(doc, pad, "Curve", 0 if padType == 0 else 1)
+		param(doc, pad, "ScanTime", 16 if padType == 0 else 38)
+		param(doc, pad, "RetrigCxl", 6 if padType == 0 else 14)
+		param(doc, pad, "MaskTime", 10 if padType == 0 else 42)
 		param(doc, pad, "XtalkCxl", 56)
 		param(doc, pad, "RimAdjust", 0)
 		param(doc, pad, "RimGain", 0)
-		param(doc, pad, "NoiseCxl", 0)
+		param(doc, pad, "NoiseCxl", 0 if padType == 0 else 1)
 		
 	#single PD-8, but could adjust to dual head with a bit of initiative (eg make two, InputMode = 1, no rim settings etc)
-	pad = node(doc, setup, "ExtPad")
-	param(doc, pad, "InputMode", 0)
-	param(doc, pad, "PadType", 6)
-	param(doc, pad, "Sens", 8)
-	param(doc, pad, "Threshold", 5)
-	param(doc, pad, "Curve", 0)
-	param(doc, pad, "ScanTime", 12)
-	param(doc, pad, "RetrigCxl", 4)
-	param(doc, pad, "MaskTime", 8)
-	param(doc, pad, "XtalkCxl", 56)
-	param(doc, pad, "RimAdjust", 0)
-	param(doc, pad, "RimGain", 15)
-	param(doc, pad, "NoiseCxl", 0)
+	for i in range(2):
+		pad = node(doc, setup, "ExtPad")
+		param(doc, pad, "InputMode", 0)
+		param(doc, pad, "PadType", 6)
+		param(doc, pad, "Sens", 8)
+		param(doc, pad, "Threshold", 5)
+		param(doc, pad, "Curve", 0)
+		param(doc, pad, "ScanTime", 12)
+		param(doc, pad, "RetrigCxl", 4)
+		param(doc, pad, "MaskTime", 8)
+		param(doc, pad, "XtalkCxl", 56)
+		param(doc, pad, "RimAdjust", 0)
+		param(doc, pad, "RimGain", 15)
+		param(doc, pad, "NoiseCxl", 0)
 
 	return setup
 	
@@ -189,12 +191,13 @@ class SystemConfig():
 	def __init__(self, delay = None):
 		self.fxModOn = 1
 		self.inAssign = 0 #0: master, 1; sub
+		self.footTriggerTypes = [0, 0] #0: KD-7
 		
 		self.masterFilter = MasterFilter()
 		self.masterDelay = MasterSyncDelay() if (delay is None) else MasterSyncDelay().delayTime(delay.time).leftTapTime(delay.leftTap)
 		self.masterShortLoop = MasterShortLooper()
-		self.masterFx = RingMod().freq(9).sens(9).polarity(1).balance(0.5)
-
+		self.masterFx = RingMod().polarity(1)
+		
 	def fx1On(self):
 		return 1 if self.inAssign == 1 else 0
 		
@@ -225,7 +228,7 @@ class SystemConfig():
 		
 	def createIn(self, fqfn):
 		file = open(fqfn, "w")
-		createSetup(self.fxModOn).writexml(file, addindent="\t", newl="\n")
+		createSetup(self.fxModOn, self.footTriggerTypes).writexml(file, addindent="\t", newl="\n")
 		createSys(self.inAssign, self.fx2Assign()).writexml(file, addindent="\t", newl="\n")
 		createKitChain().writexml(file, addindent="\t", newl="\n")
 		self.createMasterEffects().writexml(file, addindent="\t", newl="\n")
