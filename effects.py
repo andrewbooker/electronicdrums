@@ -144,9 +144,9 @@ class RingMod():
 	
 	def __init__(self):
 		self.balance = 0.5
-		self.polarity(1)
-		self.freq(randint(1, 127))
-		self.sens(randint(30, 127))
+		self.polarity(0)
+		self.freq(64)
+		self.sens(10)
 
 	def freq(self, v):
 		self.freq = v

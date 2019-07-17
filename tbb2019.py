@@ -8,7 +8,7 @@ note = "note"
 channel = "channel"
 sound = "sound"
 outAssign = "outAssign"
-
+vol = "vol"
 padOutMaster = 0
 padOutFx1 = 1
 padOutFx2 = 2
@@ -31,8 +31,8 @@ class TimeTravel():
             {sound: wav["Kick_909_Atk"]}, # bottom left
 			{sound: wav["Snare_Proc4"]},
 			{sound: wav["HH_808_cl"]},
-			{sound: wav["Kick_Proc3"]}, # foot R
-			{sound: wav["Ride_DnB"]}, # foot L
+			{sound: wav["Kick_Proc3"], outAssign: padOutSub}, # foot R
+			{sound: wav["SnareXs_6"]}, # foot L
 			{sound: wav["Clap_909"]}, # pad top
 			{sound: wav["Clap_110"]}] # pad rim
 			
@@ -47,27 +47,27 @@ class WhereverThereIsLight():
 	pads = [{note: 61, channel: 0, sound: wav["Cym_Splash1"]},
 			{note: 63, channel: 0, sound: wav["P_Triangl_op"]},
 			{note: 64, channel: 0, sound: wav["Cym_Crotale"]},
-			{note: 66, channel: 0},
-			{note: 68, channel: 0},
-			{note: 69, channel: 0},
-			{note: 52, channel: 0},
-			{note: 56, channel: 0},
-			{note: 59, channel: 0},
+			{note: 66, channel: 0, wav["Ride_DnB"], vol: 70},
+			{note: 68, channel: 0, wav["Ride_DnB"], vol: 70},
+			{note: 69, channel: 0, wav["Ride_DnB"], vol: 70},
+			{note: 52, channel: 0, wav["Ride_DnB"], vol: 70},
+			{note: 56, channel: 0, wav["Ride_DnB"], vol: 70},
+			{note: 59, channel: 0, wav["Ride_DnB"], vol: 70},
 			{sound: wav["Kick_808_L"]}, # foot R
 			{sound: wav["SE_Crasher"]}, # foot L
 			{sound: wav["Snare_Proc4"]}, # pad top
 			{sound: wav["SE_Noise1"]}] # pad rim
 
-class AllTheBlueChanges(): #58
+class AllTheBlueChanges():
 	level = 90
 	tempo = 122
 	korg = 24
 	pads = [{note: 60, channel: 0}, #top left
 			{note: 62, channel: 0},
 			{note: 64, channel: 0},
-			{note: 52, channel: 0, sound: wav["HH_DbS_cl"]}, # mid left
-			{note: 57, channel: 0, sound: wav["Cym_Fx2"]},
-			{note: 59, channel: 0, sound: wav["SE_SweepSlap"]},
+			{note: 52, channel: 0, vol: 60, sound: wav["HH_DbS_cl"]}, # mid left
+			{note: 57, channel: 0, vol: 60, sound: wav["Cym_Fx2"]},
+			{note: 59, channel: 0, vol: 60, sound: wav["SE_SweepSlap"]},
             {sound: wav["P_Tamb_Proc"]}, # bottom left
 			{sound: wav["P_Tambourine"]},
 			{sound: wav["P_Tambourine"]},
@@ -122,7 +122,7 @@ class NotMarriedAnyMore():
 			{sound: wav["Clap_Hse1"]}, # mid left
 			{sound: wav["HH_Proc2_op"]},
 			{sound: wav["Cym_Fx2"]},
-            {sound: wav["Clap_909"]}, # bottom left
+            {sound: wav["Snare_Proc4"]}, # bottom left
 			{sound: wav["P_GanzaTap"]},
 			{sound: wav["P_Triangl_cl"]},
 			{sound: wav["Kick_Acou2"]}, # foot R

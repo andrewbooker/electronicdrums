@@ -116,7 +116,7 @@ def createSetup(fxModOn, footTriggerTypes):
 		param(doc, pad, "InputMode", 0)
 		param(doc, pad, "PadType", 6)
 		param(doc, pad, "Sens", 8)
-		param(doc, pad, "Threshold", 5)
+		param(doc, pad, "Threshold", 11)
 		param(doc, pad, "Curve", 0)
 		param(doc, pad, "ScanTime", 12)
 		param(doc, pad, "RetrigCxl", 4)
