@@ -85,7 +85,7 @@ for modeName in modeNames:
 	kitDef.pads[6]["outAssign"] = midKitOut
 	kitDef.pads[7]["outAssign"] = korgPercOut
 	kitDef.pads[8]["outAssign"] = korgPercOut
-	kitDef.pads[9]["outAssign"] = bdOut
+	kitDef.pads[9]["outAssign"] = midKitOut
 	kitDef.pads[10]["outAssign"] = midKitOut
 	kitDef.pads[11]["outAssign"] = midKitOut
 	kitDef.pads[12]["outAssign"] = topKitOut
