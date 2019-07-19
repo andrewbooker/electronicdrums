@@ -149,11 +149,11 @@ class RingMod():
 		self.sens(10)
 
 	def freq(self, v):
-		self.freq = v
+		self.frequ = v
 		return self
 		
 	def sens(self, v):
-		self.sens = v
+		self.sensi = v
 		return self
 		
 	def polarity(self, v):
@@ -161,7 +161,7 @@ class RingMod():
 		return self
 	
 	def asSpec(self):
-		return [self.freq, self.sens, self.pol, 15, 15, int(100 * self.balance), 100]
+		return [self.frequ, self.sensi, self.pol, 15, 15, int(100 * self.balance), 100]
 		
 	@staticmethod
 	def createRandom():
