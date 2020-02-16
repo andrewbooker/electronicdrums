@@ -117,4 +117,5 @@ class ReadAudio():
             f.close()
             
 if (True):
+	#usage: sample.py <input wav file> <dir out> 
     ReadAudio(sys.argv[2]).read(sys.argv[1])
