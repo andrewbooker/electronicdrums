@@ -47,12 +47,15 @@ class AbsMovingAvg(MovingAvg):
 			
 			
 class DelayTimes():
-	def __init__(self, tempo):
+	def __init__(self, tempo, intraBeat = False):
 		msPer16th = 15000.0 / tempo
-		max16thsPossible = math.floor(1300 / msPer16th)
+		if intraBeat:
+			self.time = math.floor(4 * msPer16th)
+			self.leftTap = 75
+		else:
+			max16thsPossible = math.floor(1300 / msPer16th)
 		
-		self.time = math.ceil(max16thsPossible * msPer16th)
-		self.leftTap = math.ceil(100.0 * randint(2, max16thsPossible - 1) / max16thsPossible)
-		
+			self.time = math.floor(max16thsPossible * msPer16th)
+			self.leftTap = math.floor(100.0 * randint(2, max16thsPossible - 1) / max16thsPossible)
 	
 	

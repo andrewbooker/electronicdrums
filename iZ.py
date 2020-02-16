@@ -12,9 +12,10 @@ master = 0
 sub = 1
 
 if (len(sys.argv) < 2):
-	print("iZ <key> [<tempo>] [<apply-master-fx-to>] [<allow-fx-mod>]")
+	print("iZ <key> [<tempo>] [<apply-master-fx-to>] [<delay-subdivision>] [<allow-fx-mod>]")
 	print("eg iZ.py F# 83 kit")
-	print("or iZ.py Bb 150 korg 1")
+	print("or iZ.py C 110 korg intra")
+	print("or iZ.py Bb 150 korg poly 1")
 	print("or iZ.py A")
 	exit()
 
@@ -31,11 +32,12 @@ effModes = {"kit": FxKit, "korg": FxKorg}
 key = sys.argv[1].upper()
 tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
 mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
-allowFxMod = 1 if len(sys.argv) < 5 else int(sys.argv[4])
+delaySubdivision = "intra" if len(sys.argv) < 5 else int(sys.argv[4])
+allowFxMod = 1 if len(sys.argv) < 6 else int(sys.argv[5])
 
 masterFx = any(mode.allowedFx)
 
-dt = DelayTimes(tempo)
+dt = DelayTimes(tempo, delaySubdivision == "intra")
 print("tempo %d bpm" % tempo)
 print("%s ms %s%%" % (dt.time, dt.leftTap))
 print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
