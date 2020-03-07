@@ -6,19 +6,19 @@ import xml.dom.minidom
 from wave import Wave
 
 sampledir = "D:\\Samples\\bass\\synth"
-samples = [34, 36, 38, 39, 41, 43]
+samples = {34: ["02_Bb.wav"]}
 
-fn = "%s\\%s\\%s" % (sampledir, samples[0], "02_Bb.wav")
-sampleFile = sf.SoundFile(fn, "r")
-size = sampleFile.frames
-print("found %d frames in %s" % (size, fn))
+for sampleNote, wavs in samples.items():
+	for idx in range(len(wavs)):
+		fn = "%s\\%s\\%s" % (sampledir, sampleNote, wavs[idx])
+		sampleFile = sf.SoundFile(fn, "r")
+		size = sampleFile.frames
+		print("found %d frames in %s" % (size, fn))
 
-
-idx = 0
-waveFn = "%s/%s%.4d.wav" % (90, "bass", idx)
-wave = Wave(idx, "90", waveFn)
-for i in range(size):
-	wave.write(sampleFile.read())
-wave.close()
+		waveFn = "%s/%s%d%.2d.wav" % (90, "bass", sampleNote, idx)
+		wave = Wave(idx, "90", waveFn)
+		for i in range(size):
+			wave.write(sampleFile.read())
+		wave.close()
 
 print("done")
