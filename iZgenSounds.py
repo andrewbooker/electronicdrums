@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 import soundfile as sf
-import os
 import math
 from random import uniform
 import xml.dom.minidom
 from utils import any, MovingAvg, AbsMovingAvg
+from wave import Wave
 
 
 class Resize():
@@ -108,24 +108,14 @@ class Gradient():
 		
 	def at(self, i):
 		return self.y1 + (i * (self.y2 - self.y1) / Resize.maxLength)
-		
 
 
-def prepFqFnOut(fnOnto, type):
-	subDir, fnOut = fnOnto.split("/")
-	locOut = "E:\\Roland\\SPD-SX\\WAVE"
-	dir = "%s\\%s\\%s" % (locOut, type, subDir)
-	if not os.path.exists(dir):
-		os.makedirs(dir)
-	return "%s\\%s" % (dir, fnOut)
-
-def combine(fnOnto, s1, s2, grad1, grad2, op):
+def combine(fnOnto, subDir, idx, s1, s2, grad1, grad2, op):
 	loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\DATA"
 	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
 	f2 = sf.SoundFile("%s\\%s" % (loc, s2), "r")
 	
-	print("%s using %s with %s and %s" % (fnOnto, type(op).__name__, s1, s2))
-	fqfnOut = prepFqFnOut(fnOnto, "DATA")
+	print("%s with %s and %s" % (type(op).__name__, s1, s2))
 	
 	size = max(f1.frames, f2.frames)
 	resize1 = Resize()
@@ -142,9 +132,7 @@ def combine(fnOnto, s1, s2, grad1, grad2, op):
 	lr1 = len(r1)
 	lr2 = len(r2)
 	
-	if os.path.exists(fqfnOut):
-		os.remove(fqfnOut)
-	out = sf.SoundFile(fqfnOut, mode="x", samplerate=44100, channels=1, subtype="PCM_16")
+	wave = Wave(idx, subDir, fnOnto)
 	
 	i = 0
 	done = False
@@ -152,40 +140,11 @@ def combine(fnOnto, s1, s2, grad1, grad2, op):
 		hasF1 = i < lr1
 		hasF2 = i < lr2
 		data = [r1[i] if hasF1 else 0, r2[i] if hasF2 else 0]	
-		out.write(op.on(data[0], data[1], i, size))
+		wave.write(op.on(data[0], data[1], i, size))
 		done = op.isDone(hasF1, hasF2)
 		i += 1
 	
-	out.close()
-	
-	
-
-
-def param(doc, onto, name, value):
-	onto.appendChild(doc.createElement(name)).appendChild(doc.createTextNode(str(value)))
-	
-
-def prm(fnOnto, name, wavPath):
-	doc = xml.dom.minidom.parseString("<WvPrm/>")
-	wvPrm = doc.documentElement
-	
-	for i in range(12):
-		param(doc, wvPrm, "Nm%d" % i, ord(name[i]))
-
-	param(doc, wvPrm, "Tag", 0)
-	param(doc, wvPrm, "Tempo", 1200)
-	param(doc, wvPrm, "Beat", 0)
-	param(doc, wvPrm, "Measure", 0)
-	param(doc, wvPrm, "Start", 0)
-	param(doc, wvPrm, "End", 0)
-	param(doc, wvPrm, "Path", wavPath)
-	
-	fqfnOut = prepFqFnOut(fnOnto, "PRM")
-	file = open(fqfnOut, "w")
-	wvPrm.writexml(file, addindent="\t", newl="\n")
-	file.close()
-	
-	
+	wave.close()
 
 kick = [
 	"00/Kick_.wav",
@@ -342,20 +301,19 @@ note = [
 	"01/SE_Sw.wav"
 ]
 
-def generateSound(subDir, type, i, fn, setA, setB, combiner):
+def generateSound(subDir, type, i, setA, setB, combiner):
+	waveFn = "%s/%s%.6d.wav" % (subDir, type, i)
 	s1 = any(setA)
 	cmb = any(combiner)
 	g1 = Gradient.anyWithin(0.9, 1.4) if type == "bd" else Gradient.any()
 	g2 = Gradient.any()
-	combine(fn, s1, any(setB, [s1]), g1, g2, cmb())
-	prm("%s/%.2d.spd" % (subDir, i), "bd_%.10d" % i, fn) 
-	
+	combine(waveFn, subDir, i, s1, any(setB, [s1]), g1, g2, cmb())
+
 	
 def generateSoundRange(subDir, type, setA, setB, combiners):
 	print("generating %s sounds" % type)
 	for i in range(100):
-		fn = "%s/%s%.6d.wav" % (subDir, type, i)
-		generateSound(subDir, type, i, fn, setA, setB, combiners)
+		generateSound(subDir, type, i, setA, setB, combiners)
 
 most = [EnvelopeFollow, XChop, Avg, ShortXFade]
 all = [EnvelopeFollow, XChop, Avg, ShortXFade, Multiply]
