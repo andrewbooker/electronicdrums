@@ -32,7 +32,7 @@ effModes = {"kit": FxKit, "korg": FxKorg}
 key = sys.argv[1].upper()
 tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
 mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
-delaySubdivision = "intra" if len(sys.argv) < 5 else int(sys.argv[4])
+delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
 allowFxMod = 1 if len(sys.argv) < 6 else int(sys.argv[5])
 
 masterFx = any(mode.allowedFx)
