@@ -59,4 +59,4 @@ class Wave():
 		self.file.close()
 		fqn = Wave.prepFqFnOut("%s/%.2d.spd" % (self.subDir, self.idx), "PRM")
 		print("creating %s" % fqn)
-		prm(fqn, "bd_%.10d" % self.idx, self.fn) 
+		prm(fqn, "iz_%.10d" % self.idx, self.fn) 
