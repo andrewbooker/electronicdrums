@@ -56,6 +56,14 @@ class Chorus():
 		
 	def asSpec(self):
 		return [1, self.rate, self.depth, self.preDelayMs * 2, 4, 9, 50, 100]
+		
+	@staticmethod
+	def createRandom():
+		e = Chorus()
+		e.rate(randint(10, 100))
+		e.depth(randint(40, 100))
+		e.preDelayMs(randint(1, 100))
+		return e
 	
 class Phaser():
 	type = 7
