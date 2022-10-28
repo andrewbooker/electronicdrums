@@ -3,7 +3,7 @@
 import sys
 from utils import any, DelayTimes
 from kit import Kit
-from iZgenKits import generate, modeNames
+from iZgenKits import generate, modeNames, Notes, roots, modes
 from sysConfig import SystemConfig
 from effects import *
 from random import randint
@@ -68,7 +68,9 @@ print("FX2 %s" % kitFx2.__name__)
 idx = 70
 for modeName in modeNames:
 
-    kitDef = generate(key, modeName, tempo)
+    notes = Notes(7, roots[key], modes[modeName])
+    name = "%s_%s" % (key, modeName)
+    kitDef = generate(name, tempo, notes)
     kitDef.pan = 0
 
     kitDef.fx1 = kitFx1.createRandom() if c.fx1On() == 1 else kitFx1()

@@ -169,10 +169,8 @@ class GeneratedSounds():
 ks = GeneratedSounds()
 
 
-def generate(r, m, t):
-    notes = Notes(7, roots[r], modes[m])
-
-    k = type("%s_%s" % (r, m), (), {})
+def generate(name, t, notes):
+    k = type(name, (), {})
     k.level = 100
     k.tempo = t
     k.pads = []
