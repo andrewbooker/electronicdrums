@@ -56,6 +56,10 @@ class Notes():
     def note(self, i):
         return self.notes[i]
 
+class GenericNotes():
+    def note(self, i):
+        return i + 1
+
 
 class NativeKitSounds():
 

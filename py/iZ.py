@@ -3,7 +3,7 @@
 import sys
 from utils import any, DelayTimes
 from kit import Kit
-from iZgenKits import generate, modeNames, Notes, roots, modes
+from iZgenKits import generate, modeNames, Notes, roots, modes, GenericNotes
 from sysConfig import SystemConfig
 from effects import *
 from random import randint
@@ -24,6 +24,7 @@ if (len(sys.argv) < 2):
     print("or iZ.py C 110 korg intra")
     print("or iZ.py Bb 150 korg poly 1")
     print("or iZ.py A")
+    print("or iZ.py gen 101 korg poly")
     exit()
 
 class FxKorg():
@@ -34,42 +35,7 @@ class FxKit():
     korgAssign = sub
     allowedFx = [RingMod, Phaser, FilterPlusDrive, Distortion, TouchWah, PitchShift, Vibrato, Reverb, Slicer]
 
-effModes = {"kit": FxKit, "korg": FxKorg}
-
-key = sys.argv[1].upper()
-tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
-mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
-delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
-allowFxMod = 1 if len(sys.argv) < 6 else int(sys.argv[5])
-
-masterFx = any(mode.allowedFx)
-
-dt = DelayTimes(tempo, delaySubdivision == "intra")
-print("tempo %d bpm" % tempo)
-print("%s ms %s%%" % (dt.time, dt.leftTap))
-print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
-
-c = SystemConfig(dt)
-
-c.inAssign = mode.korgAssign
-c.fxModOn = allowFxMod
-c.masterFx = masterFx.createRandom()
-
-c.createIn(os.path.join(loc, "SYSTEM", "sysparam.spd"))
-
-kitFx1 = Thru
-kitFx2 = any(FxKit.allowedFx, [masterFx])
-if (c.fx1On() == 1):
-    kitFx1 = any(FxKit.allowedFx, [masterFx, kitFx2])
-    print("FX1 %s" % kitFx1.__name__)
-
-print("FX2 %s" % kitFx2.__name__)
-
-idx = 70
-for modeName in modeNames:
-
-    notes = Notes(7, roots[key], modes[modeName])
-    name = "%s_%s" % (key, modeName)
+def createKit(idx, name, notes, kitFx1, kitFx2):
     kitDef = generate(name, tempo, notes)
     kitDef.pan = 0
 
@@ -102,5 +68,48 @@ for modeName in modeNames:
     kitDef.pads[12]["outAssign"] = topKitOut
 
     Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
-    idx += 1
+
+
+effModes = {"kit": FxKit, "korg": FxKorg}
+
+key = sys.argv[1]
+tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
+mode = FxKorg if len(sys.argv) < 4 else effModes[sys.argv[3]]
+delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
+allowFxMod = 1 if len(sys.argv) < 6 else int(sys.argv[5])
+
+masterFx = any(mode.allowedFx)
+
+dt = DelayTimes(tempo, delaySubdivision == "intra")
+print("tempo %d bpm" % tempo)
+print("%s ms %s%%" % (dt.time, dt.leftTap))
+print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
+
+c = SystemConfig(dt)
+
+c.inAssign = mode.korgAssign
+c.fxModOn = allowFxMod
+c.masterFx = masterFx.createRandom()
+
+c.createIn(os.path.join(loc, "SYSTEM", "sysparam.spd"))
+
+kitFx1 = Thru
+kitFx2 = any(FxKit.allowedFx, [masterFx])
+if (c.fx1On() == 1):
+    kitFx1 = any(FxKit.allowedFx, [masterFx, kitFx2])
+    print("FX1 %s" % kitFx1.__name__)
+
+print("FX2 %s" % kitFx2.__name__)
+
+idx = 70
+
+if key == "gen":
+    for i in range(10):
+        createKit(idx + i, "gen_%02d" % i, GenericNotes(), kitFx1, kitFx2)
+else:
+    for modeName in modeNames:
+        notes = Notes(7, roots[key], modes[modeName])
+        name = "%s_%s" % (key, modeName)
+        createKit(idx, name, notes, kitFx1, kitFx2)
+        idx += 1
 
