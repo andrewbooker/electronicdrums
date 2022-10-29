@@ -9,12 +9,15 @@ from effects import *
 from random import randint
 import json
 import os
+import serial
+import time
 
 def config():
     with open("config.json") as conf:
         return json.load(conf)
 
-loc = os.path.join(config()["mediaLoc"], "Roland", "SPD-SX")
+mediaLoc = config()["mediaLoc"]
+loc = os.path.join(mediaLoc, "Roland", "SPD-SX")
 master = 0
 sub = 1
 
@@ -85,6 +88,11 @@ print("tempo %d bpm" % tempo)
 print("%s ms %s%%" % (dt.time, dt.leftTap))
 print("master %s %s%s" % (mode.__name__, masterFx.__name__, " allowing FX mod" if allowFxMod == 1 else ""))
 
+sp = serial.Serial("/dev/ttyUSB0")
+sp.setDTR(True)
+while not os.path.exists(loc):
+    time.sleep(0.1)
+
 c = SystemConfig(dt)
 
 c.inAssign = mode.korgAssign
@@ -102,7 +110,6 @@ if (c.fx1On() == 1):
 print("FX2 %s" % kitFx2.__name__)
 
 idx = 70
-
 if key == "gen":
     for i in range(10):
         createKit(idx + i, "gen_%02d" % i, GenericNotes(), kitFx1, kitFx2)
@@ -113,3 +120,5 @@ else:
         createKit(idx, name, notes, kitFx1, kitFx2)
         idx += 1
 
+os.system("umount %s" % mediaLoc)
+sp.setDTR(False)
