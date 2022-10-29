@@ -7,14 +7,9 @@ from iZgenKits import generate, modeNames, Notes, roots, modes, GenericNotes
 from sysConfig import SystemConfig
 from effects import *
 from random import randint
-import json
-import os
-import serial
-import time
 
-def config():
-    with open("config.json") as conf:
-        return json.load(conf)
+import os
+
 
 
 master = 0
@@ -106,7 +101,7 @@ class Generic():
     def createIn(self, loc, idxStart):
         pass
 
-class generic_2019(Generic):
+class Generic_2019(Generic):
     def createIn(self, loc, idxStart):
         idx = idxStart
         for modeName in modeNames:
@@ -116,16 +111,25 @@ class generic_2019(Generic):
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
             idx += 1
 
-class generic_2022(Generic):
+class Generic_2022(Generic):
     def createIn(self, loc, idxStart):
         for i in range(10):
             kitDef = self._createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
 
 
+import json
+import serial ## sudo pip install pyserial
+import time
+
 class Uploader():
+    @staticmethod
+    def config():
+        with open("config.json") as conf:
+            return json.load(conf)
+
     def __init__(self):
-        self.mediaLoc = config()["mediaLoc"]
+        self.mediaLoc = Uploader.config()["mediaLoc"]
         self.loc = os.path.join(self.mediaLoc, "Roland", "SPD-SX")
 
     def upload(self, kits, idxStart):
@@ -145,7 +149,7 @@ class Uploader():
 
 uploader = Uploader()
 if key == "gen":
-    uploader.upload(generic_2022(), 69)
+    uploader.upload(Generic_2022(), 69)
 else:
-    uploader.upload(generic_2019(), 69)
+    uploader.upload(Generic_2019(), 69)
 
