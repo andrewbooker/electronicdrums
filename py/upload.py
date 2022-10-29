@@ -25,11 +25,11 @@ if (len(sys.argv) < 2):
     exit()
 
 class FxIn():
-    korgAssign = master
+    inputAssign = master
     allowedFx = [Slicer, TapeEcho, TouchWah]
 
 class FxKit():
-    korgAssign = sub
+    inputAssign = sub
     allowedFx = [RingMod, Phaser, FilterPlusDrive, Distortion, TouchWah, PitchShift, Vibrato, Reverb, Slicer]
 
 
@@ -53,7 +53,7 @@ class Generic():
         self.c = c
         masterFx = any(mode.allowedFx)
 
-        c.inAssign = mode.korgAssign
+        c.inAssign = mode.inputAssign
         c.fxModOn = allowFxMod
         c.masterFx = masterFx.createRandom()
         self.kitFx1 = Thru
@@ -79,19 +79,19 @@ class Generic():
         padOutSub = 3
 
         topKitOut = padOutFx1 if (sysConfig.fx1On() == 1) else padOutFx2
-        korgPercOut = padOutMaster if (sysConfig.inAssign == sub) else topKitOut
+        tunedMidiPercOut = padOutMaster if (sysConfig.inAssign == sub) else topKitOut
         midKitOut = padOutFx2
         bdOut = padOutSub # allow padOutFx2 if not RingMod
 
-        kitDef.pads[0]["outAssign"] = korgPercOut
-        kitDef.pads[1]["outAssign"] = korgPercOut
-        kitDef.pads[2]["outAssign"] = korgPercOut
+        kitDef.pads[0]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[1]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[2]["outAssign"] = tunedMidiPercOut
         kitDef.pads[3]["outAssign"] = topKitOut
-        kitDef.pads[4]["outAssign"] = korgPercOut
-        kitDef.pads[5]["outAssign"] = korgPercOut
+        kitDef.pads[4]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[5]["outAssign"] = tunedMidiPercOut
         kitDef.pads[6]["outAssign"] = midKitOut
-        kitDef.pads[7]["outAssign"] = korgPercOut
-        kitDef.pads[8]["outAssign"] = korgPercOut
+        kitDef.pads[7]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[8]["outAssign"] = tunedMidiPercOut
         kitDef.pads[9]["outAssign"] = midKitOut
         kitDef.pads[10]["outAssign"] = midKitOut
         kitDef.pads[11]["outAssign"] = midKitOut
