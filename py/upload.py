@@ -21,12 +21,12 @@ master = 0
 sub = 1
 
 if (len(sys.argv) < 2):
-    print("iZ <key> [<tempo>] [<apply-master-fx-to>] [<delay-subdivision>] [<allow-fx-mod>]")
-    print("eg iZ.py F# 83 kit")
-    print("or iZ.py C 110 in intra")
-    print("or iZ.py Bb 150 in poly 1")
-    print("or iZ.py A")
-    print("or iZ.py gen 101 in poly")
+    print("upload.py <key> [<tempo>] [<apply-master-fx-to>] [<delay-subdivision>] [<allow-fx-mod>]")
+    print("eg upload.py F# 83 kit")
+    print("or upload.py C 110 in intra")
+    print("or upload.py Bb 150 in poly 1")
+    print("or upload.py A")
+    print("or upload.py gen 101 in poly")
     exit()
 
 class FxIn():
