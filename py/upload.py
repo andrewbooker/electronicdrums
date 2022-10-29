@@ -17,6 +17,7 @@ if (len(sys.argv) < 2):
     print("or upload.py Bb 150 in poly 1")
     print("or upload.py A")
     print("or upload.py gen 101 in poly")
+    print("or upload.py tbb")
     exit()
 
 
@@ -24,6 +25,7 @@ if (len(sys.argv) < 2):
 key = sys.argv[1]
 
 from kits.generic import Generic
+
 
 class Generic_2019(Generic):
     def createIn(self, loc, idxStart):
@@ -73,14 +75,19 @@ class Uploader():
 
 uploader = Uploader()
 
-tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
-delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
-dt = DelayTimes(tempo, delaySubdivision == "intra")
-print("tempo %d bpm" % tempo)
-print("%s ms %s%%" % (dt.time, dt.leftTap))
 
-if key == "gen":
-    uploader.upload(Generic_2022(tempo), 69, dt)
+
+if key == "tbb":
+    from tbb import Tbb
+    uploader.upload(Tbb(), 49)
 else:
-    uploader.upload(Generic_2019(tempo), 69, dt)
+    tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
+    delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
+    dt = DelayTimes(tempo, delaySubdivision == "intra")
+    print("tempo %d bpm" % tempo)
+    print("%s ms %s%%" % (dt.time, dt.leftTap))
+    if key == "gen":
+        uploader.upload(Generic_2022(tempo), 69, dt)
+    else:
+        uploader.upload(Generic_2019(tempo), 69, dt)
 
