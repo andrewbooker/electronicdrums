@@ -12,8 +12,9 @@ def kitParam(doc, onto, name, value):
     kitNode(doc, onto, name).appendChild(doc.createTextNode(str(value)))
     
 def setName(doc, onto, name):
+    l = len(name)
     for i in range(8):
-    	kitParam(doc, onto, "Nm%d" % i, ord(name[i]))
+        kitParam(doc, onto, "Nm%d" % i, ord(name[i]) if i < l else 0x20)
 
 def valueFrom(padSpecs, item, i, alternative = -1):
     if (i < len(padSpecs)):
