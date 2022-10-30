@@ -1,2 +1,3 @@
 __pycache__
-py/config.json
+py/config*.json
+py/*.h
