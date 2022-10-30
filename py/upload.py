@@ -57,20 +57,23 @@ class Uploader():
     def __init__(self):
         self.mediaLoc = Uploader.config()["mediaLoc"]
         self.loc = os.path.join(self.mediaLoc, "Roland", "SPD-SX")
+        self.sp = serial.Serial("/dev/ttyUSB0")
 
     def upload(self, kits, idxStart, delayTimes = None):
-        sp = serial.Serial("/dev/ttyUSB0")
-        sp.setDTR(True)
-        while not os.path.exists(self.loc):
-            time.sleep(0.1)
+        isSpdSx = "/media" in self.mediaLoc
+        if isSpdSx:
+            self.sp.setDTR(True)
+            while not os.path.exists(self.loc):
+                time.sleep(0.1)
 
         c = SystemConfig(delayTimes)
         kits.applySysConfigTo(c)
         c.createIn(os.path.join(self.loc, "SYSTEM", "sysparam.spd"))
         kits.createIn(self.loc, idxStart)
 
-        os.system("umount %s" % self.mediaLoc)
-        sp.setDTR(False)
+        if isSpdSx:
+            os.system("umount %s" % self.mediaLoc)
+            self.sp.setDTR(False)
 
 
 uploader = Uploader()
