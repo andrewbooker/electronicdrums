@@ -16,25 +16,6 @@ padOutSub = 3
 padOutPhones = 4
 
 
-
-class WhereverThereIsLight():
-    level = 100
-    tempo = 63
-    korg = 15
-    pads = [{note: 61, channel: 0, sound: wav["Cym_Splash1"]},
-            {note: 63, channel: 0, sound: wav["P_Triangl_op"]},
-            {note: 64, channel: 0, sound: wav["Cym_Crotale"]},
-            {note: 66, channel: 0, sound: wav["Ride_DnB"], vol: 70},
-            {note: 68, channel: 0, sound: wav["Ride_DnB"], vol: 70},
-            {note: 69, channel: 0, sound: wav["Ride_DnB"], vol: 70},
-            {note: 52, channel: 0, sound: wav["Ride_DnB"], vol: 70},
-            {note: 56, channel: 0, sound: wav["Ride_DnB"], vol: 70},
-            {note: 59, channel: 0, sound: wav["Ride_DnB"], vol: 70},
-            {sound: wav["Kick_808_L"]}, # foot R
-            {sound: wav["SE_Crasher"]}, # foot L
-            {sound: wav["Snare_Proc4"]}, # pad top
-            {sound: wav["SE_Noise1"]}] # pad rim
-
 class AllTheBlueChanges():
     level = 90
     tempo = 122

@@ -49,10 +49,14 @@ def readFromJson():
                 padSpec = kit["pads"][padNames[i]]
                 if "wav" in padSpec:
                     pad["sound"] = wav[padSpec["wav"]]
-                if "vol" in padSpec:
-                    pad["vol"] = wav[padSpec["vol"]]
                 if "outAssign" in padSpec:
                     pad["outAssign"] = padOutAssign[padSpec["outAssign"]]
+                if "vol" in padSpec:
+                    pad["vol"] = padSpec["vol"]
+                if "note" in padSpec:
+                    pad["note"] = padSpec["note"]
+                if "channel" in padSpec:
+                    pad["channel"] = padSpec["channel"]
             k.pads.append(pad)
         into.append(k)
     return into
