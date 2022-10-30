@@ -19,5 +19,26 @@
 			"padTop": { "wav": "Clap_909" },
 			"padRim": { "wav": "Clap_110" }
 		}
+	},
+	{
+	    "name": "Ghostlike",
+		"level": 100,
+		"tempo": 120,
+		"applyMasterFx": true,
+		"pads": {
+			"topLeft": { "wav": "Cym_Splash1" },
+			"topCentre": { "wav": "Cym_Splash2" },
+			"topRight": { "wav": "Cym_Crotale" },
+			"midLeft": { "wav": "Clap_Hse1" },
+			"midCentre": { "wav": "HH_Proc2_op" },
+			"midRight": { "wav": "Cym_Fx2" },
+			"bottomLeft": { "wav": "Kick_808_L" },
+			"bottomCentre": { "wav": "P_Tambourine" },
+			"bottomRight": { "wav": "P_GanzaTap" },
+			"footRight": { "wav": "Kick_Acou1" },
+			"footLeft": { "wav": "SE_Crasher" },
+			"padTop": { "wav": "Snare_Proc4" },
+			"padRim": { "wav": "SE_Noise1" }
+		}
 	}
 ]

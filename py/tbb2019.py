@@ -17,11 +17,6 @@ padOutPhones = 4
 
 
 
-# 1st is 51
-class Ghostlike(StandardPatch):
-    level = 100
-    tempo = 120
-
 class WhereverThereIsLight():
     level = 100
     tempo = 63
