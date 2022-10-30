@@ -1,0 +1,23 @@
+[
+	{
+	    "name": "TimeTravel",
+		"level": 100,
+		"tempo": 78,
+		"applyMasterFx": true,
+		"pads": {
+			"topLeft": { "wav": "S00236" },
+			"topCentre": { "wav": "S00237" },
+			"topRight": { "wav": "S00238" },
+			"midLeft": { "wav": "Cym_Fx2" },
+			"midCentre": { "wav": "SE_SweepSlap" },
+			"midRight": { "wav": "SnareXs_7" },
+			"bottomLeft": { "wav": "Kick_909_Atk" },
+			"bottomCentre": { "wav": "Snare_Proc4" },
+			"bottomRight": { "wav": "HH_808_cl" },
+			"footRight": { "wav": "Kick_Proc3", "outAssign": "padOutSub" },
+			"footLeft": { "wav": "SnareXs_6" },
+			"padTop": { "wav": "Clap_909" },
+			"padRim": { "wav": "Clap_110" }
+		}
+	}
+]

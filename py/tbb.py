@@ -2,6 +2,7 @@
 from kit import Kit
 from sysConfig import SystemConfig
 from effects import RingMod
+from tbb2019 import setList
 import os
 
 class Tbb():
@@ -11,18 +12,26 @@ class Tbb():
         c.fxModOn = 1
         c.masterFx = RingMod()
 
+    @staticmethod
+    def addKit(cl, n, kn, loc, cpp):
+        name = n[:8]
+        Kit().build(cl, name, os.path.join(loc, "KIT"), kn)
+
+        cpp.write("DefineTrack( %s ) {\n" % n)
+        cpp.write("\ttbb_2019( tracks, %d, spdsx_fx::%s, %d );\n" % (kn + 1, "ringMod" if hasattr(cl, "applyMasterFx") else "none", cl.korg if hasattr(cl, "korg") else 13))
+        cpp.write("}\n")
+
     def createIn(self, loc, idxStart):
         kn = idxStart
-        cpp = open("tbb_2019.h", "w")
-        set = __import__("tbb2019")
-        for n, cl in set.__dict__.items():
-            if isinstance(cl, type) and hasattr(cl, "level"):
-                name = n[:8]
-                Kit().build(cl, name, os.path.join(loc, "KIT"), kn)
 
-                cpp.write("DefineTrack( %s ) {\n" % n)
-                cpp.write("\ttbb_2019( tracks, %d, spdsx_fx::%s, %d );\n" % (kn + 1, "ringMod" if hasattr(cl, "applyMasterFx") else "none", cl.korg if hasattr(cl, "korg") else 13))
-                cpp.write("}\n")
-
+        with open("tbb_2019.h", "w") as cpp:
+            for s in setList:
+                Tbb.addKit(s, s.__name__, kn, loc, cpp)
                 kn += 1
-        cpp.close()
+
+            oldSet = __import__("tbb2019")
+            for n, cl in oldSet.__dict__.items():
+                if isinstance(cl, type) and hasattr(cl, "level"):
+                    Tbb.addKit(cl, n, kn, loc, cpp)
+
+                    kn += 1
