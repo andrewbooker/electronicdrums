@@ -81,7 +81,7 @@ uploader = Uploader()
 
 
 if key == "tbb":
-    from tbb import Tbb
+    from kits.tbb import Tbb
     uploader.upload(Tbb(), 49)
 else:
     tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
