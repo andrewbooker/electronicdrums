@@ -16,24 +16,6 @@ padOutSub = 3
 padOutPhones = 4
 
 
-class AllTheBlueChanges():
-    level = 90
-    tempo = 122
-    korg = 24
-    pads = [{note: 60, channel: 0}, #top left
-            {note: 62, channel: 0},
-            {note: 64, channel: 0},
-            {note: 52, channel: 0, vol: 60, sound: wav["HH_DbS_cl"]}, # mid left
-            {note: 57, channel: 0, vol: 60, sound: wav["Cym_Fx2"]},
-            {note: 59, channel: 0, vol: 60, sound: wav["SE_SweepSlap"]},
-            {sound: wav["P_Tamb_Proc"]}, # bottom left
-            {sound: wav["P_Tambourine"]},
-            {sound: wav["P_Tambourine"]},
-            {sound: wav["Kick_Proc3"]}, # foot R
-            {sound: wav["SnareXs_2"]}, # foot L
-            {sound: wav["Clap_Min"]}, # pad top
-            {sound: wav["Clap_110"]}] # pad rim
-
 class WarmupMan():
     level = 100
     tempo = 122

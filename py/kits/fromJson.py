@@ -40,6 +40,8 @@ def readFromJson(fn):
         k.level = kit["level"] if "level" in kit else 100
         k.tempo = kit["tempo"]
         k.pads = []
+        if "korg" in kit:
+            k.korg = kit["korg"]
 
         for i in range(13):
             pad = {}

@@ -61,5 +61,26 @@
             "padTop": { "wav": "Snare_Proc4" },
             "padRim": { "wav": "SE_Noise1" }
         }
+    },
+    {
+        "name": "AllTheBlueChanges",
+        "level": 90,
+        "tempo": 122,
+        "korg": 24,
+        "pads": {
+            "topLeft": { "note": 60, "channel": 0 },
+            "topCentre": { "note": 62, "channel": 0 },
+            "topRight": { "note": 64, "channel": 0 },
+            "midLeft": { "note": 52, "channel": 0, "wav": "HH_DbS_cl", "vol": 60 },
+            "midCentre": { "note": 57, "channel": 0, "wav": "Cym_Fx2", "vol": 60 },
+            "midRight": { "note": 59, "channel": 0, "wav": "SE_SweepSlap", "vol": 60 },
+            "bottomLeft": { "wav": "P_Tamb_Proc" },
+            "bottomCentre": { "wav": "P_Tambourine" },
+            "bottomRight": { "wav": "P_Tambourine" },
+            "footRight": { "wav": "Kick_Proc3" },
+            "footLeft": { "wav": "SnareXs_2" },
+            "padTop": { "wav": "Clap_Min" },
+            "padRim": { "wav": "Clap_110" }
+        }
     }
 ]
