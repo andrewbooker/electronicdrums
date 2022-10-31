@@ -54,7 +54,7 @@ def addEmptyKitChain(doc, onto):
     base = node(doc, onto, "KitChain")
 
     for i in range(10):
-        param(doc, base, "Nm%d" % i, "")
+        param(doc, base, "Nm%d" % i, 0)
 
     for i in range(20):
         param(doc, base, "Stp%d" % i, -1)
