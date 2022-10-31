@@ -110,5 +110,98 @@
                 "depth": 69
             }
         }
+    },
+    {
+        "name": "ItsTheWorld",
+        "level": 100,
+        "tempo": 73,
+        "applyMasterFx": true,
+        "pads": {
+            "topLeft": { "wav": "Cym_Splash1" },
+            "topCentre": { "wav": "Cym_Splash2" },
+            "topRight": { "wav": "Cym_Crotale" },
+            "midLeft": { "wav": "Clap_Hse1" },
+            "midCentre": { "wav": "HH_Proc2_op" },
+            "midRight": { "wav": "Cym_Fx2" },
+            "bottomLeft": { "wav": "Kick_808_L" },
+            "bottomCentre": { "wav": "P_Tambourine" },
+            "bottomRight": { "wav": "P_GanzaTap" },
+            "footRight": { "wav": "Kick_Acou1" },
+            "footLeft": { "wav": "Kick_DbS" },
+            "padTop": { "wav": "Snare_Proc4" },
+            "padRim": { "wav": "SE_Noise1" }
+        }
+    },
+    {
+        "name": "NotMarriedAnyMore",
+        "level": 100,
+        "tempo": 89,
+        "pads": {
+            "topLeft": { "wav": "Cym_Splash1" },
+            "topCentre": { "wav": "Cym_Splash2" },
+            "topRight": { "wav": "Cym_Crotale" },
+            "midLeft": { "wav": "Clap_Hse1" },
+            "midCentre": { "wav": "HH_Proc2_op" },
+            "midRight": { "wav": "Cym_Fx2" },
+            "bottomLeft": { "wav": "Snare_Proc4" },
+            "bottomCentre": { "wav": "P_GanzaTap" },
+            "bottomRight": { "wav": "P_Triangl_cl" },
+            "footRight": { "wav": "Kick_Acou2" },
+            "footLeft": { "wav": "SE_Crasher" },
+            "padTop": { "wav": "Snare_Proc4" },
+            "padRim": { "wav": "SE_Noise1" }
+        }
+    },
+    {
+        "name": "KillingToSurvive",
+        "level": 100,
+        "tempo": 120,
+        "applyMasterFx": true,
+        "pads": {
+            "topLeft": { "wav": "Cym_Splash1" },
+            "topCentre": { "wav": "Cym_Splash2" },
+            "topRight": { "wav": "Cym_Crotale" },
+            "midLeft": { "wav": "Clap_Hse1" },
+            "midCentre": { "wav": "HH_Proc2_op" },
+            "midRight": { "wav": "Cym_Fx2" },
+            "bottomLeft": { "wav": "Kick_808_L" },
+            "bottomCentre": { "wav": "P_Tambourine" },
+            "bottomRight": { "wav": "P_GanzaTap" },
+            "footRight": { "wav": "Kick_Acou1" },
+            "footLeft": { "wav": "SE_Crasher" },
+            "padTop": { "wav": "Snare_Proc4" },
+            "padRim": { "wav": "SE_Noise1" }
+        }
+    },
+    {
+        "name": "Mixtaped",
+        "level": 100,
+        "tempo": 47,
+        "korg": 21,
+        "applyMasterFx": true,
+        "pads": {
+            "topLeft": { "note": 71, "channel": 0, "wav": "HH_909_op" },
+            "topCentre": { "note": 74, "channel": 0, "wav": "Cym_Fx2" },
+            "topRight": { "note": 76, "channel": 0, "wav": "Cym_Crotale" },
+            "midLeft": { "note": 60, "channel": 0, "wav": "P_Tabla_Te" },
+            "midCentre": { "note": 62, "channel": 0, "wav": "Snare_Proc4" },
+            "midRight": { "note": 64, "channel": 0, "wav": "Ride_Acou" },
+            "bottomLeft": { "note": 40, "channel": 0, "wav": "Kick_808_L" },
+            "bottomCentre": { "note": 45, "channel": 0, "wav": "Snare_Hph" },
+            "bottomRight": { "note": 59, "channel": 0, "wav": "HH_Proc2_cl" },
+            "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutSub" },
+            "footLeft": { "wav": "SE_Noise4" },
+            "padTop": { "note": 66, "channel": 0, "wav": "SE_Crasher" },
+            "padRim": { "note": 88, "channel": 0, "wav": "SE_VerbPf" }
+        },
+        "fx1": {
+            "type": "Reverb",
+            "params": {
+                "time": 30,
+                "preDelay": 5,
+                "density": 10,
+                "effLevel": 100
+            }
+        }
     }
 ]

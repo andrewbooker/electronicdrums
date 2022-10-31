@@ -16,65 +16,6 @@ padOutSub = 3
 padOutPhones = 4
 
 
-class ItsTheWorld(StandardPatch):
-    level = 100
-    tempo = 73
-    applyMasterFx = True
-    pads = [{sound: wav["Cym_Splash1"]}, #top left
-            {sound: wav["Cym_Splash2"]},
-            {sound: wav["Cym_Crotale"]},
-            {sound: wav["Clap_Hse1"]}, # mid left
-            {sound: wav["HH_Proc2_op"]},
-            {sound: wav["Cym_Fx2"]},
-            {sound: wav["Kick_808_L"]}, # bottom left
-            {sound: wav["P_Tambourine"]},
-            {sound: wav["P_GanzaTap"]},
-            {sound: wav["Kick_Acou1"]}, # foot R
-            {sound: wav["Kick_DbS"]}, # foot L
-            {sound: wav["Snare_Proc4"]}, # pad top
-            {sound: wav["SE_Noise1"]}] # pad rim
-
-class NotMarriedAnyMore():
-    level = 100
-    tempo = 89
-    pads = [{sound: wav["Cym_Splash1"]}, #top left
-            {sound: wav["Cym_Splash2"]},
-            {sound: wav["Cym_Crotale"]},
-            {sound: wav["Clap_Hse1"]}, # mid left
-            {sound: wav["HH_Proc2_op"]},
-            {sound: wav["Cym_Fx2"]},
-            {sound: wav["Snare_Proc4"]}, # bottom left
-            {sound: wav["P_GanzaTap"]},
-            {sound: wav["P_Triangl_cl"]},
-            {sound: wav["Kick_Acou2"]}, # foot R
-            {sound: wav["SE_Crasher"]}, # foot L
-            {sound: wav["Snare_Proc4"]}, # pad top
-            {sound: wav["SE_Noise1"]}] # pad rim
-
-class KillingToSurvive(StandardPatch):
-    level = 100
-    tempo = 120
-
-class Mixtaped():
-    level = 100
-    tempo = 47
-    korg = 21
-    applyMasterFx = True
-    pads = [{note: 71, channel: 0, sound: wav["HH_909_op"]}, #top left
-            {note: 74, channel: 0, sound: wav["Cym_Fx2"]},
-            {note: 76, channel: 0, sound: wav["Cym_Crotale"]},
-            {note: 60, channel: 0, sound: wav["P_Tabla_Te"]}, # mid left
-            {note: 62, channel: 0, sound: wav["Snare_Proc4"]},
-            {note: 64, channel: 0, sound: wav["Ride_Acou"]},
-            {note: 40, channel: 0, sound: wav["Kick_808_L"]}, # bottom left
-            {note: 45, channel: 0, sound: wav["Snare_Hph"]},
-            {note: 59, channel: 0, sound: wav["HH_Proc2_cl"]},
-            {sound: wav["Kick_Acou1"], outAssign: padOutSub}, # foot R
-            {sound: wav["SE_Noise4"]}, # foot L
-            {note: 66, channel: 0, sound: wav["SE_Crasher"]}, # pad top
-            {note: 88, channel: 0, sound: wav["SE_VerbPf"]}] # pad rim
-    fx1 = Reverb().time(30).preDelay(5).density(10).effLevel(100)
-
 
 class ThingsChange():
     level = 100
