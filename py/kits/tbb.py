@@ -1,7 +1,5 @@
 
 from kit import Kit
-from sysConfig import SystemConfig
-from effects import RingMod
 from kits.fromJson import FromJson
 import os
 
@@ -11,10 +9,7 @@ class Tbb():
         self.spec = FromJson("tbb_2019.json")
 
     def applySysConfigTo(self, c):
-        c.footTriggerTypes = [29, 0] #29: RT-30K, 30: RT-30HR
-        c.inAssign = 0 #master
-        c.fxModOn = 1
-        c.masterFx = RingMod()
+        self.spec.applyTo(c)
 
     @staticmethod
     def addKit(cl, n, kn, loc, cpp):

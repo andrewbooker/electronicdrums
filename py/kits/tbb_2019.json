@@ -1,4 +1,12 @@
-{ 
+{
+    "system": {
+        "footTriggerTypes": ["RT-30K", "KD-7"],
+        "inAssign": "master",
+        "fxModOn": 1,
+        "masterFx": {
+            "type": "RingMod"
+        }
+    },
     "kits": [
         {
             "name": "TimeTravel",

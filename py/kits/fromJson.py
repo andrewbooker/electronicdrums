@@ -1,6 +1,8 @@
 
 from sounds import sounds as wav
 import effects
+from sysConfig import SystemConfig
+from effects import RingMod
 
 import os
 import json
@@ -35,6 +37,13 @@ padNames = [
 ]
 
 
+footTriggers = {
+    "KD-7": 0,
+    "RT-30K": 29,
+    "RT-30HR": 30
+}
+
+
 class FromJson():
     @staticmethod
     def readSet(fn):
@@ -43,6 +52,15 @@ class FromJson():
 
     def __init__(self, fn):
         self.bandSet = FromJson.readSet(fn)
+
+    def applyTo(self, sysConf):
+        if "system" in self.bandSet:
+            sysSetup = self.bandSet["system"]
+            sysConf.footTriggerTypes = [footTriggers[f] for f in sysSetup["footTriggerTypes"]]
+            sysConf.inAssign = inAssign[sysSetup["inAssign"]]
+            sysConf.fxModOn = int(sysSetup["fxModOn"])
+            if "masterFx" in sysSetup:
+                sysConf.masterFx = getattr(effects, sysSetup["masterFx"]["type"])()
 
     def kits(self):
         kits = []
