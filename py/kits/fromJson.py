@@ -1,5 +1,6 @@
 
 from sounds import sounds as wav
+import effects
 
 import os
 import json
@@ -58,5 +59,11 @@ def readFromJson(fn):
                 if "channel" in padSpec:
                     pad["channel"] = padSpec["channel"]
             k.pads.append(pad)
+
+        if "fx1" in kit:
+            eff = kit["fx1"]
+            k.fx1 = getattr(effects, eff["type"])()
+            for p in eff["params"]:
+                getattr(k.fx1, p)(int(eff["params"][p]))
         into.append(k)
     return into

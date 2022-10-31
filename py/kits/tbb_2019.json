@@ -82,5 +82,33 @@
             "padTop": { "wav": "Clap_Min" },
             "padRim": { "wav": "Clap_110" }
         }
+    },
+    {
+        "name": "WarmupMan",
+        "level": 100,
+        "tempo": 122,
+        "korg": 19,
+        "pads": {
+            "topLeft": { "note": 65, "channel": 0, "wav": "Tom_808_L" },
+            "topCentre": { "note": 70, "channel": 0, "wav": "Tom_808_M" },
+            "topRight": { "note": 72, "channel": 0, "wav": "Tom_808_H" },
+            "midLeft": { "note": 53, "channel": 0, "wav": "Tom_Roto_L" },
+            "midCentre": { "note": 55, "channel": 0, "wav": "Tom_Roto_M" },
+            "midRight": { "note": 62, "channel": 0, "wav": "Tom_Roto_H" },
+            "bottomLeft": { "note": 24, "channel": 0, "wav": "Tom_Acou_L" },
+            "bottomCentre": { "note": 46, "channel": 0, "wav": "Tom_Acou_M" },
+            "bottomRight": { "note": 51, "channel": 0, "wav": "Tom_Acou_H" },
+            "footRight": { "note": 36, "channel": 0, "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
+            "footLeft": { "note": 48, "channel": 0, "wav": "SnareXs_4" },
+            "padTop": { "note": 60, "channel": 0, "wav": "Ride_Acou" },
+            "padRim": { "note": 70, "channel": 0, "wav": "Ride_Proc1Bl" }
+        },
+        "fx1": {
+            "type": "Vibrato",
+            "params": {
+                "rate": 77,
+                "depth": 69
+            }
+        }
     }
 ]

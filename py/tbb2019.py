@@ -16,25 +16,6 @@ padOutSub = 3
 padOutPhones = 4
 
 
-class WarmupMan():
-    level = 100
-    tempo = 122
-    korg = 19
-    pads = [{note: 65, channel: 0, sound: wav["Tom_808_L"]},
-            {note: 70, channel: 0, sound: wav["Tom_808_M"]},
-            {note: 72, channel: 0, sound: wav["Tom_808_H"]},
-            {note: 53, channel: 0, sound: wav["Tom_Roto_L"]},
-            {note: 55, channel: 0, sound: wav["Tom_Roto_M"]},
-            {note: 62, channel: 0, sound: wav["Tom_Roto_H"]},
-            {note: 24, channel: 0, sound: wav["Tom_Acou_L"]},
-            {note: 46, channel: 0, sound: wav["Tom_Acou_M"]},
-            {note: 51, channel: 0, sound: wav["Tom_Acou_H"]},
-            {note: 36, channel: 0, sound: wav["Kick_Acou1"], outAssign: padOutMaster},
-            {note: 48, channel: 0, sound: wav["SnareXs_4"]},
-            {note: 60, channel: 0, sound: wav["Ride_Acou"]},
-            {note: 70, channel: 0, sound: wav["Ride_Proc1Bl"]}]
-    fx1 = Vibrato().rate(77).depth(69)
-
 class ItsTheWorld(StandardPatch):
     level = 100
     tempo = 73
