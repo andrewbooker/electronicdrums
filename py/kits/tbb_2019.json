@@ -1,356 +1,358 @@
-[
-    {
-        "name": "TimeTravel",
-        "level": 100,
-        "tempo": 78,
-        "applyMasterFx": true,
-        "pads": {
-            "topLeft": { "wav": "S00236" },
-            "topCentre": { "wav": "S00237" },
-            "topRight": { "wav": "S00238" },
-            "midLeft": { "wav": "Cym_Fx2" },
-            "midCentre": { "wav": "SE_SweepSlap" },
-            "midRight": { "wav": "SnareXs_7" },
-            "bottomLeft": { "wav": "Kick_909_Atk" },
-            "bottomCentre": { "wav": "Snare_Proc4" },
-            "bottomRight": { "wav": "HH_808_cl" },
-            "footRight": { "wav": "Kick_Proc3", "outAssign": "padOutSub" },
-            "footLeft": { "wav": "SnareXs_6" },
-            "padTop": { "wav": "Clap_909" },
-            "padRim": { "wav": "Clap_110" }
-        }
-    },
-    {
-        "name": "Ghostlike",
-        "level": 100,
-        "tempo": 120,
-        "applyMasterFx": true,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "Cym_Splash2" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "Clap_Hse1" },
-            "midCentre": { "wav": "HH_Proc2_op" },
-            "midRight": { "wav": "Cym_Fx2" },
-            "bottomLeft": { "wav": "Kick_808_L" },
-            "bottomCentre": { "wav": "P_Tambourine" },
-            "bottomRight": { "wav": "P_GanzaTap" },
-            "footRight": { "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "SE_Crasher" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        }
-    },
-    {
-        "name": "WhereverThereIsLight",
-        "level": 100,
-        "tempo": 63,
-        "korg": 15,
-        "pads": {
-            "topLeft": { "note": 61, "channel": 0, "wav": "Cym_Splash1" },
-            "topCentre": { "note": 63, "channel": 0, "wav": "P_Triangl_op" },
-            "topRight": { "note": 64, "channel": 0, "wav": "Cym_Crotale" },
-            "midLeft": { "note": 66, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
-            "midCentre": { "note": 68, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
-            "midRight": { "note": 69, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
-            "bottomLeft": { "note": 52, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
-            "bottomCentre": { "note": 56, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
-            "bottomRight": { "note": 59, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
-            "footRight": { "wav": "Kick_808_L" },
-            "footLeft": { "wav": "SE_Crasher" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        }
-    },
-    {
-        "name": "AllTheBlueChanges",
-        "level": 90,
-        "tempo": 122,
-        "korg": 24,
-        "pads": {
-            "topLeft": { "note": 60, "channel": 0 },
-            "topCentre": { "note": 62, "channel": 0 },
-            "topRight": { "note": 64, "channel": 0 },
-            "midLeft": { "note": 52, "channel": 0, "wav": "HH_DbS_cl", "vol": 60 },
-            "midCentre": { "note": 57, "channel": 0, "wav": "Cym_Fx2", "vol": 60 },
-            "midRight": { "note": 59, "channel": 0, "wav": "SE_SweepSlap", "vol": 60 },
-            "bottomLeft": { "wav": "P_Tamb_Proc" },
-            "bottomCentre": { "wav": "P_Tambourine" },
-            "bottomRight": { "wav": "P_Tambourine" },
-            "footRight": { "wav": "Kick_Proc3" },
-            "footLeft": { "wav": "SnareXs_2" },
-            "padTop": { "wav": "Clap_Min" },
-            "padRim": { "wav": "Clap_110" }
-        }
-    },
-    {
-        "name": "WarmupMan",
-        "level": 100,
-        "tempo": 122,
-        "korg": 19,
-        "pads": {
-            "topLeft": { "note": 65, "channel": 0, "wav": "Tom_808_L" },
-            "topCentre": { "note": 70, "channel": 0, "wav": "Tom_808_M" },
-            "topRight": { "note": 72, "channel": 0, "wav": "Tom_808_H" },
-            "midLeft": { "note": 53, "channel": 0, "wav": "Tom_Roto_L" },
-            "midCentre": { "note": 55, "channel": 0, "wav": "Tom_Roto_M" },
-            "midRight": { "note": 62, "channel": 0, "wav": "Tom_Roto_H" },
-            "bottomLeft": { "note": 24, "channel": 0, "wav": "Tom_Acou_L" },
-            "bottomCentre": { "note": 46, "channel": 0, "wav": "Tom_Acou_M" },
-            "bottomRight": { "note": 51, "channel": 0, "wav": "Tom_Acou_H" },
-            "footRight": { "note": 36, "channel": 0, "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
-            "footLeft": { "note": 48, "channel": 0, "wav": "SnareXs_4" },
-            "padTop": { "note": 60, "channel": 0, "wav": "Ride_Acou" },
-            "padRim": { "note": 70, "channel": 0, "wav": "Ride_Proc1Bl" }
+{ 
+    "kits": [
+        {
+            "name": "TimeTravel",
+            "level": 100,
+            "tempo": 78,
+            "applyMasterFx": true,
+            "pads": {
+                "topLeft": { "wav": "S00236" },
+                "topCentre": { "wav": "S00237" },
+                "topRight": { "wav": "S00238" },
+                "midLeft": { "wav": "Cym_Fx2" },
+                "midCentre": { "wav": "SE_SweepSlap" },
+                "midRight": { "wav": "SnareXs_7" },
+                "bottomLeft": { "wav": "Kick_909_Atk" },
+                "bottomCentre": { "wav": "Snare_Proc4" },
+                "bottomRight": { "wav": "HH_808_cl" },
+                "footRight": { "wav": "Kick_Proc3", "outAssign": "padOutSub" },
+                "footLeft": { "wav": "SnareXs_6" },
+                "padTop": { "wav": "Clap_909" },
+                "padRim": { "wav": "Clap_110" }
+            }
         },
-        "fx1": {
-            "type": "Vibrato",
-            "params": {
-                "rate": 77,
-                "depth": 69
+        {
+            "name": "Ghostlike",
+            "level": 100,
+            "tempo": 120,
+            "applyMasterFx": true,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "Cym_Splash2" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "Clap_Hse1" },
+                "midCentre": { "wav": "HH_Proc2_op" },
+                "midRight": { "wav": "Cym_Fx2" },
+                "bottomLeft": { "wav": "Kick_808_L" },
+                "bottomCentre": { "wav": "P_Tambourine" },
+                "bottomRight": { "wav": "P_GanzaTap" },
+                "footRight": { "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "SE_Crasher" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            }
+        },
+        {
+            "name": "WhereverThereIsLight",
+            "level": 100,
+            "tempo": 63,
+            "korg": 15,
+            "pads": {
+                "topLeft": { "note": 61, "channel": 0, "wav": "Cym_Splash1" },
+                "topCentre": { "note": 63, "channel": 0, "wav": "P_Triangl_op" },
+                "topRight": { "note": 64, "channel": 0, "wav": "Cym_Crotale" },
+                "midLeft": { "note": 66, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
+                "midCentre": { "note": 68, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
+                "midRight": { "note": 69, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
+                "bottomLeft": { "note": 52, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
+                "bottomCentre": { "note": 56, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
+                "bottomRight": { "note": 59, "channel": 0, "wav": "Ride_DnB", "vol": 70 },
+                "footRight": { "wav": "Kick_808_L" },
+                "footLeft": { "wav": "SE_Crasher" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            }
+        },
+        {
+            "name": "AllTheBlueChanges",
+            "level": 90,
+            "tempo": 122,
+            "korg": 24,
+            "pads": {
+                "topLeft": { "note": 60, "channel": 0 },
+                "topCentre": { "note": 62, "channel": 0 },
+                "topRight": { "note": 64, "channel": 0 },
+                "midLeft": { "note": 52, "channel": 0, "wav": "HH_DbS_cl", "vol": 60 },
+                "midCentre": { "note": 57, "channel": 0, "wav": "Cym_Fx2", "vol": 60 },
+                "midRight": { "note": 59, "channel": 0, "wav": "SE_SweepSlap", "vol": 60 },
+                "bottomLeft": { "wav": "P_Tamb_Proc" },
+                "bottomCentre": { "wav": "P_Tambourine" },
+                "bottomRight": { "wav": "P_Tambourine" },
+                "footRight": { "wav": "Kick_Proc3" },
+                "footLeft": { "wav": "SnareXs_2" },
+                "padTop": { "wav": "Clap_Min" },
+                "padRim": { "wav": "Clap_110" }
+            }
+        },
+        {
+            "name": "WarmupMan",
+            "level": 100,
+            "tempo": 122,
+            "korg": 19,
+            "pads": {
+                "topLeft": { "note": 65, "channel": 0, "wav": "Tom_808_L" },
+                "topCentre": { "note": 70, "channel": 0, "wav": "Tom_808_M" },
+                "topRight": { "note": 72, "channel": 0, "wav": "Tom_808_H" },
+                "midLeft": { "note": 53, "channel": 0, "wav": "Tom_Roto_L" },
+                "midCentre": { "note": 55, "channel": 0, "wav": "Tom_Roto_M" },
+                "midRight": { "note": 62, "channel": 0, "wav": "Tom_Roto_H" },
+                "bottomLeft": { "note": 24, "channel": 0, "wav": "Tom_Acou_L" },
+                "bottomCentre": { "note": 46, "channel": 0, "wav": "Tom_Acou_M" },
+                "bottomRight": { "note": 51, "channel": 0, "wav": "Tom_Acou_H" },
+                "footRight": { "note": 36, "channel": 0, "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
+                "footLeft": { "note": 48, "channel": 0, "wav": "SnareXs_4" },
+                "padTop": { "note": 60, "channel": 0, "wav": "Ride_Acou" },
+                "padRim": { "note": 70, "channel": 0, "wav": "Ride_Proc1Bl" }
+            },
+            "fx1": {
+                "type": "Vibrato",
+                "params": {
+                    "rate": 77,
+                    "depth": 69
+                }
+            }
+        },
+        {
+            "name": "ItsTheWorld",
+            "level": 100,
+            "tempo": 73,
+            "applyMasterFx": true,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "Cym_Splash2" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "Clap_Hse1" },
+                "midCentre": { "wav": "HH_Proc2_op" },
+                "midRight": { "wav": "Cym_Fx2" },
+                "bottomLeft": { "wav": "Kick_808_L" },
+                "bottomCentre": { "wav": "P_Tambourine" },
+                "bottomRight": { "wav": "P_GanzaTap" },
+                "footRight": { "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "Kick_DbS" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            }
+        },
+        {
+            "name": "NotMarriedAnyMore",
+            "level": 100,
+            "tempo": 89,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "Cym_Splash2" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "Clap_Hse1" },
+                "midCentre": { "wav": "HH_Proc2_op" },
+                "midRight": { "wav": "Cym_Fx2" },
+                "bottomLeft": { "wav": "Snare_Proc4" },
+                "bottomCentre": { "wav": "P_GanzaTap" },
+                "bottomRight": { "wav": "P_Triangl_cl" },
+                "footRight": { "wav": "Kick_Acou2" },
+                "footLeft": { "wav": "SE_Crasher" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            }
+        },
+        {
+            "name": "KillingToSurvive",
+            "level": 100,
+            "tempo": 120,
+            "applyMasterFx": true,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "Cym_Splash2" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "Clap_Hse1" },
+                "midCentre": { "wav": "HH_Proc2_op" },
+                "midRight": { "wav": "Cym_Fx2" },
+                "bottomLeft": { "wav": "Kick_808_L" },
+                "bottomCentre": { "wav": "P_Tambourine" },
+                "bottomRight": { "wav": "P_GanzaTap" },
+                "footRight": { "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "SE_Crasher" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            }
+        },
+        {
+            "name": "Mixtaped",
+            "level": 100,
+            "tempo": 47,
+            "korg": 21,
+            "applyMasterFx": true,
+            "pads": {
+                "topLeft": { "note": 71, "channel": 0, "wav": "HH_909_op" },
+                "topCentre": { "note": 74, "channel": 0, "wav": "Cym_Fx2" },
+                "topRight": { "note": 76, "channel": 0, "wav": "Cym_Crotale" },
+                "midLeft": { "note": 60, "channel": 0, "wav": "P_Tabla_Te" },
+                "midCentre": { "note": 62, "channel": 0, "wav": "Snare_Proc4" },
+                "midRight": { "note": 64, "channel": 0, "wav": "Ride_Acou" },
+                "bottomLeft": { "note": 40, "channel": 0, "wav": "Kick_808_L" },
+                "bottomCentre": { "note": 45, "channel": 0, "wav": "Snare_Hph" },
+                "bottomRight": { "note": 59, "channel": 0, "wav": "HH_Proc2_cl" },
+                "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutSub" },
+                "footLeft": { "wav": "SE_Noise4" },
+                "padTop": { "note": 66, "channel": 0, "wav": "SE_Crasher" },
+                "padRim": { "note": 88, "channel": 0, "wav": "SE_VerbPf" }
+            },
+            "fx1": {
+                "type": "Reverb",
+                "params": {
+                    "time": 30,
+                    "preDelay": 5,
+                    "density": 10,
+                    "effLevel": 100
+                }
+            }
+        },
+        {
+            "name": "ThingsChange",
+            "level": 100,
+            "tempo": 60,
+            "korg": 15,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "P_Triangl_op" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "note": 66, "channel": 0, "wav": "Ride_DnB" },
+                "midCentre": { "note": 68, "channel": 0, "wav": "Ride_DnB" },
+                "midRight": { "note": 71, "channel": 0, "wav": "Ride_DnB" },
+                "bottomLeft": { "note": 59, "channel": 0, "wav": "Ride_DnB" },
+                "bottomCentre": { "note": 63, "channel": 0, "wav": "Ride_DnB" },
+                "bottomRight": { "note": 64, "channel": 0, "wav": "Ride_DnB" },
+                "footRight": { "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "timbaleQ" },
+                "padTop": { "wav": "Clap_Min" },
+                "padRim": { "wav": "Snare_Proc4" }
+            }
+        },
+        {
+            "name": "ForestAlmostBurning",
+            "level": 100,
+            "tempo": 120,
+            "applyMasterFx": true,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "Cym_Splash2" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "Clap_Hse1" },
+                "midCentre": { "wav": "HH_Proc2_op" },
+                "midRight": { "wav": "Cym_Fx2" },
+                "bottomLeft": { "wav": "Kick_808_L" },
+                "bottomCentre": { "wav": "P_Tambourine" },
+                "bottomRight": { "wav": "P_GanzaTap" },
+                "footRight": { "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "SE_Crasher" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            }
+        },
+        {
+            "name": "NeverNeeding",
+            "level": 100,
+            "tempo": 120,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1", "outAssign": "padOutMaster" },
+                "topCentre": { "wav": "Cym_Splash2", "outAssign": "padOutMaster" },
+                "topRight": { "wav": "Cym_Crotale", "outAssign": "padOutMaster" },
+                "midLeft": { "wav": "Clap_Hse1" },
+                "midCentre": { "wav": "HH_Proc2_op", "outAssign": "padOutMaster" },
+                "midRight": { "wav": "Cym_Fx2", "outAssign": "padOutMaster" },
+                "bottomLeft": { "wav": "Kick_808_L", "outAssign": "padOutMaster" },
+                "bottomCentre": { "wav": "P_Tambourine", "outAssign": "padOutMaster" },
+                "bottomRight": { "wav": "P_GanzaTap", "outAssign": "padOutMaster" },
+                "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
+                "footLeft": { "wav": "SE_Crasher", "outAssign": "padOutMaster" },
+                "padTop": { "wav": "Snare_Proc4" },
+                "padRim": { "wav": "SE_Noise1" }
+            },
+            "fx1": {
+                "type": "Reverb",
+                "params": {
+                    "time": 73,
+                    "preDelay": 63,
+                    "density": 10,
+                    "effLevel": 80
+                }
+            }
+        },
+        {
+            "name": "DaysTurnIntoYears",
+            "level": 100,
+            "tempo": 84,
+            "korg": 21,
+            "pads": {
+                "topLeft": { "note": 79, "channel": 0, "wav": "S00238" },
+                "topCentre": { "note": 81, "channel": 0, "wav": "S00240"},
+                "topRight": { "note": 83, "channel": 0, "wav": "S00241" },
+                "midLeft": { "note": 69, "channel": 0, "wav": "daysRad1" },
+                "midCentre": { "note": 71, "channel": 0, "wav": "daysRad2" },
+                "midRight": { "note": 74, "channel": 0, "wav": "daysRad3" },
+                "bottomLeft": { "note": 52, "channel": 0, "wav": "Kick_DnB2" },
+                "bottomCentre": { "note": 64, "channel": 0, "wav": "Clap_Min" },
+                "bottomRight": { "note": 76, "channel": 0, "wav": "P_Claves" },
+                "footRight": { "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "SE_Crasher" },
+                "padTop": { "note": 57, "channel": 0, "wav": "P_Claves" },
+                "padRim": { "note": 59, "channel": 0, "wav": "P_Claves" }
+            },
+            "fx1": {
+                "type": "Reverb",
+                "params": {
+                    "time": 60,
+                    "preDelay": 50,
+                    "density": 10,
+                    "effLevel": 100
+                }
+            }
+        },
+        {
+            "name": "WatchingOverMe",
+            "level": 100,
+            "tempo": 102,
+            "pads": {
+                "topLeft": { "wav": "P_Triangl_cl" },
+                "topCentre": { "wav": "P_Triangl_op" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "roto8" },
+                "midCentre": { "wav": "timbale2" },
+                "midRight": { "wav": "P_Timbale_L" },
+                "bottomLeft": { "wav": "Kick_808_L" },
+                "bottomCentre": { "wav": "P_CongaProcH" },
+                "bottomRight": { "wav": "P_Tabla_Ge" },
+                "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
+                "footLeft": { "wav": "Clap_Hse2" },
+                "padTop": { "wav": "Clap_Min" },
+                "padRim": { "wav": "P_CongaProcS" }
+            },
+            "fx1": {
+                "type": "SyncDelay",
+                "params": {
+                    "feedback": 31,
+                    "effLevel": 60
+                }
+            }
+        },
+        {
+            "name": "Borderline",
+            "level": 100,
+            "tempo": 87,
+            "korg": 21,
+            "pads": {
+                "topLeft": { "wav": "Cym_Splash1" },
+                "topCentre": { "wav": "Cym_Splash2" },
+                "topRight": { "wav": "Cym_Crotale" },
+                "midLeft": { "wav": "Clap_Hse2" },
+                "midCentre": { "note": 62, "channel": 0, "wav": "P_GanzaTap" },
+                "midRight": { "note": 64, "channel": 0, "wav": "P_Tamb_DnB" },
+                "bottomLeft": { "wav": "Clap_Min" },
+                "bottomCentre": { "wav": "P_GanzaTap" },
+                "bottomRight": { "wav": "P_Tamb_DnB" },
+                "footRight": { "note": 57, "channel": 0, "wav": "Kick_Acou1" },
+                "footLeft": { "wav": "Clap_808" },
+                "padTop": { "wav": "P_Tambourine" },
+                "padRim": { "wav": "Snare_Proc4" }
             }
         }
-    },
-    {
-        "name": "ItsTheWorld",
-        "level": 100,
-        "tempo": 73,
-        "applyMasterFx": true,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "Cym_Splash2" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "Clap_Hse1" },
-            "midCentre": { "wav": "HH_Proc2_op" },
-            "midRight": { "wav": "Cym_Fx2" },
-            "bottomLeft": { "wav": "Kick_808_L" },
-            "bottomCentre": { "wav": "P_Tambourine" },
-            "bottomRight": { "wav": "P_GanzaTap" },
-            "footRight": { "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "Kick_DbS" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        }
-    },
-    {
-        "name": "NotMarriedAnyMore",
-        "level": 100,
-        "tempo": 89,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "Cym_Splash2" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "Clap_Hse1" },
-            "midCentre": { "wav": "HH_Proc2_op" },
-            "midRight": { "wav": "Cym_Fx2" },
-            "bottomLeft": { "wav": "Snare_Proc4" },
-            "bottomCentre": { "wav": "P_GanzaTap" },
-            "bottomRight": { "wav": "P_Triangl_cl" },
-            "footRight": { "wav": "Kick_Acou2" },
-            "footLeft": { "wav": "SE_Crasher" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        }
-    },
-    {
-        "name": "KillingToSurvive",
-        "level": 100,
-        "tempo": 120,
-        "applyMasterFx": true,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "Cym_Splash2" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "Clap_Hse1" },
-            "midCentre": { "wav": "HH_Proc2_op" },
-            "midRight": { "wav": "Cym_Fx2" },
-            "bottomLeft": { "wav": "Kick_808_L" },
-            "bottomCentre": { "wav": "P_Tambourine" },
-            "bottomRight": { "wav": "P_GanzaTap" },
-            "footRight": { "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "SE_Crasher" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        }
-    },
-    {
-        "name": "Mixtaped",
-        "level": 100,
-        "tempo": 47,
-        "korg": 21,
-        "applyMasterFx": true,
-        "pads": {
-            "topLeft": { "note": 71, "channel": 0, "wav": "HH_909_op" },
-            "topCentre": { "note": 74, "channel": 0, "wav": "Cym_Fx2" },
-            "topRight": { "note": 76, "channel": 0, "wav": "Cym_Crotale" },
-            "midLeft": { "note": 60, "channel": 0, "wav": "P_Tabla_Te" },
-            "midCentre": { "note": 62, "channel": 0, "wav": "Snare_Proc4" },
-            "midRight": { "note": 64, "channel": 0, "wav": "Ride_Acou" },
-            "bottomLeft": { "note": 40, "channel": 0, "wav": "Kick_808_L" },
-            "bottomCentre": { "note": 45, "channel": 0, "wav": "Snare_Hph" },
-            "bottomRight": { "note": 59, "channel": 0, "wav": "HH_Proc2_cl" },
-            "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutSub" },
-            "footLeft": { "wav": "SE_Noise4" },
-            "padTop": { "note": 66, "channel": 0, "wav": "SE_Crasher" },
-            "padRim": { "note": 88, "channel": 0, "wav": "SE_VerbPf" }
-        },
-        "fx1": {
-            "type": "Reverb",
-            "params": {
-                "time": 30,
-                "preDelay": 5,
-                "density": 10,
-                "effLevel": 100
-            }
-        }
-    },
-    {
-        "name": "ThingsChange",
-        "level": 100,
-        "tempo": 60,
-        "korg": 15,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "P_Triangl_op" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "note": 66, "channel": 0, "wav": "Ride_DnB" },
-            "midCentre": { "note": 68, "channel": 0, "wav": "Ride_DnB" },
-            "midRight": { "note": 71, "channel": 0, "wav": "Ride_DnB" },
-            "bottomLeft": { "note": 59, "channel": 0, "wav": "Ride_DnB" },
-            "bottomCentre": { "note": 63, "channel": 0, "wav": "Ride_DnB" },
-            "bottomRight": { "note": 64, "channel": 0, "wav": "Ride_DnB" },
-            "footRight": { "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "timbaleQ" },
-            "padTop": { "wav": "Clap_Min" },
-            "padRim": { "wav": "Snare_Proc4" }
-        }
-    },
-    {
-        "name": "ForestAlmostBurning",
-        "level": 100,
-        "tempo": 120,
-        "applyMasterFx": true,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "Cym_Splash2" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "Clap_Hse1" },
-            "midCentre": { "wav": "HH_Proc2_op" },
-            "midRight": { "wav": "Cym_Fx2" },
-            "bottomLeft": { "wav": "Kick_808_L" },
-            "bottomCentre": { "wav": "P_Tambourine" },
-            "bottomRight": { "wav": "P_GanzaTap" },
-            "footRight": { "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "SE_Crasher" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        }
-    },
-    {
-        "name": "NeverNeeding",
-        "level": 100,
-        "tempo": 120,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1", "outAssign": "padOutMaster" },
-            "topCentre": { "wav": "Cym_Splash2", "outAssign": "padOutMaster" },
-            "topRight": { "wav": "Cym_Crotale", "outAssign": "padOutMaster" },
-            "midLeft": { "wav": "Clap_Hse1" },
-            "midCentre": { "wav": "HH_Proc2_op", "outAssign": "padOutMaster" },
-            "midRight": { "wav": "Cym_Fx2", "outAssign": "padOutMaster" },
-            "bottomLeft": { "wav": "Kick_808_L", "outAssign": "padOutMaster" },
-            "bottomCentre": { "wav": "P_Tambourine", "outAssign": "padOutMaster" },
-            "bottomRight": { "wav": "P_GanzaTap", "outAssign": "padOutMaster" },
-            "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
-            "footLeft": { "wav": "SE_Crasher", "outAssign": "padOutMaster" },
-            "padTop": { "wav": "Snare_Proc4" },
-            "padRim": { "wav": "SE_Noise1" }
-        },
-        "fx1": {
-            "type": "Reverb",
-            "params": {
-                "time": 73,
-                "preDelay": 63,
-                "density": 10,
-                "effLevel": 80
-            }
-        }
-    },
-    {
-        "name": "DaysTurnIntoYears",
-        "level": 100,
-        "tempo": 84,
-        "korg": 21,
-        "pads": {
-            "topLeft": { "note": 79, "channel": 0, "wav": "S00238" },
-            "topCentre": { "note": 81, "channel": 0, "wav": "S00240"},
-            "topRight": { "note": 83, "channel": 0, "wav": "S00241" },
-            "midLeft": { "note": 69, "channel": 0, "wav": "daysRad1" },
-            "midCentre": { "note": 71, "channel": 0, "wav": "daysRad2" },
-            "midRight": { "note": 74, "channel": 0, "wav": "daysRad3" },
-            "bottomLeft": { "note": 52, "channel": 0, "wav": "Kick_DnB2" },
-            "bottomCentre": { "note": 64, "channel": 0, "wav": "Clap_Min" },
-            "bottomRight": { "note": 76, "channel": 0, "wav": "P_Claves" },
-            "footRight": { "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "SE_Crasher" },
-            "padTop": { "note": 57, "channel": 0, "wav": "P_Claves" },
-            "padRim": { "note": 59, "channel": 0, "wav": "P_Claves" }
-        },
-        "fx1": {
-            "type": "Reverb",
-            "params": {
-                "time": 60,
-                "preDelay": 50,
-                "density": 10,
-                "effLevel": 100
-            }
-        }
-    },
-    {
-        "name": "WatchingOverMe",
-        "level": 100,
-        "tempo": 102,
-        "pads": {
-            "topLeft": { "wav": "P_Triangl_cl" },
-            "topCentre": { "wav": "P_Triangl_op" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "roto8" },
-            "midCentre": { "wav": "timbale2" },
-            "midRight": { "wav": "P_Timbale_L" },
-            "bottomLeft": { "wav": "Kick_808_L" },
-            "bottomCentre": { "wav": "P_CongaProcH" },
-            "bottomRight": { "wav": "P_Tabla_Ge" },
-            "footRight": { "wav": "Kick_Acou1", "outAssign": "padOutMaster" },
-            "footLeft": { "wav": "Clap_Hse2" },
-            "padTop": { "wav": "Clap_Min" },
-            "padRim": { "wav": "P_CongaProcS" }
-        },
-        "fx1": {
-            "type": "SyncDelay",
-            "params": {
-                "feedback": 31,
-                "effLevel": 60
-            }
-        }
-    },
-    {
-        "name": "Borderline",
-        "level": 100,
-        "tempo": 87,
-        "korg": 21,
-        "pads": {
-            "topLeft": { "wav": "Cym_Splash1" },
-            "topCentre": { "wav": "Cym_Splash2" },
-            "topRight": { "wav": "Cym_Crotale" },
-            "midLeft": { "wav": "Clap_Hse2" },
-            "midCentre": { "note": 62, "channel": 0, "wav": "P_GanzaTap" },
-            "midRight": { "note": 64, "channel": 0, "wav": "P_Tamb_DnB" },
-            "bottomLeft": { "wav": "Clap_Min" },
-            "bottomCentre": { "wav": "P_GanzaTap" },
-            "bottomRight": { "wav": "P_Tamb_DnB" },
-            "footRight": { "note": 57, "channel": 0, "wav": "Kick_Acou1" },
-            "footLeft": { "wav": "Clap_808" },
-            "padTop": { "wav": "P_Tambourine" },
-            "padRim": { "wav": "Snare_Proc4" }
-        }
-    }
-]
+    ]
+}

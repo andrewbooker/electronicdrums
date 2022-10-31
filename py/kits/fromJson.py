@@ -29,14 +29,14 @@ padNames = [
     "padRim"
 ]
 
-def readKits(fn):
+def readSet(fn):
     with open(os.path.join("kits", fn)) as js:
         return json.load(js)
 
 def readFromJson(fn):
     into = []
-    kits = readKits(fn)
-    for kit in kits:
+    bandSet = readSet(fn)
+    for kit in bandSet["kits"]:
         k = type(kit["name"], (), {})
         k.level = kit["level"] if "level" in kit else 100
         k.tempo = kit["tempo"]
