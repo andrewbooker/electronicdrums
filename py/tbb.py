@@ -29,10 +29,3 @@ class Tbb():
             for s in readFromJson("tbb_2019.json"):
                 Tbb.addKit(s, s.__name__, kn, loc, cpp)
                 kn += 1
-
-            oldSet = __import__("tbb2019")
-            for n, cl in oldSet.__dict__.items():
-                if isinstance(cl, type) and hasattr(cl, "level"):
-                    Tbb.addKit(cl, n, kn, loc, cpp)
-
-                    kn += 1
