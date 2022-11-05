@@ -27,3 +27,17 @@ class Tbb():
             for s in self.spec.kits():
                 Tbb.addKit(s, s.__name__, kn, loc, cpp)
                 kn += 1
+
+class BandSet():
+    def __init__(self, fn):
+        self.spec = FromJson(fn)
+
+    def applySysConfigTo(self, c):
+        self.spec.applyTo(c)
+
+    def createIn(self, loc, idxStart):
+        kn = idxStart
+        for s in self.spec.kits():
+            name = s.__name__[:8]
+            Kit().build(s, name, os.path.join(loc, "KIT"), kn)
+            kn += 1

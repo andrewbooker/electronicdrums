@@ -83,6 +83,11 @@ uploader = Uploader()
 if key == "tbb":
     from kits.tbb import Tbb
     uploader.upload(Tbb(), 49)
+
+elif key == "mab":
+    from kits.tbb import BandSet
+    uploader.upload(BandSet("mab_2022.json"), 65)
+
 else:
     tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
     delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
