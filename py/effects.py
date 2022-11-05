@@ -246,6 +246,18 @@ class Reverb():
         return [2, self.time, self.preDelay, 1, 2, self.density, self.effLevel, directLevel, globalReverbLevel]
 
     @staticmethod
+    def fromSpec(s):
+        return {
+            "type": "Reverb",
+            "params": {
+                "time": s[1],
+                "preDelay": s[2],
+                "density": s[5],
+                "effLevel": s[6]
+            }
+        }
+
+    @staticmethod
     def createRandom():
         e = Reverb()
         e.time(randint(10, 90))
