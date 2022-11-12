@@ -1,6 +1,6 @@
 {
     "system": {
-        "footTriggerTypes": ["RT-30K", "KD-7"],
+        "footTriggerTypes": ["KD-7", "KD-7"],
         "inAssign": "master",
         "fxModOn": 1,
         "masterFx": {
