@@ -81,11 +81,11 @@ uploader = Uploader()
 
 
 if key == "tbb":
-    from kits.tbb import Tbb
+    from kits.bandSet import Tbb
     uploader.upload(Tbb(), 49)
 
 elif key == "mab":
-    from kits.tbb import BandSet
+    from kits.bandSet import BandSet
     uploader.upload(BandSet("mab_2022.json"), 65)
 
 else:
