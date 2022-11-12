@@ -3,6 +3,7 @@
 from xml.dom import minidom
 import sys
 import json
+import math
 from effects import *
 from sounds import sounds
 
@@ -22,6 +23,16 @@ padOrder = [
     "padRim"
 ]
 
+genSounds = {
+    93: "no",
+    94: "cy",
+    95: "pe",
+    96: "pr",
+    97: "pt",
+    98: "lf",
+    99: "bd"
+}
+
 
 doc = minidom.parse(sys.argv[1])
 
@@ -29,7 +40,9 @@ doc = minidom.parse(sys.argv[1])
 def kitNameFrom(node):
     n = []
     for i in range(8):
-        n.append(chr(int(node.getElementsByTagName("Nm%d" % i)[0].childNodes[0].data)))
+        c = int(node.getElementsByTagName("Nm%d" % i)[0].childNodes[0].data)
+        if c > 31:
+            n.append(chr(c))
     return "".join(n)
 
 def effectFrom(node, n):
@@ -44,6 +57,11 @@ def effectFrom(node, n):
     return {}
 
 def soundFrom(i):
+    if i > 9299:
+        pref = genSounds[math.floor(i / 100)]
+        idx = i % 100
+        return "%s_%09d" % (pref, idx)
+
     for s in sounds:
         if sounds[s] == i:
             return s
@@ -75,5 +93,4 @@ for p in range(len(pads[:13])):
     kit["pads"].append({ padOrder[p]: pad })
 
 kit["fx1"] = effectFrom(doc, 1)
-
-print(kit)
+print(json.dumps(kit))
