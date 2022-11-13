@@ -106,6 +106,8 @@ class FromJson():
                 kit = json.load(js)
                 kits.append(FromJson.asKit(kit))
 
-        for kit in self.bandSet["kits"]:
-            kits.append(FromJson.asKit(kit))
+        if "kits" in self.bandSet:
+            for kit in self.bandSet["kits"]:
+                kits.append(FromJson.asKit(kit))
+
         return kits
