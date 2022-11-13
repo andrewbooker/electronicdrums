@@ -50,8 +50,9 @@ class FromJson():
         with open(os.path.join("kits", fn)) as js:
             return json.load(js)
 
-    def __init__(self, fn):
+    def __init__(self, fn, actName):
         self.bandSet = FromJson.readSet(fn)
+        self.actName = actName
 
     def applyTo(self, sysConf):
         if "system" in self.bandSet:
@@ -97,6 +98,13 @@ class FromJson():
 
     def kits(self):
         kits = []
+        parentDir = os.path.dirname(os.getcwd())
+        p = os.path.join(parentDir, "json", self.actName)
+
+        for t in self.bandSet["setList"]:
+            with open(os.path.join(p, "%s.json" % t)) as js:
+                kit = json.load(js)
+                kits.append(FromJson.asKit(kit))
 
         for kit in self.bandSet["kits"]:
             kits.append(FromJson.asKit(kit))

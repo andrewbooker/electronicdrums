@@ -86,7 +86,7 @@ if key == "tbb":
 
 elif key == "mab":
     from kits.bandSet import BandSet
-    uploader.upload(BandSet("mab_2022.json"), 65)
+    uploader.upload(BandSet("mab_2022.json", key), 65)
 
 else:
     tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])

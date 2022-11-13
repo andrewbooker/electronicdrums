@@ -4,8 +4,8 @@ from kits.fromJson import FromJson
 import os
 
 class BandSet():
-    def __init__(self, fn):
-        self.spec = FromJson(fn)
+    def __init__(self, fn, actName):
+        self.spec = FromJson(fn, actName)
 
     def applySysConfigTo(self, c):
         self.spec.applyTo(c)
@@ -23,14 +23,13 @@ class BandSet():
 
 class Tbb(BandSet):
     def __init__(self):
-        BandSet.__init__(self, "tbb_2019.json")
+        BandSet.__init__(self, "tbb_2019.json", "tbb")
         self.cpp = open("tbb_2019.h", "w")
 
     def __del__(self):
         print("closing .h file")
 
     def addKit(self, cl, kn, loc):
-        print("writing", cl.__name__, "to .h")
         n = cl.__name__
 
         self.cpp.write("DefineTrack( %s ) {\n" % n)
