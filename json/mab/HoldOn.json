@@ -1,0 +1,16 @@
+{
+    "name": "HoldOn",
+    "level": 100,
+    "tempo": 78,
+    "pads": {
+        "topLeft": { "wav": "S00236" },
+        "topCentre": { "wav": "S00237" },
+        "topRight": { "wav": "S00238" },
+        "midLeft": { "wav": "Cym_Fx2" },
+        "midCentre": { "wav": "SE_SweepSlap" },
+        "midRight": { "wav": "SnareXs_7" },
+        "bottomLeft": { "wav": "Kick_909_Atk" },
+        "bottomCentre": { "wav": "Snare_Proc4" },
+        "bottomRight": { "wav": "HH_808_cl" }
+    }
+}
