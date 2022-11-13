@@ -82,7 +82,7 @@ for p in root.childNodes:
 
 pads = doc.getElementsByTagName("PadPrm")
 
-kit["pads"] = []
+kit["pads"] = {}
 
 for p in range(len(pads[:13])):
     pad = {}
@@ -90,7 +90,7 @@ for p in range(len(pads[:13])):
         if c.nodeType != c.TEXT_NODE:
             if c.tagName == "Wv":
                 pad["wav"] = soundFrom(int(c.childNodes[0].data))
-    kit["pads"].append({ padOrder[p]: pad })
+    kit["pads"][padOrder[p]] = pad
 
 kit["fx1"] = effectFrom(doc, 1)
-print(json.dumps(kit))
+print(json.dumps(kit, indent="    "))

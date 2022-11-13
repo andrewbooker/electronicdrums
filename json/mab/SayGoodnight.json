@@ -2,21 +2,47 @@
     "name": "SayGoodnight",
     "level": 100,
     "tempo": 120,
-    "pads": [
-        { "topLeft": { "wav": "Cym_Splash1" } },
-        { "topCentre": { "wav": "Cym_Splash2" } },
-        { "topRight": { "wav": "Cym_Crotale" } },
-        { "midLeft": { "wav": "Clap_Hse1" } },
-        { "midCentre": { "wav": "" } },
-        { "midRight": { "wav": "" } },
-        { "bottomLeft": { "wav": "" } },
-        { "bottomCentre": { "wav": "" } },
-        { "bottomRight": { "wav": "" } },
-        { "footRight": { "wav": "Kick_Acou1" } },
-        { "footLeft": { "wav": "SE_Crasher" } },
-        { "padTop": { "wav": "Snare_Proc4" } },
-        { "padRim": { "wav": "SE_Noise1" } }
-    ],
+    "pads": {
+        "topLeft": {
+            "wav": "Cym_Splash1"
+        },
+        "topCentre": {
+            "wav": "Cym_Splash2"
+        },
+        "topRight": {
+            "wav": "Cym_Crotale"
+        },
+        "midLeft": {
+            "wav": "Clap_Hse1"
+        },
+        "midCentre": {
+            "wav": "no_000000022"
+        },
+        "midRight": {
+            "wav": "no_000000027"
+        },
+        "bottomLeft": {
+            "wav": "pr_000000061"
+        },
+        "bottomCentre": {
+            "wav": "pr_000000009"
+        },
+        "bottomRight": {
+            "wav": "pe_000000029"
+        },
+        "footRight": {
+            "wav": "Kick_Acou1"
+        },
+        "footLeft": {
+            "wav": "SE_Crasher"
+        },
+        "padTop": {
+            "wav": "Snare_Proc4"
+        },
+        "padRim": {
+            "wav": "SE_Noise1"
+        }
+    },
     "fx1": {
         "type": "Reverb",
         "params": {
