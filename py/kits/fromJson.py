@@ -36,13 +36,29 @@ padNames = [
     "padRim"
 ]
 
-
 footTriggers = {
     "KD-7": 0,
     "RT-30K": 29,
     "RT-30HR": 30
 }
 
+genSounds = {
+    "no": 93,
+    "cy": 94,
+    "pe": 95,
+    "pr": 96,
+    "pt": 97,
+    "lf": 98,
+    "bd": 99
+}
+
+def soundIdxFrom(name):
+    if name in wav:
+        return wav[name]
+    pref = name[:2]
+    if pref not in genSounds:
+        return -1
+    return int(genSounds[pref] * 100) + int(name[-2:])
 
 class FromJson():
     @staticmethod
@@ -77,7 +93,7 @@ class FromJson():
             if padNames[i] in kit["pads"]:
                 padSpec = kit["pads"][padNames[i]]
                 if "wav" in padSpec:
-                    pad["sound"] = wav[padSpec["wav"]]
+                    pad["sound"] = soundIdxFrom(padSpec["wav"])
                 if "outAssign" in padSpec:
                     pad["outAssign"] = padOutAssign[padSpec["outAssign"]]
                 if "vol" in padSpec:
