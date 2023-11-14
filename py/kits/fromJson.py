@@ -117,8 +117,14 @@ class FromJson:
         p = os.path.join(parentDir, "json", self.actName)
 
         for t in self.bandSet["setList"]:
-            with open(os.path.join(p, "%s.json" % t)) as js:
+            fn = f"{t}.json"
+            useGeneral = not os.path.exists(os.path.join(p, fn))
+            if useGeneral:
+                fn = "General.json"
+            with open(os.path.join(p, fn)) as js:
                 kit = json.load(js)
+                if useGeneral:
+                    kit["name"] = t[:8]
                 kits.append(FromJson.asKit(kit))
 
         if "kits" in self.bandSet:
