@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from xml.dom import minidom
 import sys
@@ -45,6 +45,7 @@ def kitNameFrom(node):
             n.append(chr(c))
     return "".join(n)
 
+
 def effectFrom(node, n):
     a = []
     t = int(node.getElementsByTagName("Fx%dType" % n)[0].childNodes[0].data)
@@ -55,6 +56,7 @@ def effectFrom(node, n):
     if t == 19:
         return Reverb.fromSpec(a)
     return {}
+
 
 def soundFrom(i):
     if i > 9299:
@@ -67,8 +69,8 @@ def soundFrom(i):
             return s
     return ""
 
-kit = {}
 
+kit = dict()
 kit["name"] = kitNameFrom(doc)
 
 root = doc.getElementsByTagName("KitPrm")[0]

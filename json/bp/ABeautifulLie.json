@@ -1,0 +1,47 @@
+{
+    "name": "ABeautif",
+    "level": 100,
+    "tempo": 70,
+    "pads": {
+        "topLeft": {
+            "wav": "cy_000000013"
+        },
+        "topCentre": {
+            "wav": "cy_000000025"
+        },
+        "topRight": {
+            "wav": "cy_000000036"
+        },
+        "midLeft": {
+            "wav": "pe_000000026"
+        },
+        "midCentre": {
+            "wav": "pe_000000029"
+        },
+        "midRight": {
+            "wav": "pt_000000057"
+        },
+        "bottomLeft": {
+            "wav": "bd_000000039"
+        },
+        "bottomCentre": {
+            "wav": "bd_000000050"
+        },
+        "bottomRight": {
+            "wav": "pt_000000048"
+        },
+        "footRight": {
+            "wav": ""
+        },
+        "footLeft": {
+            "wav": ""
+        },
+        "padTop": {
+            "wav": ""
+        },
+        "padRim": {
+            "wav": ""
+        }
+    },
+    "fx1": {}
+}

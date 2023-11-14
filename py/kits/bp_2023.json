@@ -1,0 +1,13 @@
+{
+    "system": {
+        "footTriggerTypes": ["KD-7", "KD-7"],
+        "inAssign": "master",
+        "fxModOn": 1,
+        "masterFx": {
+            "type": "RingMod"
+        }
+    },
+    "setList": [
+        "ABeautifulLie"
+    ]
+}

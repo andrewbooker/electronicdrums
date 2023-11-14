@@ -1,9 +1,6 @@
 
 from sounds import sounds as wav
 import effects
-from sysConfig import SystemConfig
-from effects import RingMod
-
 import os
 import json
 
@@ -52,6 +49,7 @@ genSounds = {
     "bd": 99
 }
 
+
 def soundIdxFrom(name):
     if name in wav:
         return wav[name]
@@ -60,7 +58,8 @@ def soundIdxFrom(name):
         return -1
     return int(genSounds[pref] * 100) + int(name[-2:])
 
-class FromJson():
+
+class FromJson:
     @staticmethod
     def readSet(fn):
         with open(os.path.join("kits", fn)) as js:
@@ -104,7 +103,7 @@ class FromJson():
                     pad["channel"] = padSpec["channel"]
             k.pads.append(pad)
 
-        if "fx1" in kit:
+        if "fx1" in kit and "type" in kit["fx1"]:
             eff = kit["fx1"]
             k.fx1 = getattr(effects, eff["type"])()
             for p in eff["params"]:

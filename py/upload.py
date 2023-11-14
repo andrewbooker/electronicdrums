@@ -75,8 +75,6 @@ class Uploader:
 
 uploader = Uploader()
 
-
-
 if key == "tbb":
     from kits.bandSet import Tbb
     uploader.upload(Tbb(), 49)
@@ -84,6 +82,11 @@ if key == "tbb":
 elif key == "mab":
     from kits.bandSet import BandSet
     uploader.upload(BandSet("mab_2022.json", key), 65)
+
+elif ".json" in key:
+    from kits.bandSet import BandSet
+    actName = key.split("_")[0]
+    uploader.upload(BandSet(key, actName), 69)
 
 else:
     tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])

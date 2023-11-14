@@ -24,7 +24,9 @@ The project supports two modes of upload:
 
 ### Uploading kits defined in JSON ###
 
-First, to configure whether to upload to the real SPD-SX or a local copy, from inside the `py` directory:
+Uploads are run from inside the `py` directory.
+
+First, to configure whether to upload to the real SPD-SX or a local copy:
 
 ```commandline
 cp exampleConfig.json config.json
@@ -32,7 +34,18 @@ cp exampleConfig.json config.json
 and edit the `config.json` file to specify the `mediaLoc`. The project will write to files within a Roland/SPD-SX subdirectory.
 Note git will ignore this file.
 
+```commandline
+./upload.py mab
+```
+
+### Downloading kit from SPD-SX ###
+
+Downloading can be run from the top level project directory.
+
+This process takes a kit file in any location and prints the json representation to stdout, for piping to a desired location.
 
 ```commandline
-
+py/kitToJson.py ~/Music/hardware/Roland/SPD-SX/KIT/kit068.spd > somedir/somekit.json
 ```
+
+
