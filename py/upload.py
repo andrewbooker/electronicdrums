@@ -1,16 +1,18 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 from utils import DelayTimes
 from kit import Kit
 from iZgenKits import modeNames, Notes, roots, modes, GenericNotes
 from sysConfig import SystemConfig
-
-
 import os
+import json
+import serial  # sudo pip install pyserial
+import time
 
+from kits.generic import Generic
 
-if (len(sys.argv) < 2):
+if len(sys.argv) < 2:
     print("upload.py <key> [<tempo>] [<apply-master-fx-to>] [<delay-subdivision>] [<allow-fx-mod>]")
     print("eg upload.py F# 83 kit")
     print("or upload.py C 110 in intra")
@@ -20,11 +22,7 @@ if (len(sys.argv) < 2):
     print("or upload.py tbb")
     exit()
 
-
-
 key = sys.argv[1]
-
-from kits.generic import Generic
 
 
 class Generic_2019(Generic):
@@ -37,6 +35,7 @@ class Generic_2019(Generic):
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
             idx += 1
 
+
 class Generic_2022(Generic):
     def createIn(self, loc, idxStart):
         for i in range(10):
@@ -44,11 +43,7 @@ class Generic_2022(Generic):
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
 
 
-import json
-import serial ## sudo pip install pyserial
-import time
-
-class Uploader():
+class Uploader:
     @staticmethod
     def config():
         with open("config.json") as conf:
@@ -57,11 +52,13 @@ class Uploader():
     def __init__(self):
         self.mediaLoc = Uploader.config()["mediaLoc"]
         self.loc = os.path.join(self.mediaLoc, "Roland", "SPD-SX")
-        self.sp = serial.Serial("/dev/ttyUSB0")
+        self.sp = None
+        if os.path.exists("/dev/ttyUSB0"):
+            self.sp = serial.Serial("/dev/ttyUSB0")
 
     def upload(self, kits, idxStart, delayTimes = None):
         isSpdSx = "/media" in self.mediaLoc
-        if isSpdSx:
+        if isSpdSx and self.sp is not None:
             self.sp.setDTR(True)
             while not os.path.exists(self.loc):
                 time.sleep(0.1)
