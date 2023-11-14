@@ -1,0 +1,47 @@
+{
+    "name": "Somebody",
+    "level": 100,
+    "tempo": 120,
+    "pads": {
+        "topLeft": {
+            "wav": "HH_808_op"
+        },
+        "topCentre": {
+            "wav": "HH_DnB_op"
+        },
+        "topRight": {
+            "wav": "Cym_Crotale"
+        },
+        "midLeft": {
+            "wav": "Clap_Hse2"
+        },
+        "midCentre": {
+            "wav": "no_000000022"
+        },
+        "midRight": {
+            "wav": "no_000000023"
+        },
+        "bottomLeft": {
+            "wav": "pr_000000010"
+        },
+        "bottomCentre": {
+            "wav": "pr_000000010"
+        },
+        "bottomRight": {
+            "wav": "pe_000000021"
+        },
+        "footRight": {
+            "wav": "P_GanzaTap"
+        },
+        "footLeft": {
+            "wav": "SE_Crasher"
+        },
+        "padTop": {
+            "wav": "Snare_Proc4"
+        },
+        "padRim": {
+            "wav": "SE_Noise1"
+        }
+    },
+    "fx1": {}
+}
