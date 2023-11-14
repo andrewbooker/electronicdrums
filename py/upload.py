@@ -68,7 +68,7 @@ class Uploader:
         c.createIn(os.path.join(self.loc, "SYSTEM", "sysparam.spd"))
         kits.createIn(self.loc, idxStart)
 
-        if isSpdSx:
+        if isSpdSx and self.sp is not None:
             os.system("umount %s" % self.mediaLoc)
             self.sp.setDTR(False)
 

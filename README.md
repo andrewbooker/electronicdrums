@@ -49,3 +49,12 @@ py/kitToJson.py ~/Music/hardware/Roland/SPD-SX/KIT/kit068.spd > somedir/somekit.
 ```
 
 
+### Comparing the machine config with a local backup config ###
+This is useful for capturing any changes made by editing patches on the machine vs the last known state. A git diff on the machine remote drive (if you have initialised a git repo there) will also do this.
+
+Call `py/diffKits.py` with the machine and local directory names, to which the application will append the path `Roland/SPD-SX/KIT`.
+
+```commandline
+py/diffKits.py /media/$USER/SPD-SX/ ~/Music/hardware/
+```
+
