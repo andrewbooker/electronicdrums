@@ -1,0 +1,55 @@
+{
+    "name": "CantHitA",
+    "level": 100,
+    "tempo": 70,
+    "pads": {
+        "topLeft": {
+            "wav": "S00236"
+        },
+        "topCentre": {
+            "wav": "S00237"
+        },
+        "topRight": {
+            "wav": "S00238"
+        },
+        "midLeft": {
+            "wav": "Cym_Fx2"
+        },
+        "midCentre": {
+            "wav": "SE_SweepSlap"
+        },
+        "midRight": {
+            "wav": "snareOnL"
+        },
+        "bottomLeft": {
+            "wav": "Kick_Proc3"
+        },
+        "bottomCentre": {
+            "wav": "Snare_Proc4"
+        },
+        "bottomRight": {
+            "wav": "SnareXs_2"
+        },
+        "footRight": {
+            "wav": ""
+        },
+        "footLeft": {
+            "wav": ""
+        },
+        "padTop": {
+            "wav": ""
+        },
+        "padRim": {
+            "wav": ""
+        }
+    },
+    "fx1": {
+        "type": "Reverb",
+        "params": {
+            "time": 16,
+            "preDelay": 10,
+            "density": 10,
+            "effLevel": 80
+        }
+    }
+}
