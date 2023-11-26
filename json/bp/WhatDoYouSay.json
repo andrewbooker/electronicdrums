@@ -1,7 +1,7 @@
 {
-    "name": "CantHitA",
+    "name": "WhatDoYo",
     "level": 100,
-    "tempo": 70,
+    "tempo": 150,
     "pads": {
         "topLeft": {
             "wav": "Cym_Splash2"
@@ -13,22 +13,22 @@
             "wav": "Cym_Crotale"
         },
         "midLeft": {
-            "wav": "Cym_Fx2"
+            "wav": "timbale1"
         },
         "midCentre": {
-            "wav": "SE_SweepSlap"
+            "wav": "tom13V"
         },
         "midRight": {
-            "wav": "snareOnL"
+            "wav": "tom16L"
         },
         "bottomLeft": {
-            "wav": "Kick_Proc3"
+            "wav": "Kick_909_Atk"
         },
         "bottomCentre": {
-            "wav": "Snare_Proc4"
+            "wav": "tom13Q"
         },
         "bottomRight": {
-            "wav": "SnareXs_2"
+            "wav": "tom16L"
         },
         "footRight": {
             "wav": ""
@@ -43,13 +43,5 @@
             "wav": ""
         }
     },
-    "fx1": {
-        "type": "Reverb",
-        "params": {
-            "time": 16,
-            "preDelay": 10,
-            "density": 10,
-            "effLevel": 80
-        }
-    }
+    "fx1": {}
 }

@@ -3,9 +3,9 @@
     "level": 100,
     "tempo": 78,
     "pads": {
-        "topLeft": { "wav": "S00236" },
-        "topCentre": { "wav": "S00237" },
-        "topRight": { "wav": "S00238" },
+        "topLeft": { "wav": "Cym_Splash2" },
+        "topCentre": { "wav": "Ride_Proc1" },
+        "topRight": { "wav": "Cym_Crotale" },
         "midLeft": { "wav": "Cym_Fx2" },
         "midCentre": { "wav": "SE_SweepSlap" },
         "midRight": { "wav": "SnareXs_7" },
