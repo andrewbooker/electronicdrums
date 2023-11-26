@@ -43,5 +43,11 @@
             "wav": ""
         }
     },
-    "fx1": {}
+    "fx1": {
+        "type": "Vibrato",
+        "params": {
+            "rate": 46,
+            "depth": 76
+        }
+    }
 }

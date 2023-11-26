@@ -25,10 +25,10 @@
             "wav": "Kick_909_Atk"
         },
         "bottomCentre": {
-            "wav": "tom16Q"
+            "wav": "tom16L"
         },
         "bottomRight": {
-            "wav": "tom16L"
+            "wav": "Snare_Proc4"
         },
         "footRight": {
             "wav": ""
