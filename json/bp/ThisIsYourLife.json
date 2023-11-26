@@ -1,0 +1,48 @@
+{
+    "name": "ThisIsYo",
+    "level": 100,
+    "tempo": 165,
+    "pads": {
+        "topLeft": {
+            "wav": "Cym_Splash2"
+        },
+        "topCentre": {
+            "wav": "Ride_Proc1"
+        },
+        "topRight": {
+            "wav": "Cym_Crotale"
+        },
+        "midLeft": {
+            "wav": "tom13Q"
+        },
+        "midCentre": {
+            "wav": "roto8"
+        },
+        "midRight": {
+            "wav": "timbale2"
+        },
+        "bottomLeft": {
+            "wav": "Kick_909_Atk"
+        },
+        "bottomCentre": {
+            "wav": "timbaleQ"
+        },
+        "bottomRight": {
+            "wav": "timbaleQ"
+        },
+        "footRight": {
+            "wav": ""
+        },
+        "footLeft": {
+            "wav": ""
+        },
+        "padTop": {
+            "wav": ""
+        },
+        "padRim": {
+            "wav": ""
+        }
+    },
+    "fx1": {}
+}
+
