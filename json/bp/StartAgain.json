@@ -1,0 +1,47 @@
+{
+    "name": "StartAga",
+    "level": 100,
+    "tempo": 130,
+    "pads": {
+        "topLeft": {
+            "wav": "Cym_Splash2"
+        },
+        "topCentre": {
+            "wav": "Ride_Proc1"
+        },
+        "topRight": {
+            "wav": "Cym_Crotale"
+        },
+        "midLeft": {
+            "wav": "tom13L"
+        },
+        "midCentre": {
+            "wav": "timbale2"
+        },
+        "midRight": {
+            "wav": "roto8Q"
+        },
+        "bottomLeft": {
+            "wav": "tom16L"
+        },
+        "bottomCentre": {
+            "wav": "tom16Q"
+        },
+        "bottomRight": {
+            "wav": "roto8"
+        },
+        "footRight": {
+            "wav": ""
+        },
+        "footLeft": {
+            "wav": ""
+        },
+        "padTop": {
+            "wav": ""
+        },
+        "padRim": {
+            "wav": ""
+        }
+    },
+    "fx1": {}
+}
