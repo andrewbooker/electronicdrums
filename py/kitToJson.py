@@ -87,6 +87,8 @@ def effectFrom(node, n):
             a.append(v)
     if t == 19:
         return Reverb.fromSpec(a)
+    if t == 18:
+        return Vibrato.fromSpec(a)
     return {}
 
 
@@ -128,4 +130,4 @@ for p in range(len(pads[:13])):
 
 kit["fx1"] = effectFrom(doc, 1)
 with open(sys.argv[2], "w") as outfile:
-    print(json.dump(kit, outfile, indent=4))
+    json.dump(kit, outfile, indent=4)

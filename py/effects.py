@@ -200,7 +200,8 @@ class PitchShift():
         e.feedback(randint(1, 99))
         return e
 
-class Vibrato():
+
+class Vibrato:
     type = 18
 
     def rate(self, v):
@@ -221,7 +222,18 @@ class Vibrato():
         e.depth(randint(20, 100))
         return e
 
-class Reverb():
+    @staticmethod
+    def fromSpec(s):
+        return {
+            "type": "Vibrato",
+            "params": {
+                "rate": s[0],
+                "depth": s[1]
+            }
+        }
+
+
+class Reverb:
     type = 19
 
     def time(self, v):
