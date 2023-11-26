@@ -2,8 +2,11 @@
 
 from xml.dom import minidom
 import sys
+import os
 import json
 import math
+import time
+import serial  # sudo pip install pyserial
 from effects import *
 from sounds import sounds
 
@@ -34,7 +37,36 @@ genSounds = {
 }
 
 
-doc = minidom.parse(sys.argv[1])
+class KitLocation:
+    @staticmethod
+    def config():
+        with open("py/config.json") as conf:
+            return json.load(conf)
+
+    def __init__(self):
+        self.mediaLoc = KitLocation.config()["mediaLoc"]
+        self.isSpdSx = "/media" in self.mediaLoc
+        self.sp = None
+        if os.path.exists("/dev/ttyUSB0"):
+            self.sp = serial.Serial("/dev/ttyUSB0")
+
+    def __del__(self):
+        if self.isSpdSx and self.sp is not None:
+            print("Disconnecting from SPD-SX")
+            os.system("umount %s" % self.mediaLoc)
+            self.sp.setDTR(False)
+
+    def get(self):
+        if self.isSpdSx and self.sp is not None:
+            print("Connecting to SPD-SX")
+            self.sp.setDTR(True)
+            while not os.path.exists(self.mediaLoc):
+                time.sleep(0.1)
+        return os.path.join(self.mediaLoc, "Roland", "SPD-SX")
+
+
+kitLoc = KitLocation()
+doc = minidom.parse(os.path.join(kitLoc.get(), "KIT", sys.argv[1]))
 
 
 def kitNameFrom(node):
@@ -95,4 +127,5 @@ for p in range(len(pads[:13])):
     kit["pads"][padOrder[p]] = pad
 
 kit["fx1"] = effectFrom(doc, 1)
-print(json.dumps(kit, indent="    "))
+with open(sys.argv[2], "w") as outfile:
+    print(json.dump(kit, outfile, indent=4))

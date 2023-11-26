@@ -42,10 +42,10 @@ Note git will ignore this file.
 
 Downloading can be run from the top level project directory.
 
-This process takes a kit file in any location and prints the json representation to stdout, for piping to a desired location.
+This process takes a kit file from the config location and writes it to the specified location. If the config location is the real SPD-SX and the serial port is available, it will attempt to mount and unmount either side of fetching the kit file.
 
 ```commandline
-py/kitToJson.py ~/Music/hardware/Roland/SPD-SX/KIT/kit068.spd > somedir/somekit.json
+py/kitToJson.py kit068.spd somedir/somekit.json
 ```
 
 
