@@ -13,22 +13,22 @@
             "wav": "Cym_Crotale"
         },
         "midLeft": {
-            "wav": "tom13Q"
+            "wav": "tom13V"
         },
         "midCentre": {
-            "wav": "roto8"
+            "wav": "timbale2"
         },
         "midRight": {
-            "wav": "timbale2"
+            "wav": "roto8"
         },
         "bottomLeft": {
             "wav": "Kick_909_Atk"
         },
         "bottomCentre": {
-            "wav": "timbaleQ"
+            "wav": "tom16Q"
         },
         "bottomRight": {
-            "wav": "timbaleQ"
+            "wav": "tom16L"
         },
         "footRight": {
             "wav": ""
@@ -45,4 +45,3 @@
     },
     "fx1": {}
 }
-
