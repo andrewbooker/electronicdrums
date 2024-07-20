@@ -51,12 +51,14 @@ class Uploader:
             return json.load(conf)
 
     def __init__(self):
-        self.mediaLoc = Uploader.config()["mediaLoc"]
-        self.serialLoc = Uploader.config()["serialLoc"]
+        conf = Uploader.config()
+        self.mediaLoc = conf["mediaLoc"]
         self.loc = os.path.join(self.mediaLoc, "Roland", "SPD-SX")
         self.sp = None
-        if os.path.exists(self.serialLoc):
-            self.sp = serial.Serial(self.serialLoc)
+        if "serialLoc" in conf:
+            serialLoc = Uploader.config()["serialLoc"]
+            if os.path.exists(serialLoc):
+                self.sp = serial.Serial(serialLoc)
 
     def upload(self, kits, idxStart, delayTimes = None):
         isSpdSx = "/media" in self.mediaLoc
