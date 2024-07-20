@@ -4,13 +4,14 @@ import sys
 from utils import DelayTimes
 from kit import Kit
 from iZgenKits import modeNames, Notes, roots, modes, GenericNotes
+from kits.generic import Generic
 from sysConfig import SystemConfig
 import os
 import json
 import serial  # sudo pip install pyserial
 import time
+from random import randint
 
-from kits.generic import Generic
 
 if len(sys.argv) < 2:
     print("upload.py <key> [<tempo>] [<apply-master-fx-to>] [<delay-subdivision>] [<allow-fx-mod>]")
@@ -25,7 +26,7 @@ if len(sys.argv) < 2:
 key = sys.argv[1]
 
 
-class Generic_2019(Generic):
+class Generic2019(Generic):
     def createIn(self, loc, idxStart):
         idx = idxStart
         for modeName in modeNames:
@@ -36,7 +37,7 @@ class Generic_2019(Generic):
             idx += 1
 
 
-class Generic_2022(Generic):
+class Generic2024(Generic):
     def createIn(self, loc, idxStart):
         for i in range(10):
             kitDef = self._createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
@@ -51,10 +52,11 @@ class Uploader:
 
     def __init__(self):
         self.mediaLoc = Uploader.config()["mediaLoc"]
+        self.serialLoc = Uploader.config()["serialLoc"]
         self.loc = os.path.join(self.mediaLoc, "Roland", "SPD-SX")
         self.sp = None
-        if os.path.exists("/dev/ttyUSB0"):
-            self.sp = serial.Serial("/dev/ttyUSB0")
+        if os.path.exists(self.serialLoc):
+            self.sp = serial.Serial(self.serialLoc)
 
     def upload(self, kits, idxStart, delayTimes = None):
         isSpdSx = "/media" in self.mediaLoc
@@ -89,13 +91,13 @@ elif ".json" in key:
     uploader.upload(BandSet(key, actName), 69)
 
 else:
-    tempo = randint(46, 119) if (len(sys.argv) < 3) else int(sys.argv[2])
-    delaySubdivision = "intra" if len(sys.argv) < 5 else sys.argv[4]
+    tempo = int(sys.argv[2]) if len(sys.argv) > 2 else randint(46, 119)
+    delaySubdivision = sys.argv[4] if len(sys.argv) > 4 else "intra"
     dt = DelayTimes(tempo, delaySubdivision == "intra")
     print("tempo %d bpm" % tempo)
     print("%s ms %s%%" % (dt.time, dt.leftTap))
     if key == "gen":
-        uploader.upload(Generic_2022(tempo), 69, dt)
+        uploader.upload(Generic2024(tempo), 49, dt)
     else:
-        uploader.upload(Generic_2019(tempo), 69, dt)
+        uploader.upload(Generic2019(tempo), 69, dt)
 
