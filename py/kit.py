@@ -74,7 +74,7 @@ class Kit():
     		kitParam(doc, pad, "VoiceAsgn", 1)
     		kitParam(doc, pad, "Reverse", 0)
     		kitParam(doc, pad, "SubWv", valueFrom(kitDef.pads, "soundb", i))
-    		kitParam(doc, pad, "SubWvLevel", 80)
+    		kitParam(doc, pad, "SubWvLevel", valueFrom(kitDef.pads, "vol", i, 100))
     		kitParam(doc, pad, "SubWvPan", 30)
     		
     	return kitPrm
