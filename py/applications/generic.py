@@ -1,7 +1,6 @@
 
 from utils import any
 from effects import *
-from iZgenKits import GeneratedSounds
 import sys
 from random import randint
 
@@ -16,7 +15,34 @@ class FxKit():
     inputAssign = sub
     allowedFx = [RingMod, Phaser, FilterPlusDrive, Distortion, TouchWah, PitchShift, Vibrato, Reverb, Slicer]
 
-class Generic():
+
+class GeneratedSounds:
+    def _findIn(self, n):
+        return (n * 100) + randint(0, 99)
+
+    def rightFoot(self):
+        return self._findIn(99)
+
+    def leftFoot(self):
+        return self._findIn(98)
+
+    def padTop(self):
+        return self._findIn(97)
+
+    def padRim(self):
+        return self._findIn(96)
+
+    def perc(self):
+        return self._findIn(95)
+
+    def cym(self):
+        return self._findIn(94)
+
+    def note(self):
+        return self._findIn(93)
+
+
+class Generic:
     def __init__(self, tempo):
         self.tempo = tempo
 

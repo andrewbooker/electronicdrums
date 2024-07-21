@@ -142,30 +142,3 @@ class NativeKitSounds:
 
     def note(self):
         return wav["P_GanzaTap"]
-
-
-class GeneratedSounds:
-    def _findIn(self, n):
-        return (n * 100) + randint(0, 99)
-
-    def rightFoot(self):
-        return self._findIn(99)
-
-    def leftFoot(self):
-        return self._findIn(98)
-
-    def padTop(self):
-        return self._findIn(97)
-
-    def padRim(self):
-        return self._findIn(96)
-
-    def perc(self):
-        return self._findIn(95)
-
-    def cym(self):
-        return self._findIn(94)
-
-    def note(self):
-        return self._findIn(93)
-
