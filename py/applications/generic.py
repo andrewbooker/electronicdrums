@@ -148,24 +148,9 @@ class Generic2024(Generic):
         kitDef = type(name, (), {})
         kitDef.level = 100
         kitDef.tempo = self.tempo
-        kitDef.pads = []
         noteVol = 50
 
-        kitDef.pads = [
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)},
-            {"sound": Generated.cym(), "soundb": Generated.cym()},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)},
-            {"sound": Generated.perc(), "soundb": Generated.perc()},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)},
-            {"sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
-            {"sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
-            {"sound": Generated.padTop(), "soundb": Generated.padTop()},
-            {"sound": Generated.padRim(), "soundb": Generated.padRim()}
-        ]
+
         kitDef.pan = 0
         kitDef.fx1 = self.kitFx1.createRandom() if self.sysConfig.fx1On() == 1 else self.kitFx1()
         kitDef.fx2 = self.kitFx2.createRandom()
@@ -181,19 +166,22 @@ class Generic2024(Generic):
         midKitOut = padOutFx2
         bdOut = padOutSub # allow padOutFx2 if not RingMod
 
-        kitDef.pads[0]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[1]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[2]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[3]["outAssign"] = topKitOut
-        kitDef.pads[4]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[5]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[6]["outAssign"] = midKitOut
-        kitDef.pads[7]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[8]["outAssign"] = tunedMidiPercOut
-        kitDef.pads[9]["outAssign"] = midKitOut
-        kitDef.pads[10]["outAssign"] = midKitOut
-        kitDef.pads[11]["outAssign"] = midKitOut
-        kitDef.pads[12]["outAssign"] = topKitOut
+        kitDef.pads = [
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)},
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)},
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)},
+            {"outAssign": topKitOut, "sound": Generated.cym(), "soundb": Generated.cym()},
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)},
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)},
+            {"outAssign": midKitOut, "sound": Generated.perc(), "soundb": Generated.perc()},
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)},
+            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)},
+            {"outAssign": midKitOut, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
+            {"outAssign": midKitOut, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
+            {"outAssign": midKitOut, "sound": Generated.padTop(), "soundb": Generated.padTop()},
+            {"outAssign": topKitOut, "sound": Generated.padRim(), "soundb": Generated.padRim()}
+        ]
+
         return kitDef
 
     def createIn(self, loc, idxStart):
