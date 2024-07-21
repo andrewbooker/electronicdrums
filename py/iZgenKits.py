@@ -195,3 +195,4 @@ def generate(name, t, notes):
     k.pads.append({"sound": ks.padRim(), "soundb": ks.padRim()})
 
     return k
+

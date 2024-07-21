@@ -1,6 +1,6 @@
 
 from kit import Kit
-from kits.fromJson import FromJson
+from applications.fromJson import FromJson
 import os
 
 class BandSet():

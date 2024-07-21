@@ -4,7 +4,7 @@ import sys
 from utils import DelayTimes
 from kit import Kit
 from iZgenKits import modeNames, Notes, roots, modes, GenericNotes
-from kits.generic import Generic
+from applications.generic import Generic
 from sysConfig import SystemConfig
 import os
 import json
@@ -80,15 +80,15 @@ class Uploader:
 uploader = Uploader()
 
 if key == "tbb":
-    from kits.bandSet import Tbb
+    from applications.bandSet import Tbb
     uploader.upload(Tbb(), 49)
 
 elif key == "mab":
-    from kits.bandSet import BandSet
+    from applications.bandSet import BandSet
     uploader.upload(BandSet("mab_2022.json", key), 65)
 
 elif ".json" in key:
-    from kits.bandSet import BandSet
+    from applications.bandSet import BandSet
     actName = key.split("_")[0]
     uploader.upload(BandSet(key, actName), 69)
 

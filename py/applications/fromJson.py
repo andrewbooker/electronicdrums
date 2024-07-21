@@ -62,7 +62,7 @@ def soundIdxFrom(name):
 class FromJson:
     @staticmethod
     def readSet(fn):
-        with open(os.path.join("kits", fn)) as js:
+        with open(os.path.join("applications", fn)) as js:
             return json.load(js)
 
     def __init__(self, fn, actName):
