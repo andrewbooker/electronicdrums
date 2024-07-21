@@ -60,6 +60,10 @@ padOutSub = 3
 
 
 class Generic:
+    @staticmethod
+    def _note(i):
+        return i + 1
+
     def __init__(self, tempo):
         self.tempo = tempo
         self.sysConfig = None
@@ -93,15 +97,15 @@ class Generic:
         noteVol = 50
 
         k.pads = [
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(4)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(5)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(6)},
             {"sound": Generated.cym(), "soundb": Generated.cym()},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(2)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(3)},
             {"sound": Generated.perc(), "soundb": Generated.perc()},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(0)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(1)},
             {"sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
             {"sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
             {"sound": Generated.padTop(), "soundb": Generated.padTop()},
@@ -141,44 +145,32 @@ class Generic:
 
 
 class Generic2024(Generic):
-    @staticmethod
-    def _note(i):
-        return i + 1
-    
     def _createKit(self, name):
         kitDef = type(name, (), {})
         kitDef.level = 100
         kitDef.tempo = self.tempo
-        noteVol = 50
         kitDef.pan = 0
         kitDef.fx1 = self.kitFx1.createRandom() if self.sysConfig.fx1On() == 1 else self.kitFx1()
         kitDef.fx2 = self.kitFx2.createRandom()
 
-        # assign all sounds using c.kitAssign() and c.fx1On()
-
-        topKitOut = padOutFx1Master if (self.sysConfig.fx1On() == 1) else padOutFx2Sub
-        tunedMidiPercOut = padOutMaster if (self.sysConfig.inAssign == sub) else topKitOut
-        midKitOut = padOutFx2Sub
-        bdOut = padOutSub  # allow padOutFx2 if not RingMod
-
         kitDef.pads = [
             # top left to right
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)},
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)},
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
             # upper three
-            {"outAssign": topKitOut, "sound": Generated.cym(), "soundb": Generated.cym()},
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)},
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "channel": 0, "note": 1},
+            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
             # lower three
-            {"outAssign": midKitOut, "sound": Generated.perc(), "soundb": Generated.perc()},
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)},
-            {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "channel": 0, "note": 2},
+            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
             # externals
-            {"outAssign": midKitOut, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
-            {"outAssign": midKitOut, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
-            {"outAssign": midKitOut, "sound": Generated.padTop(), "soundb": Generated.padTop()},
-            {"outAssign": topKitOut, "sound": Generated.padRim(), "soundb": Generated.padRim()}
+            {"outAssign": padOutSub, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
+            {"outAssign": padOutSub, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
+            {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
+            {"outAssign": padOutSub, "sound": Generated.padRim(), "soundb": Generated.padRim()}
         ]
 
         return kitDef
