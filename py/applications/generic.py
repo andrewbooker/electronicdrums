@@ -143,8 +143,59 @@ class GenericNotes:
         return i + 1
 
 
-
 class Generic2024(Generic):
+    def createKit(self, name, notes, kitFx1, kitFx2, sysConfig):
+        ks = GeneratedSounds
+        kitDef = type(name, (), {})
+        kitDef.level = 100
+        kitDef.tempo = self.tempo
+        kitDef.pads = []
+        noteVol = 50
+
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)})
+        kitDef.pads.append({"sound": ks.cym(), "soundb": ks.cym()})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)})
+        kitDef.pads.append({"sound": ks.perc(), "soundb": ks.perc()})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)})
+        kitDef.pads.append({"sound": ks.rightFoot(), "soundb": ks.rightFoot()})
+        kitDef.pads.append({"sound": ks.leftFoot(), "soundb": ks.leftFoot()})
+        kitDef.pads.append({"sound": ks.padTop(), "soundb": ks.padTop()})
+        kitDef.pads.append({"sound": ks.padRim(), "soundb": ks.padRim()})
+
+        kitDef.pan = 0
+        kitDef.fx1 = kitFx1.createRandom() if sysConfig.fx1On() == 1 else kitFx1()
+        kitDef.fx2 = kitFx2.createRandom()
+
+        # assign all sounds using c.kitAssign() and c.fx1On()
+        padOutMaster = 0
+        padOutFx1 = 1
+        padOutFx2 = 2
+        padOutSub = 3
+
+        topKitOut = padOutFx1 if (sysConfig.fx1On() == 1) else padOutFx2
+        tunedMidiPercOut = padOutMaster if (sysConfig.inAssign == sub) else topKitOut
+        midKitOut = padOutFx2
+        bdOut = padOutSub # allow padOutFx2 if not RingMod
+
+        kitDef.pads[0]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[1]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[2]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[3]["outAssign"] = topKitOut
+        kitDef.pads[4]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[5]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[6]["outAssign"] = midKitOut
+        kitDef.pads[7]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[8]["outAssign"] = tunedMidiPercOut
+        kitDef.pads[9]["outAssign"] = midKitOut
+        kitDef.pads[10]["outAssign"] = midKitOut
+        kitDef.pads[11]["outAssign"] = midKitOut
+        kitDef.pads[12]["outAssign"] = topKitOut
+        return kitDef
+
     def createIn(self, loc, idxStart):
         for i in range(10):
             kitDef = self.createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
