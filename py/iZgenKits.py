@@ -38,7 +38,7 @@ modes = {"fifths": [7],
 modeNames = modes.keys()
 
 
-class Notes():
+class Notes:
     def __init__(self, padCount, root, mode):
         octaves = -1
         base = root
@@ -56,13 +56,13 @@ class Notes():
     def note(self, i):
         return self.notes[i]
 
-class GenericNotes():
+
+class GenericNotes:
     def note(self, i):
         return i + 1
 
 
-class NativeKitSounds():
-
+class NativeKitSounds:
     def rightFoot(self):
         return wav[any(["Kick_110",
                         "Kick_808_L", #:40 #00/Kick__01.wav
@@ -144,7 +144,7 @@ class NativeKitSounds():
         return wav["P_GanzaTap"]
 
 
-class GeneratedSounds():
+class GeneratedSounds:
     def _findIn(self, n):
         return (n * 100) + randint(0, 99)
 
@@ -168,31 +168,4 @@ class GeneratedSounds():
 
     def note(self):
         return self._findIn(93)
-
-
-ks = GeneratedSounds()
-
-
-def generate(name, t, notes):
-    k = type(name, (), {})
-    k.level = 100
-    k.tempo = t
-    k.pads = []
-    noteVol = 50
-
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)})
-    k.pads.append({"sound": ks.cym(), "soundb": ks.cym()})
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)})
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)})
-    k.pads.append({"sound": ks.perc(), "soundb": ks.perc()})
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)})
-    k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)})
-    k.pads.append({"sound": ks.rightFoot(), "soundb": ks.rightFoot()})
-    k.pads.append({"sound": ks.leftFoot(), "soundb": ks.leftFoot()})
-    k.pads.append({"sound": ks.padTop(), "soundb": ks.padTop()})
-    k.pads.append({"sound": ks.padRim(), "soundb": ks.padRim()})
-
-    return k
 

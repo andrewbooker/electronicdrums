@@ -32,7 +32,7 @@ class Generic2019(Generic):
         for modeName in modeNames:
             notes = Notes(7, roots[key], modes[modeName])
             name = "%s_%s" % (key, modeName)
-            kitDef = self._createKit(name, notes, self.kitFx1, self.kitFx2, self.c)
+            kitDef = self.createKit(name, notes, self.kitFx1, self.kitFx2, self.c)
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
             idx += 1
 
@@ -40,7 +40,7 @@ class Generic2019(Generic):
 class Generic2024(Generic):
     def createIn(self, loc, idxStart):
         for i in range(10):
-            kitDef = self._createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
+            kitDef = self.createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
 
 
