@@ -85,15 +85,15 @@ class Generic:
         k.pads = []
         noteVol = 50
 
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)})
         k.pads.append({"sound": ks.cym(), "soundb": ks.cym()})
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)})
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)})
         k.pads.append({"sound": ks.perc(), "soundb": ks.perc()})
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)})
-        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)})
+        k.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)})
         k.pads.append({"sound": ks.rightFoot(), "soundb": ks.rightFoot()})
         k.pads.append({"sound": ks.leftFoot(), "soundb": ks.leftFoot()})
         k.pads.append({"sound": ks.padTop(), "soundb": ks.padTop()})
@@ -138,13 +138,12 @@ class Generic:
         pass
 
 
-class GenericNotes:
-    def note(self, i):
-        return i + 1
-
-
 class Generic2024(Generic):
-    def createKit(self, name, notes, kitFx1, kitFx2, sysConfig):
+    @staticmethod
+    def _note(i):
+        return i + 1
+    
+    def _createKit(self, name):
         ks = GeneratedSounds
         kitDef = type(name, (), {})
         kitDef.level = 100
@@ -152,23 +151,23 @@ class Generic2024(Generic):
         kitDef.pads = []
         noteVol = 50
 
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)})
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)})
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)})
         kitDef.pads.append({"sound": ks.cym(), "soundb": ks.cym()})
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)})
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)})
         kitDef.pads.append({"sound": ks.perc(), "soundb": ks.perc()})
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)})
-        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)})
+        kitDef.pads.append({"sound": ks.note(), "soundb": ks.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)})
         kitDef.pads.append({"sound": ks.rightFoot(), "soundb": ks.rightFoot()})
         kitDef.pads.append({"sound": ks.leftFoot(), "soundb": ks.leftFoot()})
         kitDef.pads.append({"sound": ks.padTop(), "soundb": ks.padTop()})
         kitDef.pads.append({"sound": ks.padRim(), "soundb": ks.padRim()})
 
         kitDef.pan = 0
-        kitDef.fx1 = kitFx1.createRandom() if sysConfig.fx1On() == 1 else kitFx1()
-        kitDef.fx2 = kitFx2.createRandom()
+        kitDef.fx1 = self.kitFx1.createRandom() if self.c.fx1On() == 1 else self.kitFx1()
+        kitDef.fx2 = self.kitFx2.createRandom()
 
         # assign all sounds using c.kitAssign() and c.fx1On()
         padOutMaster = 0
@@ -176,8 +175,8 @@ class Generic2024(Generic):
         padOutFx2 = 2
         padOutSub = 3
 
-        topKitOut = padOutFx1 if (sysConfig.fx1On() == 1) else padOutFx2
-        tunedMidiPercOut = padOutMaster if (sysConfig.inAssign == sub) else topKitOut
+        topKitOut = padOutFx1 if (self.c.fx1On() == 1) else padOutFx2
+        tunedMidiPercOut = padOutMaster if (self.c.inAssign == sub) else topKitOut
         midKitOut = padOutFx2
         bdOut = padOutSub # allow padOutFx2 if not RingMod
 
@@ -198,5 +197,5 @@ class Generic2024(Generic):
 
     def createIn(self, loc, idxStart):
         for i in range(10):
-            kitDef = self.createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
+            kitDef = self._createKit("gen_%02d" % i)
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
