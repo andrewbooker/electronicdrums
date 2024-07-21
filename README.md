@@ -16,17 +16,18 @@ Wiring to follow.
 
 Given the SPD-SX acts as a remote drive, whose files this project will overwrite, I have found it useful to copy the entire contents (max 4GB) onto the local hard disk, and then initialise a git repo there. This serves as a sandbox for checking the outcome of changes, and a backup. I have also initialsed a git repo on the SPD-SX drive, but this is mainly to watch for changes, and I have not used this much to preserve history. I would avoid adding wav files to either git repo.
 
-## Uploading Kit sounds ##
+## Uploading kit sounds ##
 
 The project supports two modes of upload:
-1) uploading kits defined in json file
-2) uploading a set of random kit definitions
+
+ 1. uploading kits defined in json file
+ 2. uploading a set of random kit definitions
 
 ### Uploading kits defined in JSON ###
 
 Uploads are run from inside the `py` directory.
 
-First, to configure whether to upload to the real SPD-SX or a local copy:
+Whether setting up predfined or random kits, first configure whether to upload to the real SPD-SX or a local copy:
 
 ```commandline
 cp exampleConfig.json config.json
@@ -57,4 +58,20 @@ Call `py/diffKits.py` with the machine and local directory names, to which the a
 ```commandline
 py/diffKits.py /media/$USER/SPD-SX/ ~/Music/hardware/
 ```
+
+## Creating random kits ##
+
+Creating a random kit is another type of upload, run from inside the `py` directory.
+
+```commandline
+./upload.py gen 101 in poly
+```
+will create 10 random kits from prog 50 to 60. It will create a polyrhythmic system dual delay where the left and right delay times will be longer than a beat length. The beat length is determined by the tempo, specified here as 101bpm. The `in` instruction means that the input channel will be routed to the master, via the (delay) effects. Drum sounds will be routed to the sub.
+
+The minimal command
+```commandline
+./upload.py gen
+```
+will randomly assign the tempo. The delay times will be less than a beat length.
+
 
