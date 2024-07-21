@@ -1,7 +1,6 @@
 
 from sounds import sounds as wav
 from utils import any
-from random import randint
 
 
 roots = {"E": 64,

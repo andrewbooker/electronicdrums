@@ -17,29 +17,37 @@ class FxKit():
 
 
 class GeneratedSounds:
-    def _findIn(self, n):
+    @staticmethod
+    def _findIn(n):
         return (n * 100) + randint(0, 99)
 
-    def rightFoot(self):
-        return self._findIn(99)
+    @staticmethod
+    def rightFoot():
+        return GeneratedSounds._findIn(99)
 
-    def leftFoot(self):
-        return self._findIn(98)
+    @staticmethod
+    def leftFoot():
+        return GeneratedSounds._findIn(98)
 
-    def padTop(self):
-        return self._findIn(97)
+    @staticmethod
+    def padTop():
+        return GeneratedSounds._findIn(97)
 
-    def padRim(self):
-        return self._findIn(96)
+    @staticmethod
+    def padRim():
+        return GeneratedSounds._findIn(96)
 
-    def perc(self):
-        return self._findIn(95)
+    @staticmethod
+    def perc():
+        return GeneratedSounds._findIn(95)
 
-    def cym(self):
-        return self._findIn(94)
+    @staticmethod
+    def cym():
+        return GeneratedSounds._findIn(94)
 
-    def note(self):
-        return self._findIn(93)
+    @staticmethod
+    def note():
+        return GeneratedSounds._findIn(93)
 
 
 class Generic:
@@ -68,7 +76,7 @@ class Generic:
 
     @staticmethod
     def _generate(name, t, notes):
-        ks = GeneratedSounds()
+        ks = GeneratedSounds
         k = type(name, (), {})
         k.level = 100
         k.tempo = t
