@@ -159,16 +159,16 @@ class Generic2024(Generic):
             {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
             {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
             # upper three
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "channel": 0, "note": 1},
-            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.padRim(), "soundb": Generated.padRim()},
             {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
             # lower three
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "channel": 0, "note": 2},
-            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
-            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 1},
+            {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
+            {"outAssign": padOutSub, "sound": Generated.perc(), "soundb": Generated.perc()},
             # externals
             {"outAssign": padOutSub, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
-            {"outAssign": padOutSub, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
             {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
             {"outAssign": padOutSub, "sound": Generated.padRim(), "soundb": Generated.padRim()}
         ]
