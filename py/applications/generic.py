@@ -9,7 +9,6 @@ import os
 master = 0
 sub = 1
 
-
 class FxIn:
     inputAssign = master
     allowedFx = [Slicer, TapeEcho, TouchWah]
@@ -52,6 +51,12 @@ class Generated:
     @staticmethod
     def note():
         return Generated._findIn(93)
+
+
+padOutMaster = 0
+padOutFx1Master = 1
+padOutFx2Sub = 2
+padOutSub = 3
 
 
 class Generic:
@@ -113,14 +118,10 @@ class Generic:
         kitDef.fx2 = self.kitFx2.createRandom()
 
         # assign all sounds using c.kitAssign() and c.fx1On()
-        padOutMaster = 0
-        padOutFx1 = 1
-        padOutFx2 = 2
-        padOutSub = 3
 
-        topKitOut = padOutFx1 if (self.sysConfig.fx1On() == 1) else padOutFx2
+        topKitOut = padOutFx1Master if (self.sysConfig.fx1On() == 1) else padOutFx2Sub
         tunedMidiPercOut = padOutMaster if (self.sysConfig.inAssign == sub) else topKitOut
-        midKitOut = padOutFx2
+        midKitOut = padOutFx2Sub
         bdOut = padOutSub # allow padOutFx2 if not RingMod
 
         kitDef.pads[0]["outAssign"] = tunedMidiPercOut
@@ -149,33 +150,31 @@ class Generic2024(Generic):
         kitDef.level = 100
         kitDef.tempo = self.tempo
         noteVol = 50
-
-
         kitDef.pan = 0
         kitDef.fx1 = self.kitFx1.createRandom() if self.sysConfig.fx1On() == 1 else self.kitFx1()
         kitDef.fx2 = self.kitFx2.createRandom()
 
         # assign all sounds using c.kitAssign() and c.fx1On()
-        padOutMaster = 0
-        padOutFx1 = 1
-        padOutFx2 = 2
-        padOutSub = 3
 
-        topKitOut = padOutFx1 if (self.sysConfig.fx1On() == 1) else padOutFx2
+        topKitOut = padOutFx1Master if (self.sysConfig.fx1On() == 1) else padOutFx2Sub
         tunedMidiPercOut = padOutMaster if (self.sysConfig.inAssign == sub) else topKitOut
-        midKitOut = padOutFx2
-        bdOut = padOutSub # allow padOutFx2 if not RingMod
+        midKitOut = padOutFx2Sub
+        bdOut = padOutSub  # allow padOutFx2 if not RingMod
 
         kitDef.pads = [
+            # top left to right
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(4)},
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(5)},
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(6)},
+            # upper three
             {"outAssign": topKitOut, "sound": Generated.cym(), "soundb": Generated.cym()},
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(2)},
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(3)},
+            # lower three
             {"outAssign": midKitOut, "sound": Generated.perc(), "soundb": Generated.perc()},
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(0)},
             {"outAssign": tunedMidiPercOut, "sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic2024._note(1)},
+            # externals
             {"outAssign": midKitOut, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
             {"outAssign": midKitOut, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
             {"outAssign": midKitOut, "sound": Generated.padTop(), "soundb": Generated.padTop()},
