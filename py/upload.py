@@ -3,8 +3,8 @@
 import sys
 from utils import DelayTimes
 from kit import Kit
-from iZgenKits import modeNames, Notes, roots, modes, GenericNotes
-from applications.generic import Generic
+from iZgenKits import modeNames, Notes, roots, modes
+from applications.generic import Generic, Generic2024
 from sysConfig import SystemConfig
 import os
 import json
@@ -24,24 +24,6 @@ if len(sys.argv) < 2:
     exit()
 
 key = sys.argv[1]
-
-
-class Generic2019(Generic):
-    def createIn(self, loc, idxStart):
-        idx = idxStart
-        for modeName in modeNames:
-            notes = Notes(7, roots[key], modes[modeName])
-            name = "%s_%s" % (key, modeName)
-            kitDef = self.createKit(name, notes, self.kitFx1, self.kitFx2, self.c)
-            Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
-            idx += 1
-
-
-class Generic2024(Generic):
-    def createIn(self, loc, idxStart):
-        for i in range(10):
-            kitDef = self.createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
-            Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
 
 
 class Uploader:
@@ -75,6 +57,17 @@ class Uploader:
         if isSpdSx and self.sp is not None:
             os.system("umount %s" % self.mediaLoc)
             self.sp.setDTR(False)
+
+
+class Generic2019(Generic):
+    def createIn(self, loc, idxStart):
+        idx = idxStart
+        for modeName in modeNames:
+            notes = Notes(7, roots[key], modes[modeName])
+            name = "%s_%s" % (key, modeName)
+            kitDef = self.createKit(name, notes, self.kitFx1, self.kitFx2, self.c)
+            Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
+            idx += 1
 
 
 uploader = Uploader()

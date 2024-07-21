@@ -56,11 +56,6 @@ class Notes:
         return self.notes[i]
 
 
-class GenericNotes:
-    def note(self, i):
-        return i + 1
-
-
 class NativeKitSounds:
     def rightFoot(self):
         return wav[any(["Kick_110",

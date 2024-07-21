@@ -1,8 +1,10 @@
 
 from utils import any
 from effects import *
+from kit import Kit
 import sys
 from random import randint
+import os
 
 master = 0
 sub = 1
@@ -134,3 +136,16 @@ class Generic:
 
     def createIn(self, loc, idxStart):
         pass
+
+
+class GenericNotes:
+    def note(self, i):
+        return i + 1
+
+
+
+class Generic2024(Generic):
+    def createIn(self, loc, idxStart):
+        for i in range(10):
+            kitDef = self.createKit("gen_%02d" % i, GenericNotes(), self.kitFx1, self.kitFx2, self.c)
+            Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
