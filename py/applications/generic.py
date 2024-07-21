@@ -9,11 +9,13 @@ import os
 master = 0
 sub = 1
 
-class FxIn():
+
+class FxIn:
     inputAssign = master
     allowedFx = [Slicer, TapeEcho, TouchWah]
 
-class FxKit():
+
+class FxKit:
     inputAssign = sub
     allowedFx = [RingMod, Phaser, FilterPlusDrive, Distortion, TouchWah, PitchShift, Vibrato, Reverb, Slicer]
 
@@ -55,13 +57,15 @@ class GeneratedSounds:
 class Generic:
     def __init__(self, tempo):
         self.tempo = tempo
+        self.sysConfig = None
 
     def applySysConfigTo(self, c):
+        self.sysConfig = c
         effModes = { "kit": FxKit, "in": FxIn }
         fxMode = FxIn if len(sys.argv) < 4 else effModes[sys.argv[3]]
         allowFxMod = 1 if len(sys.argv) < 6 else int(sys.argv[5])
     
-        self.c = c
+
         masterFx = any(fxMode.allowedFx)
 
         c.inAssign = fxMode.inputAssign
@@ -101,12 +105,12 @@ class Generic:
 
         return k
 
-    def createKit(self, name, notes, kitFx1, kitFx2, sysConfig):
+    def createKit(self, name, notes):
         kitDef = Generic._generate(name, self.tempo, notes)
         kitDef.pan = 0
 
-        kitDef.fx1 = kitFx1.createRandom() if sysConfig.fx1On() == 1 else kitFx1()
-        kitDef.fx2 = kitFx2.createRandom()
+        kitDef.fx1 = self.kitFx1.createRandom() if self.sysConfig.fx1On() == 1 else self.kitFx1()
+        kitDef.fx2 = self.kitFx2.createRandom()
 
         # assign all sounds using c.kitAssign() and c.fx1On()
         padOutMaster = 0
@@ -114,8 +118,8 @@ class Generic:
         padOutFx2 = 2
         padOutSub = 3
 
-        topKitOut = padOutFx1 if (sysConfig.fx1On() == 1) else padOutFx2
-        tunedMidiPercOut = padOutMaster if (sysConfig.inAssign == sub) else topKitOut
+        topKitOut = padOutFx1 if (self.sysConfig.fx1On() == 1) else padOutFx2
+        tunedMidiPercOut = padOutMaster if (self.sysConfig.inAssign == sub) else topKitOut
         midKitOut = padOutFx2
         bdOut = padOutSub # allow padOutFx2 if not RingMod
 
@@ -133,9 +137,6 @@ class Generic:
         kitDef.pads[11]["outAssign"] = midKitOut
         kitDef.pads[12]["outAssign"] = topKitOut
         return kitDef
-
-    def createIn(self, loc, idxStart):
-        pass
 
 
 class Generic2024(Generic):
@@ -166,7 +167,7 @@ class Generic2024(Generic):
         kitDef.pads.append({"sound": ks.padRim(), "soundb": ks.padRim()})
 
         kitDef.pan = 0
-        kitDef.fx1 = self.kitFx1.createRandom() if self.c.fx1On() == 1 else self.kitFx1()
+        kitDef.fx1 = self.kitFx1.createRandom() if self.sysConfig.fx1On() == 1 else self.kitFx1()
         kitDef.fx2 = self.kitFx2.createRandom()
 
         # assign all sounds using c.kitAssign() and c.fx1On()
@@ -175,8 +176,8 @@ class Generic2024(Generic):
         padOutFx2 = 2
         padOutSub = 3
 
-        topKitOut = padOutFx1 if (self.c.fx1On() == 1) else padOutFx2
-        tunedMidiPercOut = padOutMaster if (self.c.inAssign == sub) else topKitOut
+        topKitOut = padOutFx1 if (self.sysConfig.fx1On() == 1) else padOutFx2
+        tunedMidiPercOut = padOutMaster if (self.sysConfig.inAssign == sub) else topKitOut
         midKitOut = padOutFx2
         bdOut = padOutSub # allow padOutFx2 if not RingMod
 

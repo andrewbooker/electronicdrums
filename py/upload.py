@@ -65,7 +65,7 @@ class Generic2019(Generic):
         for modeName in modeNames:
             notes = Notes(7, roots[key], modes[modeName])
             name = "%s_%s" % (key, modeName)
-            kitDef = self.createKit(name, notes, self.kitFx1, self.kitFx2, self.c)
+            kitDef = self.createKit(name, notes)
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idx)
             idx += 1
 
