@@ -97,15 +97,15 @@ class Generic:
         noteVol = 50
 
         k.pads = [
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(4)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(5)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(6)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(4)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(5)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(6)},
             {"sound": Generated.cym(), "soundb": Generated.cym()},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(2)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(3)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(2)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(3)},
             {"sound": Generated.perc(), "soundb": Generated.perc()},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(0)},
-            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": Generic._note(1)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(0)},
+            {"sound": Generated.note(), "soundb": Generated.note(), "channel": 0, "vol": noteVol, "note": notes.note(1)},
             {"sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
             {"sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
             {"sound": Generated.padTop(), "soundb": Generated.padTop()},
