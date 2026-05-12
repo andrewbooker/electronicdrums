@@ -10,11 +10,11 @@ The function of this project is to support specifying kit sounds in json files (
 There is also a process for creating those json files from existing SPD-SX kits.
 
 While connected via USB as an external drive, the SPD-SX cannot function as a drum module.
-In order not to have to continuously connect and disconnect the USB lead manually in order to audition sounds having created them, the upload feature of this project includes a switchable USB connector, by means of a serial port (which can be a USB adapter).
+In order not to have to continuously connect and disconnect the USB lead manually to audition recently created sounds, the upload feature includes a switchable USB connector, by means of a serial port (which can be a USB adapter).
 Some specific hardware is required for this.
 Wiring to follow.
 
-Given the SPD-SX acts as a remote drive, whose files this project will overwrite, I have found it useful to copy the entire contents (max 4GB) onto the local hard disk, and then initialise a git repo there. This serves as a sandbox for checking the outcome of changes, and a backup. I have also initialsed a git repo on the SPD-SX drive, but this is mainly to watch for changes, and I have not used this much to preserve history. I would avoid adding wav files to either git repo.
+Given the SPD-SX acts as a remote drive, whose files this project will overwrite, I have found it useful to copy the entire contents (max 4GB) onto the local hard disk, and then initialise a git repo there. This serves as a sandbox for checking the outcome of changes, and a backup. I have also initialsed a git repo on the SPD-SX drive, but this is mainly to watch for changes, and I have not used this much to preserve history. I recommend not adding wav files to either git repo.
 
 ## Uploading kit sounds ##
 
