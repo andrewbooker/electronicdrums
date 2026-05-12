@@ -4,8 +4,8 @@ docDir="/home/$USER/Documents"
 modDir="$docDir/midimodulator"
 drumDir="$docDir/electronicdrums"
 
-thruCmd="cd $modDir/thru; cargo run"
-modCmd="cd $modDir/modulator; cargo run"
+thruCmd="cd $modDir/thru; bash"
+modCmd="cd $modDir/modulator; bash"
 
 tmuxCmds=()
 tmuxCmds+=("tmux new-session \"htop\"\;")
@@ -18,8 +18,9 @@ topRightPane=$((cmds-1))
 
 tmuxCmds+=("send-keys -t 1 \"./upload.py\"\;")
 tmuxCmds+=("send-keys -t 2 \"./note_monitor.sh\" ENTER\;")
-
 tmuxCmds+=("select-pane -t $topRightPane \; split-window -v -l '50%' \"$modCmd\"\;")
+tmuxCmds+=("send-keys -t $((topRightPane+1)) \"cargo run\" ENTER\;")
+tmuxCmds+=("send-keys -t $topRightPane \"cargo run\" ENTER\;")
 tmuxCmds+=("select-pane -t $topRightPane")
 
 
