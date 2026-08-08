@@ -4,13 +4,16 @@ docDir="/home/$USER/Documents"
 modDir="$docDir/midimodulator"
 drumDir="$docDir/electronicdrums"
 
+$modDir/test_setup.sh
+
 thruCmd="cd $modDir/thru; bash"
 modCmd="cd $modDir/modulator; bash"
 
 tmuxCmds=()
 tmuxCmds+=("tmux new-session \"htop\"\;")
 tmuxCmds+=("split-window -h \"$thruCmd\"\;")
-tmuxCmds+=("select-pane -t 0 \; split-window -v -l '80%' \"cd $drumDir/py; bash\"\;")
+tmuxCmds+=("select-pane -t 0 \; split-window -v -l '85%' \"cd $drumDir/py; bash\"\;")
+tmuxCmds+=("select-pane -t 1 \; split-window -v -l '20%' \"cd $drumDir/setups; bash\"\;")
 tmuxCmds+=("select-pane -t 1 \; split-window -v -l '50%' \"cd $drumDir/setups; bash\"\;")
 
 cmds=${#tmuxCmds[@]}
