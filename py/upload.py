@@ -53,9 +53,12 @@ class Uploader:
         kits.applySysConfigTo(c)
         c.createIn(os.path.join(self.loc, "SYSTEM", "sysparam.spd"))
         kits.createIn(self.loc, idxStart)
+        time.sleep(1.0)
 
         if isSpdSx and self.sp is not None:
             os.system("umount %s" % self.mediaLoc)
+            while os.path.exists(self.loc):
+                time.sleep(0.1)
             self.sp.setDTR(False)
 
 
@@ -92,7 +95,7 @@ else:
     print("tempo %d bpm" % tempo)
     print("%s ms %s%%" % (dt.time, dt.leftTap))
     if key == "gen":
-        uploader.upload(Generic2026(tempo), 49, dt)
+        uploader.upload(Generic2026(tempo), 50, dt)
     else:
         uploader.upload(Generic2019(tempo), 69, dt)
 

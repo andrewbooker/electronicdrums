@@ -5,6 +5,8 @@ from kit import Kit
 import sys
 from random import randint
 import os
+from datetime import datetime
+
 
 master = 0
 sub = 1
@@ -213,7 +215,8 @@ class Generic2026(Generic):
         return kitDef
 
     def createIn(self, loc, idxStart):
-        i = 0
-        kitDef = self._createKit("gen_%02d" % i)
-        Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
+        i = idxStart - 50
+        kn = datetime.now().strftime("%Y%m%d")
+        kitDef = self._createKit(kn)
+        Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart)
 
