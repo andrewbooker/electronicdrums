@@ -4,7 +4,7 @@ import sys
 from utils import DelayTimes
 from kit import Kit
 from iZgenKits import modeNames, Notes, roots, modes
-from applications.generic import Generic, Generic2024
+from applications.generic import Generic, Generic2026
 from sysConfig import SystemConfig
 import os
 import json
@@ -92,7 +92,7 @@ else:
     print("tempo %d bpm" % tempo)
     print("%s ms %s%%" % (dt.time, dt.leftTap))
     if key == "gen":
-        uploader.upload(Generic2024(tempo), 49, dt)
+        uploader.upload(Generic2026(tempo), 49, dt)
     else:
         uploader.upload(Generic2019(tempo), 69, dt)
 

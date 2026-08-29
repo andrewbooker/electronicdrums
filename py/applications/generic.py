@@ -179,3 +179,41 @@ class Generic2024(Generic):
         for i in range(10):
             kitDef = self._createKit("gen_%02d" % i)
             Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
+
+
+class Generic2026(Generic):
+    def _createKit(self, name):
+        kitDef = type(name, (), {})
+        kitDef.level = 100
+        kitDef.tempo = self.tempo
+        kitDef.pan = 0
+        kitDef.fx1 = self.kitFx1.createRandom() if self.sysConfig.fx1On() == 1 else self.kitFx1()
+        kitDef.fx2 = self.kitFx2.createRandom()
+
+        kitDef.pads = [
+            # top left to right
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 101},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 102},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 103},
+            # upper three
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.padRim(), "soundb": Generated.padRim()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc(), "vol": 50, "channel": 0, "note": 1},
+            # lower three
+            {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
+            {"outAssign": padOutSub, "sound": Generated.perc(), "soundb": Generated.perc()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
+            # externals
+            {"outAssign": padOutSub, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
+            {"outAssign": padOutFx2Sub, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
+            {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
+            {"outAssign": padOutSub, "sound": Generated.padRim(), "soundb": Generated.padRim()}
+        ]
+
+        return kitDef
+
+    def createIn(self, loc, idxStart):
+        i = 0
+        kitDef = self._createKit("gen_%02d" % i)
+        Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart + i)
+
