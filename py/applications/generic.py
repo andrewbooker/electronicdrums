@@ -198,7 +198,7 @@ class Generic2026(Generic):
             # upper three
             {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
             {"outAssign": padOutFx2Sub, "sound": Generated.padRim(), "soundb": Generated.padRim()},
-            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc(), "vol": 50, "channel": 0, "note": 1},
+            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc(), "vol": 70, "channel": 0, "note": 1},
             # lower three
             {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
             {"outAssign": padOutSub, "sound": Generated.perc(), "soundb": Generated.perc()},
@@ -207,7 +207,7 @@ class Generic2026(Generic):
             {"outAssign": padOutSub, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
             {"outAssign": padOutFx2Sub, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
             {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
-            {"outAssign": padOutSub, "sound": Generated.padRim(), "soundb": Generated.padRim()}
+            {"outAssign": padOutSub, "sound": Generated.padRim(), "soundb": Generated.padRim(), "vol": 90, "channel": 0, "note": 100}
         ]
 
         return kitDef
