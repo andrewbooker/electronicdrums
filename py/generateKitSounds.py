@@ -340,7 +340,7 @@ strategies = {
     "no": (note, note, every)
 }
 
-startAt = 99
+startAt = 89
 for s, p in strategies.items():
     combiner.generateSoundRange(str(startAt), s, *p)
     startAt -= 1
