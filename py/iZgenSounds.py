@@ -1,11 +1,15 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import soundfile as sf
 import math
 from random import uniform
 import xml.dom.minidom
-from utils import any, MovingAvg, AbsMovingAvg
+from utils import MovingAvg, AbsMovingAvg
+from utils import any as anyOf
 from wave import Wave
+import os
+from datetime import datetime
+import sys
 
 
 class Resize():
@@ -110,41 +114,62 @@ class Gradient():
 		return self.y1 + (i * (self.y2 - self.y1) / Resize.maxLength)
 
 
-def combine(fnOnto, subDir, idx, s1, s2, grad1, grad2, op):
-	loc = "D:\\gear\\spd-sx\\sandbox\\Roland\\SPD-SX\\WAVE\\DATA"
-	f1 = sf.SoundFile("%s\\%s" % (loc, s1), "r")
-	f2 = sf.SoundFile("%s\\%s" % (loc, s2), "r")
-	
-	print("%s with %s and %s" % (type(op).__name__, s1, s2))
-	
-	size = max(f1.frames, f2.frames)
-	resize1 = Resize()
-	resize2 = Resize()
-	
-	resize1.buffer = f1.read()
-	resize2.buffer = f2.read()
-	
-	f1.close()
-	f2.close()
-	
-	r1 = resize1.read(grad1.at)
-	r2 = resize2.read(grad2.at)
-	lr1 = len(r1)
-	lr2 = len(r2)
-	
-	wave = Wave(idx, subDir, fnOnto)
-	
-	i = 0
-	done = False
-	while (not done):
-		hasF1 = i < lr1
-		hasF2 = i < lr2
-		data = [r1[i] if hasF1 else 0, r2[i] if hasF2 else 0]	
-		wave.write(op.on(data[0], data[1], i, size))
-		done = op.isDone(hasF1, hasF2)
-		i += 1
-	
-	wave.close()
+class Combiner:
+    def __init__(self, baseDir, iterations):
+        self.iterations = iterations
+        self.sourceLoc = os.path.join(baseDir, "backup/Roland/SPD-SX/WAVE/DATA")
+        self.baseOutLoc = os.path.join(baseDir, datetime.now().strftime("%Y%m%d"))
+            
+    
+    def _combine(self, fnOnto, subDir, idx, s1, s2, grad1, grad2, op):
+        f1 = sf.SoundFile(os.path.join(self.sourceLoc, s1), "r")
+        f2 = sf.SoundFile(os.path.join(self.sourceLoc, s2), "r")
+        
+        print(type(op).__name__, "with", s1, "and", s2)
+        
+        size = max(f1.frames, f2.frames)
+        resize1 = Resize()
+        resize2 = Resize()
+        
+        resize1.buffer = f1.read()
+        resize2.buffer = f2.read()
+        
+        f1.close()
+        f2.close()
+        
+        r1 = resize1.read(grad1.at)
+        r2 = resize2.read(grad2.at)
+        lr1 = len(r1)
+        lr2 = len(r2)
+        
+        wave = Wave(self.baseOutLoc, idx, fnOnto)
+        
+        i = 0
+        done = False
+        while (not done):
+	        hasF1 = i < lr1
+	        hasF2 = i < lr2
+	        data = [r1[i] if hasF1 else 0, r2[i] if hasF2 else 0]	
+	        wave.write(op.on(data[0], data[1], i, size))
+	        done = op.isDone(hasF1, hasF2)
+	        i += 1
+        
+        wave.close()
+
+
+    def generateSoundRange(self, subDir, instr, setA, setB, combiners):
+        print("generating", instr, "sounds")
+        for i in range(self.iterations):
+            waveFn = "%s/%s%.6d.wav" % (subDir, instr, i)
+            s1 = anyOf(setA)
+            cmb = anyOf(combiners)
+            g1 = Gradient.anyWithin(0.9, 1.4) if instr == "bd" else Gradient.any()
+            g2 = Gradient.any()
+            self._combine(waveFn, subDir, i, s1, anyOf(setB, [s1]), g1, g2, cmb())
+
+most = [EnvelopeFollow, XChop, Avg, ShortXFade]
+every = [EnvelopeFollow, XChop, Avg, ShortXFade, Multiply]
+
 
 kick = [
 	"00/Kick_.wav",
@@ -301,33 +326,22 @@ note = [
 	"01/SE_Sw.wav"
 ]
 
-def generateSound(subDir, type, i, setA, setB, combiner):
-	waveFn = "%s/%s%.6d.wav" % (subDir, type, i)
-	s1 = any(setA)
-	cmb = any(combiner)
-	g1 = Gradient.anyWithin(0.9, 1.4) if type == "bd" else Gradient.any()
-	g2 = Gradient.any()
-	combine(waveFn, subDir, i, s1, any(setB, [s1]), g1, g2, cmb())
+baseDir = sys.argv[1]
 
-	
-def generateSoundRange(subDir, type, setA, setB, combiners):
-	print("generating %s sounds" % type)
-	for i in range(100):
-		generateSound(subDir, type, i, setA, setB, combiners)
+combiner = Combiner(baseDir, 2)
 
-most = [EnvelopeFollow, XChop, Avg, ShortXFade]
-all = [EnvelopeFollow, XChop, Avg, ShortXFade, Multiply]
+strategies = {
+    "bd": (kick, kick + tom, most),
+    "lf": (tom + perc, snare + perc, every),
+    "pt": (snare, snare, most),
+    "pr": (tom, tom, every),
+    "pe": (perc, perc, every),
+    "cy": (cym, cym, [XChop, Avg, ShortXFade]),
+    "no": (note, note, every)
+}
 
-generateSoundRange("99", "bd", kick, kick + tom, most)
-generateSoundRange("98", "lf", tom + perc, snare + perc, all)
-generateSoundRange("97", "pt", snare, snare, most)
-generateSoundRange("96", "pr", tom, tom, all)
-generateSoundRange("95", "pe", perc, perc, all)
-generateSoundRange("94", "cy", cym, cym, [XChop, Avg, ShortXFade])
-generateSoundRange("93", "no", note, note, all)
-		
-		
+startAt = 99
+for s, p in strategies.items():
+    combiner.generateSoundRange(str(startAt), s, *p)
+    startAt -= 1
 
-	
-	
-	
