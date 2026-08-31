@@ -2,20 +2,18 @@
     <body>
         <div id="container">
         </div>
+        <script src="./files.js"></script>
         <script>
-            const files = [
-                {group: "99", instr: "bd", files: ["bd000000.wav", "bd000001.wav"]}
-            ]
             const urlParams = new URLSearchParams(window.location.search);
             const loc = urlParams.get("loc")
             const container = document.getElementById("container");
-            files.forEach((s, _) => {
+            files.forEach(s => {
                 container.appendChild((function() {
-                    const e = document.createElement("div");
+                    const e = document.createElement("h3");
                     e.innerHTML = s.instr;
                     return e;
                 })());
-                s.files.forEach((f, _) => {
+                s.files.forEach(f => {
                     const audio = new Audio(loc + "/WAVE/" + s.group + "/" + f);
                     audio.controls = true;
                     container.appendChild((function() {
