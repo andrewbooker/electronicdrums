@@ -2,7 +2,7 @@
 
 import soundfile as sf
 import math
-from random import uniform
+from random import uniform, randint
 import xml.dom.minidom
 from utils import MovingAvg, AbsMovingAvg
 from utils import any as anyOf
@@ -45,13 +45,22 @@ class Operation:
     def on(self, d1, d2, i, size):
         pass
 
+    def reset(self):
+        pass
+
     def isDone(self, hasF1, hasF2):
         return not hasF1 and not hasF2
 
 
 class Avg(Operation):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.coeff = uniform(0.2, 0.8)
+
     def on(self, d1, d2, i, size):
-        return (d1 * 0.5) + (d2 * 0.5)
+        return (d1 * self.coeff) + (d2 * (1.0 - self.coeff))
 
 
 class LinearXFade(Operation):
@@ -62,6 +71,9 @@ class LinearXFade(Operation):
 
 class XChop(Operation):
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.freq = uniform(400.0, 4000.0)
 
     def on(self, d1, d2, i, size):
@@ -77,7 +89,10 @@ class ShortXFade(Operation):
 
 class EnvelopeFollow(Operation):
     def __init__(self):
-        self.movingAvg = AbsMovingAvg(8)
+        self.reset()
+
+    def reset(self):
+        self.movingAvg = AbsMovingAvg(randint(4, 10))
 
     def on(self, d1, d2, i, size):
         self.movingAvg.add(d1)
@@ -86,7 +101,7 @@ class EnvelopeFollow(Operation):
 
 class Multiply(Operation):
     def __init__(self):
-        self.movingAvg = MovingAvg(8)
+        self.movingAvg = MovingAvg(randint(4, 10))
 
     def on(self, d1, d2, i, size):
         self.movingAvg.add(d1 * d2)
@@ -143,6 +158,7 @@ class Combiner:
 
         i = 0
         done = False
+        op.reset()
         while (not done):
             hasF1 = i < lr1
             hasF2 = i < lr2
