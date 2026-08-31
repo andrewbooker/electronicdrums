@@ -10,7 +10,7 @@
             files.forEach(s => {
                 container.appendChild((function() {
                     const e = document.createElement("h3");
-                    e.innerHTML = s.instr + " (" + s.group + ")";
+                    e.innerHTML = s.instr
                     return e;
                 })());
                 s.files.forEach(f => {
@@ -19,6 +19,8 @@
                     container.appendChild((function() {
                         const e = document.createElement("div");
                         e.appendChild(audio);
+                        const t = document.createTextNode(f);
+                        e.appendChild(t);
                         return e;
                     })());
                 });
