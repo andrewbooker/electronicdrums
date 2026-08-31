@@ -226,11 +226,11 @@ class SystemConfig():
         return eff
 
     def createIn(self, fqfn):
-        file = open(fqfn, "w")
-        createSetup(self.fxModOn, self.footTriggerTypes).writexml(file, addindent="\t", newl="\n")
-        createSys(self.inAssign, self.fx2Assign()).writexml(file, addindent="\t", newl="\n")
-        createKitChain().writexml(file, addindent="\t", newl="\n")
-        self.createMasterEffects().writexml(file, addindent="\t", newl="\n")
-        file.close()
+        outFile = open(fqfn, "w")
+        createSetup(self.fxModOn, self.footTriggerTypes).writexml(outFile, addindent="\t", newl="\n")
+        createSys(self.inAssign, self.fx2Assign()).writexml(outFile, addindent="\t", newl="\n")
+        createKitChain().writexml(outFile, addindent="\t", newl="\n")
+        self.createMasterEffects().writexml(outFile, addindent="\t", newl="\n")
+        outFile.close()
 
 
