@@ -130,9 +130,10 @@ class Combiner:
         self.sourceLoc = os.path.join(baseDir, "backup/Roland/SPD-SX/WAVE/DATA")
         self.baseOutLoc = os.path.join(baseDir, datetime.now().strftime("%Y%m%d"))
         self.audit = []
+        self.blockIdx = 0
 
 
-    def _combine(self, fnOnto, subDir, idx, s1, s2, grad1, grad2, op, newLength):
+    def _combine(self, fnOnto, subDir, s1, s2, grad1, grad2, op, newLength):
         f1 = sf.SoundFile(os.path.join(self.sourceLoc, s1), "r")
         f2 = sf.SoundFile(os.path.join(self.sourceLoc, s2), "r")
 
@@ -152,7 +153,7 @@ class Combiner:
         lr1 = len(r1)
         lr2 = len(r2)
 
-        wave = Wave(self.baseOutLoc, idx, fnOnto)
+        wave = Wave(self.baseOutLoc, self.blockIdx, fnOnto)
 
         i = 0
         done = False
@@ -180,16 +181,17 @@ class Combiner:
     def generateSoundRange(self, subDir, instr, setA, setB, combiners):
         print("generating", instr, "sounds")
         group = {"group": subDir, "instr": instr, "files": []}
-        for i in range(self.iterations):
+        for _ in range(self.iterations):
             newLength = randint(22050, 66150) # 0.5 to 1.5 seconds
-            fn = f"{instr}{i:06d}.wav"
+            fn = f"{instr}00{subDir}{self.blockIdx:02d}.wav"
             group["files"].append(fn)
             waveFn = f"{subDir}/{fn}"
             s1 = anyOf(setA)
             cmb = anyOf(combiners)
             g1 = self._gradientFor(instr, newLength)
             g2 = self._gradientFor(instr, newLength)
-            self._combine(waveFn, subDir, i, s1, anyOf(setB, [s1]), g1, g2, cmb(), newLength)
+            self._combine(waveFn, subDir, s1, anyOf(setB, [s1]), g1, g2, cmb(), newLength)
+            self.blockIdx += 1
         self.audit.append(group)
 
     def dumpAudit(self):
@@ -360,8 +362,6 @@ note = [
 
 baseDir = sys.argv[1]
 
-
-
 strategies = {
     "bd": (kick, kick + tom, most),
     "lf": (tom + perc, snare + perc, every),
@@ -380,7 +380,7 @@ combiner = Combiner(baseDir, iterations)
 for s, p in strategies.items():
     if group is None or group == s:
         combiner.generateSoundRange(str(startAt), s, *p)
-    startAt -= 1
+    #startAt -= 1
 combiner.dumpAudit()
 
 
