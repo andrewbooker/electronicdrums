@@ -125,12 +125,12 @@ class Gradient():
 
 
 class Combiner:
-    def __init__(self, baseDir, iterations):
-        self.iterations = iterations
+    def __init__(self, baseDir):
         self.sourceLoc = os.path.join(baseDir, "backup/Roland/SPD-SX/WAVE/DATA")
         self.baseOutLoc = os.path.join(baseDir, datetime.now().strftime("%Y%m%d"))
         self.audit = []
         self.blockIdx = 0
+        self.blockDecile = 0
 
 
     def _combine(self, fnOnto, subDir, s1, s2, grad1, grad2, op, newLength):
@@ -178,12 +178,13 @@ class Combiner:
                 return Gradient.any(newLength)
 
 
-    def generateSoundRange(self, subDir, instr, setA, setB, combiners):
-        print("generating", instr, "sounds")
+    def generateSoundRange(self, subDir, instr, setA, setB, combiners, iterations):
+        print("generating", iterations, instr, "sounds")
         group = {"group": subDir, "instr": instr, "files": []}
-        for _ in range(self.iterations):
+        self.blockIdx = 0
+        for _ in range(iterations):
             newLength = randint(22050, 66150) # 0.5 to 1.5 seconds
-            fn = f"{subDir}{self.blockIdx:02d}00{instr}.wav"
+            fn = f"{subDir}{(self.blockIdx + (10 * self.blockDecile)):02d}00{instr}.wav"
             group["files"].append(fn)
             waveFn = f"{subDir}/{fn}"
             s1 = anyOf(setA)
@@ -193,6 +194,7 @@ class Combiner:
             self._combine(waveFn, subDir, s1, anyOf(setB, [s1]), g1, g2, cmb(), newLength)
             self.blockIdx += 1
         self.audit.append(group)
+        self.blockDecile += 1
 
     def dumpAudit(self):
         with open("../html/files.js", "w") as f:
@@ -364,24 +366,23 @@ note = [
 baseDir = sys.argv[1]
 
 strategies = {
-    "bd": (kick, kick + tom, most),
-    "lf": (tom + perc, snare + perc, every),
-    "pt": (snare, snare, most),
-    "pr": (tom, tom, every),
-    "pe": (perc, perc, every),
-    "cy": (cym, cym, [XChop, Avg, ShortXFade]),
-    "no": (note, note, every)
+    "bd": (kick, kick + tom, most, 2),
+    "lf": (tom + perc, snare + perc, every, 2),
+    "pt": (snare, snare, most, 4),
+    "pr": (tom, tom, every, 4),
+    "pe": (perc, perc, every, 2),
+    "cy": (cym, cym, [XChop, Avg, ShortXFade], 10),
+    "no": (note, note, every, 2)
 }
 
-startAt = int(sys.argv[2]) if len(sys.argv) > 2 else 99
-iterations = int(sys.argv[3]) if len(sys.argv) > 3 else 2
-group = sys.argv[4] if len(sys.argv) > 4 else None
 
-combiner = Combiner(baseDir, iterations)
+startAt = int(sys.argv[2]) if len(sys.argv) > 2 else 99
+group = sys.argv[3] if len(sys.argv) > 3 else None
+
+combiner = Combiner(baseDir)
 for s, p in strategies.items():
     if group is None or group == s:
         combiner.generateSoundRange(str(startAt), s, *p)
-    #startAt -= 1
 combiner.dumpAudit()
 
 
