@@ -14,10 +14,9 @@ import json
 
 
 class Resize():
-    maxLength = 66150 #1.5 seconds
-
-    def __init__(self):
+    def __init__(self, length):
         self.buffer = []
+        self.length = length
 
     def add(self, d):
         self.buffer.append(d)
@@ -28,17 +27,16 @@ class Resize():
         i = 0
         done = False
         while not done:
-            vol = 1 - (i / (1.0 * Resize.maxLength))
+            vol = 1 - (i / (1.0 * self.length))
             p = i / f(i)
             l = math.floor(p)
             u = math.ceil(p)
-            if (u < inSize and l < inSize and i < Resize.maxLength):
+            if (u < inSize and l < inSize and i < self.length):
                 dp = p - l
                 out.append(vol * (((1 - dp) * self.buffer[l]) + (dp * self.buffer[u])))
             else:
                 done = True
             i += 1
-
         return out
 
 class Operation:
@@ -110,19 +108,20 @@ class Multiply(Operation):
 
 class Gradient():
     @staticmethod
-    def anyWithin(lower, upper):
-        return Gradient(uniform(lower, upper), uniform(lower, upper))
+    def anyWithin(lower, upper, length):
+        return Gradient(uniform(lower, upper), uniform(lower, upper), length)
 
     @staticmethod
-    def any():
-        return Gradient.anyWithin(0.3, 2.7)
+    def any(length):
+        return Gradient.anyWithin(0.3, 2.7, length)
 
-    def __init__(self, y1, y2):
+    def __init__(self, y1, y2, length):
         self.y1 = y1
         self.y2 = y2
+        self.length = length
 
     def at(self, i):
-        return self.y1 + (i * (self.y2 - self.y1) / Resize.maxLength)
+        return self.y1 + (i * (self.y2 - self.y1) / self.length)
 
 
 class Combiner:
@@ -133,16 +132,15 @@ class Combiner:
         self.audit = []
 
 
-    def _combine(self, fnOnto, subDir, idx, s1, s2, grad1, grad2, op):
+    def _combine(self, fnOnto, subDir, idx, s1, s2, grad1, grad2, op, newLength):
         f1 = sf.SoundFile(os.path.join(self.sourceLoc, s1), "r")
         f2 = sf.SoundFile(os.path.join(self.sourceLoc, s2), "r")
 
-        print(type(op).__name__, "with", s1, "and", s2)
+        print(type(op).__name__, "with", s1, "and", s2, f"lasting {(newLength / 44100.0):.02f}s")
 
         size = max(f1.frames, f2.frames)
-        resize1 = Resize()
-        resize2 = Resize()
-
+        resize1 = Resize(newLength)
+        resize2 = Resize(newLength)
         resize1.buffer = f1.read()
         resize2.buffer = f2.read()
 
@@ -174,14 +172,15 @@ class Combiner:
         print("generating", instr, "sounds")
         group = {"group": subDir, "instr": instr, "files": []}
         for i in range(self.iterations):
+            newLength = randint(22050, 66150) # 0.5 to 1.5 seconds
             fn = f"{instr}{i:06d}.wav"
             group["files"].append(fn)
             waveFn = f"{subDir}/{fn}"
             s1 = anyOf(setA)
             cmb = anyOf(combiners)
-            g1 = Gradient.anyWithin(0.9, 1.4) if instr == "bd" else Gradient.any()
-            g2 = Gradient.any()
-            self._combine(waveFn, subDir, i, s1, anyOf(setB, [s1]), g1, g2, cmb())
+            g1 = Gradient.anyWithin(0.9, 1.4, newLength) if instr == "bd" else Gradient.any(newLength)
+            g2 = Gradient.any(newLength)
+            self._combine(waveFn, subDir, i, s1, anyOf(setB, [s1]), g1, g2, cmb(), newLength)
         self.audit.append(group)
 
     def dumpAudit(self):
