@@ -113,7 +113,7 @@ class Gradient():
 
     @staticmethod
     def any(length):
-        return Gradient.anyWithin(0.1, 1.1, length)
+        return Gradient.anyWithin(0.6, 1.1, length)
 
     def __init__(self, y1, y2, length):
         self.y1 = y1
@@ -167,6 +167,15 @@ class Combiner:
 
         wave.close()
 
+    def _gradientFor(self, instr, newLength):
+        match instr:
+            case "bd":
+                return Gradient.anyWithin(0.9, 1.4, newLength)
+            case "cy":
+                return Gradient.anyWithin(0.8, 1.1, newLength)
+            case _:
+                return Gradient.any(newLength)
+
 
     def generateSoundRange(self, subDir, instr, setA, setB, combiners):
         print("generating", instr, "sounds")
@@ -178,8 +187,8 @@ class Combiner:
             waveFn = f"{subDir}/{fn}"
             s1 = anyOf(setA)
             cmb = anyOf(combiners)
-            g1 = Gradient.anyWithin(0.9, 1.4, newLength) if instr == "bd" else Gradient.any(newLength)
-            g2 = Gradient.any(newLength)
+            g1 = self._gradientFor(instr, newLength)
+            g2 = self._gradientFor(instr, newLength)
             self._combine(waveFn, subDir, i, s1, anyOf(setB, [s1]), g1, g2, cmb(), newLength)
         self.audit.append(group)
 
