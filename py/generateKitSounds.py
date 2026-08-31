@@ -113,7 +113,7 @@ class Gradient():
 
     @staticmethod
     def any(length):
-        return Gradient.anyWithin(0.3, 2.7, length)
+        return Gradient.anyWithin(0.1, 1.1, length)
 
     def __init__(self, y1, y2, length):
         self.y1 = y1
