@@ -10,6 +10,7 @@ from wave import Wave
 import os
 from datetime import datetime
 import sys
+import json
 
 
 class Resize():
@@ -119,6 +120,7 @@ class Combiner:
         self.iterations = iterations
         self.sourceLoc = os.path.join(baseDir, "backup/Roland/SPD-SX/WAVE/DATA")
         self.baseOutLoc = os.path.join(baseDir, datetime.now().strftime("%Y%m%d"))
+        self.audit = []
             
     
     def _combine(self, fnOnto, subDir, idx, s1, s2, grad1, grad2, op):
@@ -159,13 +161,24 @@ class Combiner:
 
     def generateSoundRange(self, subDir, instr, setA, setB, combiners):
         print("generating", instr, "sounds")
+        group = {"group": subDir, "instr": instr, "files": []}
         for i in range(self.iterations):
-            waveFn = "%s/%s%.6d.wav" % (subDir, instr, i)
+            fn = f"{instr}{i:06d}.wav"
+            group["files"].append(fn)
+            waveFn = f"{subDir}/{fn}"
             s1 = anyOf(setA)
             cmb = anyOf(combiners)
             g1 = Gradient.anyWithin(0.9, 1.4) if instr == "bd" else Gradient.any()
             g2 = Gradient.any()
             self._combine(waveFn, subDir, i, s1, anyOf(setB, [s1]), g1, g2, cmb())
+        self.audit.append(group)
+
+    def dumpAudit(self):
+        with open("../html/files.js", "w") as f:
+            f.write("const files = ")
+            json.dump(self.audit, f, indent=4)
+            f.write(";")
+
 
 most = [EnvelopeFollow, XChop, Avg, ShortXFade]
 every = [EnvelopeFollow, XChop, Avg, ShortXFade, Multiply]
@@ -340,8 +353,12 @@ strategies = {
     "no": (note, note, every)
 }
 
-startAt = 89
+group = sys.argv[2] if len(sys.argv) > 2 else None
+startAt = 99
 for s, p in strategies.items():
-    combiner.generateSoundRange(str(startAt), s, *p)
+    if group is None or group == s:
+        combiner.generateSoundRange(str(startAt), s, *p)
     startAt -= 1
+combiner.dumpAudit()
+
 

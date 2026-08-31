@@ -2,3 +2,4 @@ __pycache__
 py/config*.json
 py/*.h
 .idea/
+html/files.js
