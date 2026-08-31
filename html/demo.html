@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <div id="container">
+        </div>
+        <script>
+            const files = [
+                {group: "99", instr: "bd", files: ["bd000000.wav", "bd000001.wav"]}
+            ]
+            const urlParams = new URLSearchParams(window.location.search);
+            const loc = urlParams.get("loc")
+            const container = document.getElementById("container");
+            files.forEach((s, _) => {
+                container.appendChild((function() {
+                    const e = document.createElement("div");
+                    e.innerHTML = s.instr;
+                    return e;
+                })());
+                s.files.forEach((f, _) => {
+                    const audio = new Audio(loc + "/WAVE/" + s.group + "/" + f);
+                    audio.controls = true;
+                    container.appendChild((function() {
+                        const e = document.createElement("div");
+                        e.appendChild(audio);
+                        return e;
+                    })());
+                });
+            });
+        </script>
+    </body>
+<html>
