@@ -360,7 +360,7 @@ note = [
 
 baseDir = sys.argv[1]
 
-combiner = Combiner(baseDir, 2)
+
 
 strategies = {
     "bd": (kick, kick + tom, most),
@@ -372,8 +372,11 @@ strategies = {
     "no": (note, note, every)
 }
 
-group = sys.argv[2] if len(sys.argv) > 2 else None
-startAt = 99
+startAt = int(sys.argv[2]) if len(sys.argv) > 2 else 99
+iterations = int(sys.argv[3]) if len(sys.argv) > 3 else 2
+group = sys.argv[4] if len(sys.argv) > 4 else None
+
+combiner = Combiner(baseDir, iterations)
 for s, p in strategies.items():
     if group is None or group == s:
         combiner.generateSoundRange(str(startAt), s, *p)
