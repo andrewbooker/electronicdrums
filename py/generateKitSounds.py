@@ -183,7 +183,7 @@ class Combiner:
         group = {"group": subDir, "instr": instr, "files": []}
         for _ in range(self.iterations):
             newLength = randint(22050, 66150) # 0.5 to 1.5 seconds
-            fn = f"{instr}00{subDir}{self.blockIdx:02d}.wav"
+            fn = f"{subDir}{self.blockIdx:02d}00{instr}.wav"
             group["files"].append(fn)
             waveFn = f"{subDir}/{fn}"
             s1 = anyOf(setA)
@@ -359,6 +359,7 @@ note = [
     "00/SE_Cr.wav",
     "01/SE_Sw.wav"
 ]
+
 
 baseDir = sys.argv[1]
 
