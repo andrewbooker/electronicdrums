@@ -204,7 +204,7 @@ class Generic2026(Generic):
             # lower three
             {"outAssign": padOutSub, "sound": 4020, "soundb": 4021},  # pad top
             {"outAssign": padOutSub, "sound": 4040, "soundb": 4041},  # perc
-            {"outAssign": padOutFx2Sub, "sound": 4058, "soundb": 4059},  # cym
+            {"outAssign": padOutFx2Sub, "sound": 4058, "soundb": 4059, "vol": 80},  # cym
             # externals
             {"outAssign": padOutSub, "sound": 4000, "soundb": 4001},
             {"outAssign": padOutFx2Sub, "sound": 4010, "soundb": 4011},
