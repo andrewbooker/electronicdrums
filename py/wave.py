@@ -16,7 +16,7 @@ class Wave():
         self.idx = idx
         self.fn = fn
         self.subDir = os.path.dirname(fn)
-        self.waveDir = os.path.join(baseDir, "WAVE")
+        self.waveDir = os.path.join(baseDir, "DATA")
         self.prmDir = os.path.join(baseDir, "PRM")
         for d in [self.waveDir, self.prmDir]:
             fd = os.path.join(d, self.subDir)

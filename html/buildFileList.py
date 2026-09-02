@@ -6,7 +6,7 @@ import json
 
 
 inDir = sys.argv[1]
-d = os.path.join(inDir, "WAVE")
+d = os.path.join(inDir, "DATA")
 js = []
 for f in os.listdir(d):
     g = {"group": f}
