@@ -194,28 +194,27 @@ class Generic2026(Generic):
 
         kitDef.pads = [
             # top left to right
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 101},
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 102},
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym(), "vol": 50, "channel": 0, "note": 103},
+            {"outAssign": padOutFx2Sub, "sound": 4050, "soundb": 4051, "vol": 50, "channel": 0, "note": 101},  # cym
+            {"outAssign": padOutFx2Sub, "sound": 4052, "soundb": 4053, "vol": 50, "channel": 0, "note": 102},  # cym
+            {"outAssign": padOutFx2Sub, "sound": 4054, "soundb": 4055, "vol": 50, "channel": 0, "note": 103},  # cym
             # upper three
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
-            {"outAssign": padOutFx2Sub, "sound": Generated.padRim(), "soundb": Generated.padRim()},
-            {"outAssign": padOutFx2Sub, "sound": Generated.perc(), "soundb": Generated.perc(), "vol": 70, "channel": 0, "note": 1},
+            {"outAssign": padOutFx2Sub, "sound": 4056, "soundb": 4057},  # cym
+            {"outAssign": padOutFx2Sub, "sound": 4030, "soundb": 4031},  # pad rim
+            {"outAssign": padOutFx2Sub, "sound": 4060, "soundb": 4061, "vol": 70, "channel": 0, "note": 1}, # note
             # lower three
-            {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
-            {"outAssign": padOutSub, "sound": Generated.perc(), "soundb": Generated.perc()},
-            {"outAssign": padOutFx2Sub, "sound": Generated.cym(), "soundb": Generated.cym()},
+            {"outAssign": padOutSub, "sound": 4020, "soundb": 4021},  # pad top
+            {"outAssign": padOutSub, "sound": 4040, "soundb": 4041},  # perc
+            {"outAssign": padOutFx2Sub, "sound": 4058, "soundb": 4059},  # cym
             # externals
-            {"outAssign": padOutSub, "sound": Generated.rightFoot(), "soundb": Generated.rightFoot()},
-            {"outAssign": padOutFx2Sub, "sound": Generated.leftFoot(), "soundb": Generated.leftFoot()},
-            {"outAssign": padOutSub, "sound": Generated.padTop(), "soundb": Generated.padTop()},
-            {"outAssign": padOutSub, "sound": Generated.padRim(), "soundb": Generated.padRim(), "vol": 90, "channel": 0, "note": 100}
+            {"outAssign": padOutSub, "sound": 4000, "soundb": 4001},
+            {"outAssign": padOutFx2Sub, "sound": 4010, "soundb": 4011},
+            {"outAssign": padOutSub, "sound": 4022, "soundb": 4023}, # pad top
+            {"outAssign": padOutSub, "sound": 4032, "soundb": 4033, "vol": 90, "channel": 0, "note": 100}  # pad rim
         ]
 
         return kitDef
 
     def createIn(self, loc, idxStart):
-        i = idxStart - 50
         kn = datetime.now().strftime("%Y%m%d")
         kitDef = self._createKit(kn)
         Kit().buildNamed(kitDef, os.path.join(loc, "KIT"), idxStart)

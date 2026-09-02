@@ -96,7 +96,7 @@ else:
     print("tempo %d bpm" % tempo)
     print("%s ms %s%%" % (dt.time, dt.leftTap))
     if key == "gen":
-        uploader.upload(Generic2026(tempo), dt)
+        uploader.upload(Generic2026(tempo), dt, 51)
     else:
         uploader.upload(Generic2019(tempo), 69, dt)
 
