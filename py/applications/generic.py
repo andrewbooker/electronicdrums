@@ -198,7 +198,7 @@ class Generic2026(Generic):
             {"outAssign": padOutFx2Sub, "sound": 4052, "soundb": 4053, "vol": 50, "channel": 0, "note": 102},  # cym
             {"outAssign": padOutFx2Sub, "sound": 4054, "soundb": 4055, "vol": 50, "channel": 0, "note": 103},  # cym
             # upper three
-            {"outAssign": padOutFx2Sub, "sound": 4056, "soundb": 4057},  # cym
+            {"outAssign": padOutFx2Sub, "sound": 4056, "soundb": 4057, "vol": 70},  # cym
             {"outAssign": padOutFx2Sub, "sound": 4030, "soundb": 4031},  # pad rim
             {"outAssign": padOutFx2Sub, "sound": 4060, "soundb": 4061, "vol": 70, "channel": 0, "note": 1}, # note
             # lower three
