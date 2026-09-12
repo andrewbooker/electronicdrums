@@ -5,6 +5,11 @@
 import mido
 import time
 
+portNames = mido.get_output_names()
+portName = portNames[1]
+
+outport = mido.open_output(portName)
+korgChannel = 0
 
 setList = [
     {"song": "The Warm-Up Man Forever", "tempo": 122, "korg": 19, "spd-sx": 27},
@@ -22,16 +27,23 @@ setList = [
 ]
 
 
+def selectSong(idx):
+    song = setList[idx]
+    if "korg" in song:
+        outport.send(mido.Message("program_change", channel=korgChannel, program=int(song["korg"])))
 
 for i in range(len(setList)):
     s = setList[i]
     print(f"{(1 + i):2d}", s["song"])
 
 
-print(mido.get_output_names())
+songIdx = 0
+selectSong(songIdx)
 
-korgChannel = 0
-outport = mido.open_output("USB Midi:USB Midi MIDI 1 20:0")
+
 outport.send(mido.Message("note_on", channel=korgChannel, note=60, velocity=64, time=0))
 time.sleep(1)
 outport.send(mido.Message("note_off", channel=korgChannel, note=60, velocity=0, time=0))
+
+
+
