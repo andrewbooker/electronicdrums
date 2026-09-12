@@ -15,6 +15,11 @@ channels = {
     "spd-sx": 13
 }
 
+defaultProgs = {
+    "korg": 35,
+    "spd-sx": 81
+}
+
 
 setList = [
     {"song": "The Warm-Up Man Forever", "tempo": 122, "korg": 19, "spd-sx": 26},
@@ -33,8 +38,8 @@ setList = [
 
 
 def sendProgramChange(song, instr):
-    if instr in song:
-        outport.send(mido.Message("program_change", channel=channels[instr], program=song[instr]))
+    p = song[instr] if instr in song else defaultProgs[instr]
+    outport.send(mido.Message("program_change", channel=channels[instr], program=p))
 
 def selectSong(idx):
     song = setList[idx]
@@ -47,7 +52,7 @@ for i in range(len(setList)):
     print(f"{(1 + i):2d}", s["song"])
 
 
-songIdx = 0
+songIdx = 4
 selectSong(songIdx)
 
 
