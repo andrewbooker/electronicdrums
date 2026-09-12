@@ -4,6 +4,10 @@
 # sudo pip install python-rtmidi
 import mido
 import time
+import math
+import threading
+import readchar
+
 
 portNames = mido.get_output_names()
 portName = portNames[1]
@@ -32,6 +36,25 @@ setList = [
 ]
 
 
+class ControlChangeSender:
+    def __init__(self, channel, number, midiOut, freq):
+        self.channel = channel
+        self.number = number
+        self.midiOut = midiOut
+        self.freq = freq
+
+    def start(self, shouldStop):
+        start_time = time.monotonic()
+        interval = 0.2
+        while not shouldStop.is_set():
+            elapsed = time.monotonic() - start_time
+            v = math.sin(2 * math.pi * self.freq * elapsed)
+            outport.send(mido.Message("control_change", channel=self.channel, control=self.number, value=math.floor(56 * (1.0 + v))))
+
+            next_time = start_time + (int(elapsed / interval) + 1) * interval
+            time.sleep(max(0, next_time - time.monotonic()))
+
+
 def sendProgramChange(song, instr):
     p = song[instr] if instr in song else devices[instr]["defaultProg"]
     c = devices[instr]["channel"]
@@ -48,10 +71,31 @@ for i in range(len(setList)):
     print(f"{(1 + i):2d}", s["song"])
 
 
-songIdx = 11
+songIdx = 0
 selectSong(songIdx)
 
 
-outport.send(mido.Message("note_on", channel=0, note=60, velocity=64, time=0))
-time.sleep(1)
-outport.send(mido.Message("note_off", channel=0, note=60, velocity=0, time=0))
+controlSignals = [
+    ControlChangeSender(devices["korg"]["channel"], 12, outport, 0.2),
+    ControlChangeSender(devices["korg"]["channel"], 13, outport, 1.8),
+    ControlChangeSender(devices["spd-sx"]["channel"], 12, outport, 0.5),
+    ControlChangeSender(devices["spd-sx"]["channel"], 13, outport, 2.7)
+]
+
+shouldStop = threading.Event()
+threads = [threading.Thread(target=c.start, args=(shouldStop,), daemon=True) for c in controlSignals]
+[t.start() for t in threads]
+done = False
+
+print("Started. Press 'q' to exit")
+while not done:
+    c = readchar.readchar()
+    if c == "q":
+        done = True
+        shouldStop.set()
+        [t.join() for t in threads]
+    if c == "n":
+        outport.send(mido.Message("note_on", channel=0, note=60, velocity=64, time=0))
+        time.sleep(1)
+        outport.send(mido.Message("note_off", channel=0, note=60, velocity=0, time=0))
+
