@@ -10,14 +10,9 @@ portName = portNames[1]
 
 outport = mido.open_output(portName)
 
-channels = {
-    "korg": 0,
-    "spd-sx": 13
-}
-
-defaultProgs = {
-    "korg": 35,
-    "spd-sx": 81
+devices = {
+    "korg": {"channel": 0, "defaultProg": 35},
+    "spd-sx": {"channel": 13, "defaultProg": 81}
 }
 
 
@@ -38,8 +33,9 @@ setList = [
 
 
 def sendProgramChange(song, instr):
-    p = song[instr] if instr in song else defaultProgs[instr]
-    outport.send(mido.Message("program_change", channel=channels[instr], program=p))
+    p = song[instr] if instr in song else devices[instr]["defaultProg"]
+    c = devices[instr]["channel"]
+    outport.send(mido.Message("program_change", channel=c, program=p))
 
 def selectSong(idx):
     song = setList[idx]
@@ -52,10 +48,10 @@ for i in range(len(setList)):
     print(f"{(1 + i):2d}", s["song"])
 
 
-songIdx = 4
+songIdx = 11
 selectSong(songIdx)
 
 
-outport.send(mido.Message("note_on", channel=channels["korg"], note=60, velocity=64, time=0))
+outport.send(mido.Message("note_on", channel=0, note=60, velocity=64, time=0))
 time.sleep(1)
-outport.send(mido.Message("note_off", channel=channels["korg"], note=60, velocity=0, time=0))
+outport.send(mido.Message("note_off", channel=0, note=60, velocity=0, time=0))
