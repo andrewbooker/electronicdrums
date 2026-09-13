@@ -59,5 +59,4 @@ while not done:
         shouldStop.set()
         [t.join() for t in threads]
 
-
 print()
